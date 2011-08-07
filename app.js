@@ -7,7 +7,10 @@ function MyApp(config) {
 }
 
 MyApp.prototype.onEvent = function (event) {
-    console.log('------- Event ------\r\n' + event + '\r\n---------------\r\n');
+    console.log('------- Event ------');
+    console.log(event);
+    console.log(event.marshall());
+    console.log('---------------');
 }
 MyApp.prototype.onInvalidPeer = function (data) {
     console.log('invalid peer: ' + data);

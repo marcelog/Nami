@@ -14,9 +14,12 @@ Message.prototype.marshall = function () {
 }
 
 Message.prototype.unmarshall = function (data) {
-    this.lines = data.split("\r\n");
+    this.lines = data.split(this.EOL);
     for (line in this.lines) {
         key = this.lines[line].split(":");
+        if (typeof(key[1]) === 'undefined') {
+            continue;
+        }
         this.keys[key[0]] = key[1].replace(/^\s+/g,'').replace(/\s+$/g,'');
     }
 }

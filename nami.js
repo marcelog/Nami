@@ -2,6 +2,7 @@ var net = require('net');
 var events = require('events');
 var action = require('./message/action.js');
 var util = require('util');
+var namiEvents = require('./message/event.js');
 
 function Nami(amiData) {
     Nami.super_.call(this);
@@ -17,11 +18,12 @@ util.inherits(Nami, events.EventEmitter);
 Nami.prototype.onData = function (data) {
     while ((theEOM = data.indexOf(this.me.EOM)) != -1) {
         this.me.received = this.me.received + data.substr(0, theEOM);
-        this.me.emit('namiEvent', this.me.received);
-        this.me.received = '';
+        var event = new namiEvents.Event(this.me.received);
+        this.me.emit('namiEvent', event);
         data = data.substr(theEOM + this.me.EOM.length);
+        this.me.received = "";
     }
-    this.me.received = this.me.received + data;
+    this.me.received = data;
 }
 Nami.prototype.onConnect = function () {
     this.connected = true;
