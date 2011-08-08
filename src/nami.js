@@ -26,6 +26,7 @@ Nami.prototype.onRawEvent = function (buffer) {
 Nami.prototype.onData = function (data) {
     while ((theEOM = data.indexOf(this.me.EOM)) != -1) {
         this.me.received = this.me.received.concat(data.substr(0, theEOM));
+console.log("|" + this.me.received + "|\n");
         this.me.emit('namiRawEvent', this.me.received);
         this.me.received = "";
         data = data.substr(theEOM + this.me.EOM.length);
@@ -36,6 +37,7 @@ Nami.prototype.onConnect = function () {
     this.connected = true;
 }
 Nami.prototype.login = function () {
+    this.socket.on('data', this.onData);
     this.send(new action.LoginAction(
         this.amiData.username, this.amiData.secret
     ));
@@ -46,7 +48,6 @@ Nami.prototype.onWelcomeMessage = function (data) {
     if (welcome == -1) {
         this.me.emit('namiInvalidPeer', data);
     } else {
-        this.on('data', this.me.onData);
         this.me.login();
     }
 }
