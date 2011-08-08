@@ -1,7 +1,13 @@
+if (process.argv.length != 3) {
+	console.log("Use: <config dir>\n");
+	process.exit();
+}
+
+var configDir = process.argv[2];
+eval(require('fs').readFileSync(configDir + '/config.js', encoding="ascii"));
 var app = require("./app.js");
-///var config = require("../config.js")
 // Go!
 
-new app.MyApp(config).run();
+new app.MyApp(NamiConfig).run();
 
 
