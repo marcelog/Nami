@@ -10,14 +10,10 @@ function MyApp(config) {
 }
 
 MyApp.prototype.onEvent = function (event) {
-    //console.log('------- Event ------');
-    //console.log(event.keys);
-    //console.log(event.marshall());
     for (client in this.clients) {
     	console.log(event.keys);
     	this.clients[client].emit('event', event);
     }
-    //console.log('---------------');
 }
 MyApp.prototype.onInvalidPeer = function (data) {
     console.log('invalid peer: ' + data);
