@@ -24,42 +24,46 @@ Nami.prototype.onRawEvent = function (buffer) {
     this.emit('namiEvent', event);
 }
 
-// in net.Socket scope
 Nami.prototype.onData = function (data) {
-    while ((theEOM = data.indexOf(this.me.EOM)) != -1) {
-        this.me.received = this.me.received.concat(data.substr(0, theEOM));
-        this.me.emit('namiRawEvent', this.me.received);
-        this.me.received = "";
-        data = data.substr(theEOM + this.me.EOM.length);
+    while ((theEOM = data.indexOf(this.EOM)) != -1) {
+        this.received = this.received.concat(data.substr(0, theEOM));
+        this.emit('namiRawEvent', this.received);
+        this.received = "";
+        data = data.substr(theEOM + this.EOM.length);
     }
-    this.me.received = data;
+    this.received = data;
 }
 Nami.prototype.onConnect = function () {
     this.connected = true;
 }
 Nami.prototype.login = function () {
-    this.socket.on('data', this.onData);
+	var self = this;
+    this.socket.on('data', function (data) {
+    	self.onData(data);
+    });
     this.send(new action.LoginAction(
         this.amiData.username, this.amiData.secret
     ));
 }
 
 Nami.prototype.onWelcomeMessage = function (data) {
-    var welcome = data.indexOf(this.me.welcomeMessage);
+    var welcome = data.indexOf(this.welcomeMessage);
     if (welcome == -1) {
-        this.me.emit('namiInvalidPeer', data);
+        this.emit('namiInvalidPeer', data);
     } else {
-        this.me.login();
+        this.login();
     }
 }
 Nami.prototype.open = function () {
     this.socket = new net.Socket();
+    var self = this;
     this.socket.on('connect', this.onConnect);
     this.on('namiRawEvent', this.onRawEvent);
-    this.socket.once('data', this.onWelcomeMessage);
+    this.socket.once('data', function (data) {
+    	self.onWelcomeMessage(data); 
+    });
     this.socket.setEncoding('ascii');
     this.received = "";
-    this.socket.me = this;
     this.socket.connect(this.amiData.port, this.amiData.host);
 }
 
