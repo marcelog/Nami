@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script src="http://192.168.0.10:1028/socket.io/socket.io.js"></script>
+<script type="text/javascript">
+function WebSocketTest()
+{
+    var socket = io.connect('http://192.168.0.10:1028/');
+    socket.on('connect', function () {
+        socket.send('hi');
+
+        socket.on('event', function (msg) {
+            console.log(msg);
+            var txt = document.createTextNode(msg);
+            document.getElementById('messages').appendChild(txt);
+          console.log(msg);// my msg
+        });
+      });
+}
+</script>
+</head>
+<body>
+<div id="sse">
+   <a href="javascript:WebSocketTest()">Run WebSocket</a>
+</div>
+<div id="messages">
+</div>
+</body>
+</html>

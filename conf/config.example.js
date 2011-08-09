@@ -4,5 +4,8 @@ var NamiConfig = {
         port: 9999,
         username: "admin",
         secret: "admin"
+    },
+    webSocket: {
+    	port: 1028
     }
 };

@@ -5,6 +5,7 @@ var util = require('util');
 var namiEvents = require('./message/event.js');
 var timer = require('timers');
 
+// Constructor
 function Nami(amiData) {
     Nami.super_.call(this);
     this.connected = false;
@@ -15,6 +16,7 @@ function Nami(amiData) {
     this.welcomeMessage = "Asterisk Call Manager/1.1" + this.EOL;
     this.received = false;
 }
+// Nami inherits from the EventEmitter so Nami itself can throw events.
 util.inherits(Nami, events.EventEmitter);
 
 Nami.prototype.onRawEvent = function (buffer) {
@@ -26,7 +28,6 @@ Nami.prototype.onRawEvent = function (buffer) {
 Nami.prototype.onData = function (data) {
     while ((theEOM = data.indexOf(this.me.EOM)) != -1) {
         this.me.received = this.me.received.concat(data.substr(0, theEOM));
-console.log("|" + this.me.received + "|\n");
         this.me.emit('namiRawEvent', this.me.received);
         this.me.received = "";
         data = data.substr(theEOM + this.me.EOM.length);
