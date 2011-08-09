@@ -33,14 +33,14 @@ function Nami(amiData) {
     this.EOM = this.EOL + this.EOL;
     this.welcomeMessage = "Asterisk Call Manager/1.1" + this.EOL;
     this.received = false;
-}
+};
 // Nami inherits from the EventEmitter so Nami itself can throw events.
 util.inherits(Nami, events.EventEmitter);
 
 Nami.prototype.onRawEvent = function (buffer) {
     var event = new namiEvents.Event(buffer);
     this.emit('namiEvent', event);
-}
+};
 
 Nami.prototype.onData = function (data) {
     while ((theEOM = data.indexOf(this.EOM)) != -1) {
@@ -50,19 +50,22 @@ Nami.prototype.onData = function (data) {
         data = data.substr(theEOM + this.EOM.length);
     }
     this.received = data;
-}
+};
 Nami.prototype.onConnect = function () {
     this.connected = true;
-}
+};
 Nami.prototype.login = function () {
 	var self = this;
     this.socket.on('data', function (data) {
     	self.onData(data);
     });
     this.send(new action.LoginAction(
-        this.amiData.username, this.amiData.secret
-    ));
-}
+        this.amiData.username,
+        this.amiData.secret,
+        function (response) {
+        })
+    );
+};
 
 Nami.prototype.onWelcomeMessage = function (data) {
     var welcome = data.indexOf(this.welcomeMessage);
@@ -71,7 +74,7 @@ Nami.prototype.onWelcomeMessage = function (data) {
     } else {
         this.login();
     }
-}
+};
 Nami.prototype.open = function () {
     this.socket = new net.Socket();
     var self = this;
@@ -83,10 +86,10 @@ Nami.prototype.open = function () {
     this.socket.setEncoding('ascii');
     this.received = "";
     this.socket.connect(this.amiData.port, this.amiData.host);
-}
+};
 
 Nami.prototype.send = function (action) {
     this.socket.write(action.marshall());
-}
+};
 
 exports.Nami = Nami;

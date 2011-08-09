@@ -20,7 +20,7 @@
 if (process.argv.length != 3) {
 	console.log("Use: <config dir>\n");
 	process.exit();
-}
+};
 
 // "Read config file" :P
 var configDir = process.argv[2];
