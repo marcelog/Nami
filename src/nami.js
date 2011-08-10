@@ -27,6 +27,7 @@ var timer = require('timers');
 // Constructor
 function Nami(amiData) {
     Nami.super_.call(this);
+    this.connected = false;
     this.amiData = amiData;
     this.EOL = "\r\n";
     this.EOM = this.EOL + this.EOL;
