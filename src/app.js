@@ -30,8 +30,8 @@ function MyApp(config) {
 };
 
 MyApp.prototype.onEvent = function (event) {
+	console.log(event);
     for (client in this.clients) {
-    	console.log(event.keys);
     	this.clients[client].emit('event', event);
     }
 };

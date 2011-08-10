@@ -38,33 +38,19 @@ function Nami(amiData) {
 // Nami inherits from the EventEmitter so Nami itself can throw events.
 util.inherits(Nami, events.EventEmitter);
 
-Nami.prototype.onRawEvent = function (event) {
-	console.log(event);
-};
-Nami.prototype.onRawResponse = function (response) {
-	if (typeof (this.callbacks[response.ActionID]) !== 'undefined') {
-		this.callbacks[response.ActionID](response);
-	}
-	//this.responses.push(response);
-};
-
-Nami.prototype.onLoginResponse = function (response) {
-	if (response.Response != 'Success') {
-		this.emit('namiLoginIncorrect');
-	}
-};
-
 Nami.prototype.onRawMessage = function (buffer) {
 	if (buffer.indexOf('Event: ') != -1) {
 		var event = new namiEvents.Event(buffer);
-		this.emit('namiRawEvent', event);
+		this.emit('namiEvent', event);
 	} else if (buffer.indexOf('Response: ') != -1) {
 		var response = new namiEvents.Event(buffer);
-		this.emit('namiRawResponse', response);
+		if (typeof (this.callbacks[response.ActionID]) !== 'undefined') {
+			this.callbacks[response.ActionID](response);
+		}
+		//this.responses.push(response);
 	} else {
 		console.log("Discarded: |" + buffer + "|");
 	}
-    
     this.emit('namiEvent', event);
 };
 
@@ -92,7 +78,11 @@ Nami.prototype.onWelcomeMessage = function (data) {
         });
         this.send(
         	new action.LoginAction(this.amiData.username, this.amiData.secret),
-        	function (response) { self.onLoginResponse(response); }
+        	function (response) {
+        		if (response.Response != 'Success') {
+        			self.emit('namiLoginIncorrect');
+        		}
+        	}
         );
     }
 };
@@ -101,8 +91,6 @@ Nami.prototype.open = function () {
     var self = this;
     this.socket.on('connect', this.onConnect);
     this.on('namiRawMessage', this.onRawMessage);
-    this.on('namiRawEvent', this.onRawEvent);
-    this.on('namiRawResponse', this.onRawResponse);
     this.socket.once('data', function (data) {
     	self.onWelcomeMessage(data); 
     });
