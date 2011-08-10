@@ -31,9 +31,9 @@ function MyApp(config) {
 };
 
 MyApp.prototype.onEvent = function (event) {
-	console.log(event);
+	//console.log(event);
     for (client in this.clients) {
-    	this.clients[client].emit('event', event);
+    	//this.clients[client].emit('event', event);
     }
 };
 MyApp.prototype.onInvalidPeer = function (data) {
@@ -47,13 +47,13 @@ MyApp.prototype.onLoginIncorrect = function (data) {
 MyApp.prototype.onWebSocketDisconnect = function () {
 	console.log('disconnect');
 };
-MyApp.prototype.onWebSocketMessage = function (message) {
-	this.ami.send(new namiAction.CoreShowChannelsAction(), function (response) { console.log(response); process.exit(); });
+MyApp.prototype.onWebSocketMessage = function (message, socket) {
+	this.ami.send(new namiAction.CoreShowChannelsAction(), function (response) { socket.emit('response', response); });
 };
 MyApp.prototype.onWebSocketConnect = function (socket) {
 	var self = this;
 	this.clients.push(socket);
-    socket.on('message', function (message) { self.onWebSocketMessage(message) });
+    socket.on('message', function (message) { self.onWebSocketMessage(message, socket); });
     socket.on('disconnect', this.onWebSocketDisconnect);
 };
 MyApp.prototype.run = function() {

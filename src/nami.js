@@ -43,8 +43,11 @@ Nami.prototype.onRawEvent = function (event) {
 	if (typeof (event.ActionID) !== 'undefined') {
 		this.responses[event.ActionID].events.push(event);
 	}
-	if (event.Event.indexOf('Complete') !== -1) {
-		this.callbacks[response.ActionID](this.responses[event.ActionID]);
+	if (
+		event.Event.indexOf('Complete') !== -1
+		|| ((typeof(event.EventList) !== 'undefined') && event.EventList.indexOf('Complete') != -1)
+	) {
+		this.callbacks[event.ActionID](this.responses[event.ActionID]);
 	} else {
 		this.emit('namiEvent', event);
 	}
