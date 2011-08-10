@@ -47,8 +47,7 @@ MyApp.prototype.onWebSocketDisconnect = function () {
 	console.log('disconnect');
 };
 MyApp.prototype.onWebSocketMessage = function (message) {
-	console.log(message);
-	
+	this.ami.send();
 };
 MyApp.prototype.onWebSocketConnect = function (socket) {
 	this.clients.push(socket);

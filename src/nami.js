@@ -19,7 +19,7 @@
 var net = require('net');
 var events = require('events');
 var action = require('./message/action.js');
-var response = require('./message/response.js');
+var namiResponse = require('./message/response.js');
 var util = require('util');
 var namiEvents = require('./message/event.js');
 var timer = require('timers');
@@ -38,20 +38,34 @@ function Nami(amiData) {
 // Nami inherits from the EventEmitter so Nami itself can throw events.
 util.inherits(Nami, events.EventEmitter);
 
+Nami.prototype.onRawEvent = function (event) {
+	if (typeof (event.ActionID) !== 'undefined') {
+		this.responses[event.ActionID].events.push(event);
+	} else if (event.Event.indexOf('complete') !== -1) {
+		this.callbacks[response.ActionID](response);
+	} else {
+		this.emit('namiEvent', event);
+	}
+};
+
+Nami.prototype.onRawResponse = function (response) {
+	if (response.Message.indexOf('follows') != -1) {
+		this.responses[response.ActionID] = response;			
+	} else if (typeof (this.callbacks[response.ActionID]) !== 'undefined') {
+		this.callbacks[response.ActionID](response);
+	}
+};
+
 Nami.prototype.onRawMessage = function (buffer) {
 	if (buffer.indexOf('Event: ') != -1) {
 		var event = new namiEvents.Event(buffer);
-		this.emit('namiEvent', event);
+		this.emit('namiRawEvent', event);
 	} else if (buffer.indexOf('Response: ') != -1) {
-		var response = new namiEvents.Event(buffer);
-		if (typeof (this.callbacks[response.ActionID]) !== 'undefined') {
-			this.callbacks[response.ActionID](response);
-		}
-		//this.responses.push(response);
+		var response = new namiResponse.Response(buffer);
+		this.emit('namiRawResponse', response);
 	} else {
 		console.log("Discarded: |" + buffer + "|");
 	}
-    this.emit('namiEvent', event);
 };
 
 Nami.prototype.onData = function (data) {
@@ -91,6 +105,8 @@ Nami.prototype.open = function () {
     var self = this;
     this.socket.on('connect', this.onConnect);
     this.on('namiRawMessage', this.onRawMessage);
+    this.on('namiRawResponse', this.onRawResponse);
+    this.on('namiRawEvent', this.onRawEvent);
     this.socket.once('data', function (data) {
     	self.onWelcomeMessage(data); 
     });
