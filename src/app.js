@@ -23,6 +23,7 @@ function MyApp(config) {
 	this.config = config;
     this.ami = new nami.Nami(config.amiData);
     this.ami.on('namiInvalidPeer', function () { self.onInvalidPeer() });
+    this.ami.on('namiLoginIncorrect', function () { self.onLoginIncorrect() });
     var self = this;
     this.ami.on('namiEvent', function (event) { self.onEvent(event) });
     this.clients = [];
@@ -36,6 +37,10 @@ MyApp.prototype.onEvent = function (event) {
 };
 MyApp.prototype.onInvalidPeer = function (data) {
     console.log('invalid peer: ' + data);
+    process.exit();
+};
+MyApp.prototype.onLoginIncorrect = function (data) {
+    console.log('login incorrect');
     process.exit();
 };
 MyApp.prototype.onWebSocketDisconnect = function () {

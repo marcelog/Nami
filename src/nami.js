@@ -19,6 +19,7 @@
 var net = require('net');
 var events = require('events');
 var action = require('./message/action.js');
+var response = require('./message/response.js');
 var util = require('util');
 var namiEvents = require('./message/event.js');
 var timer = require('timers');
@@ -26,26 +27,51 @@ var timer = require('timers');
 // Constructor
 function Nami(amiData) {
     Nami.super_.call(this);
-    this.connected = false;
-    this.loggedIn = false;
     this.amiData = amiData;
     this.EOL = "\r\n";
     this.EOM = this.EOL + this.EOL;
     this.welcomeMessage = "Asterisk Call Manager/1.1" + this.EOL;
     this.received = false;
+    this.responses = { };
+    this.callbacks = { };
 };
 // Nami inherits from the EventEmitter so Nami itself can throw events.
 util.inherits(Nami, events.EventEmitter);
 
-Nami.prototype.onRawEvent = function (buffer) {
-    var event = new namiEvents.Event(buffer);
+Nami.prototype.onRawEvent = function (event) {
+	console.log(event);
+};
+Nami.prototype.onRawResponse = function (response) {
+	if (typeof (this.callbacks[response.ActionID]) !== 'undefined') {
+		this.callbacks[response.ActionID](response);
+	}
+	//this.responses.push(response);
+};
+
+Nami.prototype.onLoginResponse = function (response) {
+	if (response.Response != 'Success') {
+		this.emit('namiLoginIncorrect');
+	}
+};
+
+Nami.prototype.onRawMessage = function (buffer) {
+	if (buffer.indexOf('Event: ') != -1) {
+		var event = new namiEvents.Event(buffer);
+		this.emit('namiRawEvent', event);
+	} else if (buffer.indexOf('Response: ') != -1) {
+		var response = new namiEvents.Event(buffer);
+		this.emit('namiRawResponse', response);
+	} else {
+		console.log("Discarded: |" + buffer + "|");
+	}
+    
     this.emit('namiEvent', event);
 };
 
 Nami.prototype.onData = function (data) {
     while ((theEOM = data.indexOf(this.EOM)) != -1) {
         this.received = this.received.concat(data.substr(0, theEOM));
-        this.emit('namiRawEvent', this.received);
+        this.emit('namiRawMessage', this.received);
         this.received = "";
         data = data.substr(theEOM + this.EOM.length);
     }
@@ -54,32 +80,29 @@ Nami.prototype.onData = function (data) {
 Nami.prototype.onConnect = function () {
     this.connected = true;
 };
-Nami.prototype.login = function () {
-	var self = this;
-    this.socket.on('data', function (data) {
-    	self.onData(data);
-    });
-    this.send(new action.LoginAction(
-        this.amiData.username,
-        this.amiData.secret,
-        function (response) {
-        })
-    );
-};
 
 Nami.prototype.onWelcomeMessage = function (data) {
     var welcome = data.indexOf(this.welcomeMessage);
+	var self = this;
     if (welcome == -1) {
         this.emit('namiInvalidPeer', data);
     } else {
-        this.login();
+        this.socket.on('data', function (data) {
+        	self.onData(data);
+        });
+        this.send(
+        	new action.LoginAction(this.amiData.username, this.amiData.secret),
+        	function (response) { self.onLoginResponse(response); }
+        );
     }
 };
 Nami.prototype.open = function () {
     this.socket = new net.Socket();
     var self = this;
     this.socket.on('connect', this.onConnect);
+    this.on('namiRawMessage', this.onRawMessage);
     this.on('namiRawEvent', this.onRawEvent);
+    this.on('namiRawResponse', this.onRawResponse);
     this.socket.once('data', function (data) {
     	self.onWelcomeMessage(data); 
     });
@@ -88,7 +111,9 @@ Nami.prototype.open = function () {
     this.socket.connect(this.amiData.port, this.amiData.host);
 };
 
-Nami.prototype.send = function (action) {
+Nami.prototype.send = function (action, callback) {
+    this.callbacks[action.ActionID] = callback;
+    this.responses[action.ActionID] = "";
     this.socket.write(action.marshall());
 };
 
