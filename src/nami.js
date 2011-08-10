@@ -42,15 +42,16 @@ util.inherits(Nami, events.EventEmitter);
 Nami.prototype.onRawEvent = function (event) {
 	if (typeof (event.ActionID) !== 'undefined') {
 		this.responses[event.ActionID].events.push(event);
-	} else if (event.Event.indexOf('complete') !== -1) {
-		this.callbacks[response.ActionID](response);
+	}
+	if (event.Event.indexOf('Complete') !== -1) {
+		this.callbacks[response.ActionID](this.responses[event.ActionID]);
 	} else {
 		this.emit('namiEvent', event);
 	}
 };
 
 Nami.prototype.onRawResponse = function (response) {
-	if (response.Message.indexOf('follows') != -1) {
+	if (response.Message.indexOf('follow') != -1) {
 		this.responses[response.ActionID] = response;			
 	} else if (typeof (this.callbacks[response.ActionID]) !== 'undefined') {
 		this.callbacks[response.ActionID](response);

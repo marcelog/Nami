@@ -31,11 +31,14 @@ function LoginAction(username, secret) {
     this.set('Username', username);
     this.set('Secret', secret );
 };
+function CoreShowChannelsAction() {
+	CoreShowChannelsAction.super_.call(this, 'CoreShowChannels');
+};
 
 // Inheritance for this module
 util.inherits(Action, message.Message);
 util.inherits(LoginAction, Action);
-
+util.inherits(CoreShowChannelsAction, Action);
 // Exports for this module
 exports.LoginAction = LoginAction;
-
+exports.CoreShowChannelsAction = CoreShowChannelsAction;

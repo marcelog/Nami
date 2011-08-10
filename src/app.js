@@ -17,6 +17,7 @@
  *
  */
 var nami = require("./nami.js");
+var namiAction = require("./message/action.js");
 
 function MyApp(config) {
 	var self = this;
@@ -47,11 +48,12 @@ MyApp.prototype.onWebSocketDisconnect = function () {
 	console.log('disconnect');
 };
 MyApp.prototype.onWebSocketMessage = function (message) {
-	this.ami.send();
+	this.ami.send(new namiAction.CoreShowChannelsAction(), function (response) { console.log(response); process.exit(); });
 };
 MyApp.prototype.onWebSocketConnect = function (socket) {
+	var self = this;
 	this.clients.push(socket);
-    socket.on('message', this.onWebSocketMessage);
+    socket.on('message', function (message) { self.onWebSocketMessage(message) });
     socket.on('disconnect', this.onWebSocketDisconnect);
 };
 MyApp.prototype.run = function() {

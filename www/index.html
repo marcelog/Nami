@@ -7,6 +7,7 @@
 function EventDispatcher(socket) {
 	var self = this;
     socket.on('connect', function () {
+    	socket.send('asd');
         socket.on('event', function (msg) { self.onEvent(msg); });
         socket.on('response', function (msg) { self.onEvent(msg); });
     });
