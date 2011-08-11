@@ -23,10 +23,10 @@ function MyApp(config) {
 	var self = this;
 	this.config = config;
     this.ami = new nami.Nami(config.amiData);
-    this.ami.on('namiInvalidPeer', function () { self.onInvalidPeer() });
-    this.ami.on('namiLoginIncorrect', function () { self.onLoginIncorrect() });
+    this.ami.on('namiInvalidPeer', function () { self.onInvalidPeer(); });
+    this.ami.on('namiLoginIncorrect', function () { self.onLoginIncorrect(); });
     var self = this;
-    this.ami.on('namiEvent', function (event) { self.onEvent(event) });
+    this.ami.on('namiEvent', function (event) { self.onEvent(event); });
     this.clients = [];
 };
 
