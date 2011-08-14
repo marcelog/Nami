@@ -20,6 +20,8 @@ var CallSchema = new Schema({
 	answeredTime: { type: Number},
 	dialStatus: { type: String, index: true },
 	hangupCause: { type: Number, index: true },
+    start: { type: Date, index: true, default: Date.now },
+    end: { type: Date, index: true }
 });
 var EventModel = mongoose.model('Events', EventSchema);
 var CallModel = mongoose.model('OutgoingCalls', CallSchema);

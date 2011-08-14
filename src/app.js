@@ -42,7 +42,7 @@ function MyApp(config) {
 };
 util.inherits(MyApp, events.EventEmitter);
 MyApp.prototype.onAnyEvent = function (event) {
-//    console.log(event);
+    console.log(event);
     this.emit(event.Event, event);
 };
 
@@ -84,6 +84,7 @@ MyApp.prototype.onVarSet = function (event) {
         this.getCall(event.Uniqueid, function(call) {
             if (call !== null) {
                 call.hangupCause = event.Value;
+                call.end = Date.now();
                 self.saveCall(call);
             }
         });
@@ -142,12 +143,16 @@ MyApp.prototype.onWebSocketDisconnect = function () {
 	console.log('disconnect');
 };
 MyApp.prototype.onWebSocketMessage = function (message, socket) {
-	this.ami.send(new namiAction.CoreShowChannelsAction(), function (response) { socket.emit('response', response); });
+	this.ami.send(new namiAction.CoreShowChannelsAction(), function (response) {
+        socket.emit('response', response); 
+    });
 };
 MyApp.prototype.onWebSocketConnect = function (socket) {
 	var self = this;
 	this.clients.push(socket);
-    socket.on('message', function (message) { self.onWebSocketMessage(message, socket); });
+    socket.on('message', function (message) {
+        self.onWebSocketMessage(message, socket);
+    });
     socket.on('disconnect', this.onWebSocketDisconnect);
 };
 MyApp.prototype.run = function() {
