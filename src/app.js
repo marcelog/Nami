@@ -42,6 +42,9 @@ function MyApp(config) {
 };
 util.inherits(MyApp, events.EventEmitter);
 MyApp.prototype.onAnyEvent = function (event) {
+    if (event.Event === 'DTMF') {
+        return;
+    }
     console.log(event);
     this.emit(event.Event, event);
 };
@@ -114,6 +117,9 @@ MyApp.prototype.onDial = function (event) {
 }
 
 MyApp.prototype.onEventToMongo = function (event) {
+    if (event.Event === 'DTMF') {
+        return;
+    }
     var eventEntity = new namiMongoModels.EventModel();
     eventEntity.uniqueId = typeof(event.Uniqueid) !== 'undefined' ? event.Uniqueid : '';
     eventEntity.name = typeof(event.Event) !== 'undefined' ? event.Event : '';
@@ -127,6 +133,9 @@ MyApp.prototype.onEventToMongo = function (event) {
 };
 
 MyApp.prototype.onEventToClients = function (event) {
+    if (event.Event === 'DTMF') {
+        return;
+    }
     for (client in this.clients) {
     	this.clients[client].emit('event', event);
     }
