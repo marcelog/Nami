@@ -18,6 +18,7 @@
  */
 var nami = require("./nami.js");
 var namiAction = require("./message/action.js");
+var namiMongoModels = require("./mongomodels.js");
 
 function MyApp(config) {
 	var self = this;
@@ -26,14 +27,29 @@ function MyApp(config) {
     this.ami.on('namiInvalidPeer', function () { self.onInvalidPeer(); });
     this.ami.on('namiLoginIncorrect', function () { self.onLoginIncorrect(); });
     var self = this;
-    this.ami.on('namiEvent', function (event) { self.onEvent(event); });
+    this.ami.on('namiEvent', function (event) { self.onEventToClients(event); });
+    this.ami.on('namiEvent', function (event) { self.onEventToMongo(event); });
     this.clients = [];
+    namiMongoModels.mongoose.connect(
+    	'mongodb://' + config.mongo.user + ':' + config.mongo.password
+    	+ '@' + config.mongo.host + ':' + config.mongo.port
+    	+ '/' + config.mongo.dbname
+    );
+};
+MyApp.prototype.onEventToMongo = function (event) {
+    var eventEntity = new namiMongoModels.EventModel();
+    eventEntity.uniqueId = typeof(event.Uniqueid) !== 'undefined' ? event.Uniqueid : '';
+    eventEntity.name = typeof(event.Event) !== 'undefined' ? event.Event : '';
+    eventEntity.channel = typeof(event.Channel) !== 'undefined' ? event.Channel : '';
+    eventEntity.event = JSON.stringify(event); 
+    eventEntity.save(function (err) {
+    });
 };
 
-MyApp.prototype.onEvent = function (event) {
-	//console.log(event);
+MyApp.prototype.onEventToClients = function (event) {
+//	console.log(event);
     for (client in this.clients) {
-    	//this.clients[client].emit('event', event);
+    	this.clients[client].emit('event', event);
     }
 };
 MyApp.prototype.onInvalidPeer = function (data) {

@@ -4,6 +4,13 @@
 <script src="http://192.168.0.10:1028/socket.io/socket.io.js"></script>
 <script type="text/javascript">
 
+function Action(name, arguments) {
+	this.name = name;
+	if (typeof(arguments) !== 'undefined') {
+		this.arguments = arguments;
+	}
+}
+
 function EventDispatcher(socket) {
 	var self = this;
     socket.on('connect', function () {

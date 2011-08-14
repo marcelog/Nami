@@ -17,6 +17,13 @@
  *
  */
 var NamiConfig = {
+	mongo: {
+		host: "127.0.0.1",
+		port: 10000,
+		dbname: "dbname",
+		user: "username",
+		password: "password"
+	},
     amiData: {
         host: "127.0.0.1",
         port: 9999,
