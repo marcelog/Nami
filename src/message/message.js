@@ -37,6 +37,10 @@ Message.prototype.unmarshall = function (data) {
     this.lines = data.split(this.EOL);
     for (line in this.lines) {
         key = this.lines[line].split(":");
+        /* XXX This should not be needed... */
+        if (typeof(key[1]) === 'undefined') {
+            continue;
+        }
         this[key[0].replace(/-/, '_')] = key[1].replace(/^\s+/g, '').replace(/\s+$/g, '');
     }
 };
