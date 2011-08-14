@@ -32,6 +32,7 @@ function MyApp(config) {
     this.ami.on('namiEvent', function (event) { self.onEventToMongo(event); });
     this.ami.on('namiEvent', function (event) { self.onAnyEvent(event); });
     this.on('Dial', function (event) { self.onDial(event); });
+    this.on('Hangup', function (event) { self.onHangup(event); });
     this.clients = [];
     namiMongoModels.mongoose.connect(
     	'mongodb://' + config.mongo.user + ':' + config.mongo.password
@@ -45,9 +46,25 @@ MyApp.prototype.onAnyEvent = function (event) {
     this.emit(event.Event, event);
 };
 
+MyApp.prototype.onHangup = function (event) {
+    namiMongoModels.CallModel.findOne( {uniqueId1: event.uniqueId}, function(err, obj) {
+        if (err !== null) {
+            console.log("Error getting call: " + err);
+        } else if (obj !== null) {
+            obj.hangupCause = event['Cause'];
+            obj.hangupTxt = event['Cause-txt'];
+            obj.save(function (err) {
+                if (err !== null) {
+                    console.log("Error saving call: " + err);
+                }
+            });
+        }
+    });
+};
+
 MyApp.prototype.onDial = function (event) {
+    var callEntity = new namiMongoModels.CallModel();
     if (event.SubEvent === 'Begin') {
-        var callEntity = new namiMongoModels.CallModel();
         callEntity.channel1 = event.Channel;
         callEntity.uniqueId1 = event.Uniqueid;
         callEntity.channel2 = event.Destination;
@@ -61,7 +78,18 @@ MyApp.prototype.onDial = function (event) {
             }
         });
     } else if (event.SubEvent === 'End') {
-        console.log('End');
+        namiMongoModels.CallModel.findOne( {uniqueId1: event.Uniqueid}, function(err, obj) {
+            if (err !== null) {
+                console.log("Error getting call: " + err);
+            } else if (obj !== null) {
+                obj.dialStatus = event.DialStatus;
+                obj.save(function (err) {
+                    if (err !== null) {
+                        console.log("Error saving call: " + err);
+                    }
+                });
+            }
+        });
     }
 }
 

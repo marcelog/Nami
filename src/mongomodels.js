@@ -23,7 +23,7 @@ var CallSchema = new Schema({
 	hangupTxt: { type: String, index: true }
 });
 var EventModel = mongoose.model('Events', EventSchema);
-var CallModel = mongoose.model('Calls', CallSchema);
+var CallModel = mongoose.model('OutgoingCalls', CallSchema);
 
 exports.EventModel = EventModel;
 exports.CallModel = CallModel;
