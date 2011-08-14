@@ -5,41 +5,57 @@
 <script type="text/javascript">
 
 function Action(name, arguments) {
-	this.name = name;
-	if (typeof(arguments) !== 'undefined') {
-		this.arguments = arguments;
-	}
-}
+    this.name = name;
+    this.arguments = arguments;
+};
 
 function EventDispatcher(socket) {
-	var self = this;
+    var self = this;
+    this.socket = socket;
     socket.on('connect', function () {
-    	socket.send('asd');
         socket.on('event', function (msg) { self.onEvent(msg); });
         socket.on('response', function (msg) { self.onResponse(msg); });
     });
-}
+};
+
+EventDispatcher.prototype.send = function(action) {
+    this.socket.send(action);
+};
 
 EventDispatcher.prototype.onEvent = function (event) {
     console.log("Event: ");
     console.log(event);
-}
+};
 EventDispatcher.prototype.onResponse = function (response) {
-    console.log("Response: ");
-    console.log(event);
+//    document.createTextNode("Response to: " + response.Action);
+    var txt = document.createTextNode(JSON.stringify(response));
+    document.getElementById('responses').appendChild(txt);
+};
 
-}
+function load() {
+    NamiDispatcher = new EventDispatcher(io.connect('http://192.168.0.10:1028/'));
+};
 
-function WebSocketTest() {
-	var dispatcher = new EventDispatcher(io.connect('http://192.168.0.10:1028/'));
-}
+function sendAction() {
+alert(document.getElementById('actionName').value);
+    NamiDispatcher.send(document.getElementById('actionName').value);
+};
 </script>
 </head>
-<body>
+<body onload="load()">
 <div id="sse">
-   <a href="javascript:WebSocketTest()">Run WebSocket</a>
+   <table>
+       <tr>
+           <td>Send</td>
+           <td><input type="text" size="32" id="actionName"/></td>
+           <td><input type="submit" onClick="sendAction()"/></td>
+       </tr>
+   </table>
 </div>
 <div id="messages">
+</div>
+<hr/>
+<div id="responses">
 </div>
 </body>
 </html>
