@@ -18,8 +18,8 @@ function EventDispatcher(socket) {
     });
 };
 
-EventDispatcher.prototype.send = function(action) {
-    this.socket.send(action);
+EventDispatcher.prototype.send = function(action, arguments) {
+    this.socket.send(JSON.stringify(new Action(action, arguments)));
 };
 
 EventDispatcher.prototype.onEvent = function (event) {
@@ -37,8 +37,10 @@ function load() {
 };
 
 function sendAction() {
-alert(document.getElementById('actionName').value);
-    NamiDispatcher.send(document.getElementById('actionName').value);
+    NamiDispatcher.send(
+        document.getElementById('actionName').value,
+        eval(document.getElementById('actionArguments').value)
+    );
 };
 </script>
 </head>
@@ -47,7 +49,17 @@ alert(document.getElementById('actionName').value);
    <table>
        <tr>
            <td>Send</td>
-           <td><input type="text" size="32" id="actionName"/></td>
+           <td>
+               <select id="actionName">
+                   <option selected value="CoreShowChannelsAction">CoreShowChannelsAction</option>
+               </select>
+           </td>
+       </tr>
+       <tr>
+           <td>Arguments</td>
+           <td><input type="text" size="32" id="actionArguments"/></td>
+       </tr>
+       <tr>
            <td><input type="submit" onClick="sendAction()"/></td>
        </tr>
    </table>

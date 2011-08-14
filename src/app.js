@@ -152,7 +152,12 @@ MyApp.prototype.onWebSocketDisconnect = function () {
 	console.log('disconnect');
 };
 MyApp.prototype.onWebSocketMessage = function (message, socket) {
-	this.ami.send(new namiAction.CoreShowChannelsAction(), function (response) {
+    message = JSON.parse(message);
+    var action = new namiAction[message.name]();
+    for (prop in message.arguments) {
+        action.set(prop, message.arguments[prop]);
+    }
+	this.ami.send(action, function (response) {
         socket.emit('response', response); 
     });
 };
