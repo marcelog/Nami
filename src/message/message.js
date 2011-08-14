@@ -37,7 +37,7 @@ Message.prototype.unmarshall = function (data) {
     this.lines = data.split(this.EOL);
     for (line in this.lines) {
         key = this.lines[line].split(":");
-        this[key[0]] = key[1].replace(/^\s+/g, '').replace(/\s+$/g, '');
+        this[key[0].replace(/-/, '_')] = key[1].replace(/^\s+/g, '').replace(/\s+$/g, '');
     }
 };
 

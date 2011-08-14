@@ -32,7 +32,7 @@ function MyApp(config) {
     this.ami.on('namiEvent', function (event) { self.onEventToMongo(event); });
     this.ami.on('namiEvent', function (event) { self.onAnyEvent(event); });
     this.on('Dial', function (event) { self.onDial(event); });
-    this.on('Hangup', function (event) { self.onHangup(event); });
+    this.on('VarSet', function (event) { self.onVarSet(event); });
     this.clients = [];
     namiMongoModels.mongoose.connect(
     	'mongodb://' + config.mongo.user + ':' + config.mongo.password
@@ -46,48 +46,67 @@ MyApp.prototype.onAnyEvent = function (event) {
     this.emit(event.Event, event);
 };
 
-MyApp.prototype.onHangup = function (event) {
-    namiMongoModels.CallModel.findOne( {uniqueId1: event.uniqueId}, function(err, obj) {
+MyApp.prototype.saveCall = function (call) {
+    call.save(function (err) {
+        if (err !== null) {
+            console.log("Error saving call: " + err);
+        }
+    });
+}
+
+MyApp.prototype.getCall = function (uniqueId, callback) {
+    namiMongoModels.CallModel.findOne( {uniqueId1: uniqueId}, function(err, obj) {
         if (err !== null) {
             console.log("Error getting call: " + err);
-        } else if (obj !== null) {
-            obj.hangupCause = event['Cause'];
-            obj.hangupTxt = event['Cause-txt'];
-            obj.save(function (err) {
-                if (err !== null) {
-                    console.log("Error saving call: " + err);
-                }
-            });
+        } else {
+            callback(obj);
         }
     });
 };
 
+MyApp.prototype.onVarSet = function (event) {
+    var self = this;
+    if (event.Variable == 'DIALEDTIME') {
+        this.getCall(event.Uniqueid, function(call) {
+            if (call !== null) {
+                call.dialedTime = event.Value;
+                self.saveCall(call);
+            }
+        });
+    } else if (event.Variable == 'ANSWEREDTIME') {
+        this.getCall(event.Uniqueid, function(call) {
+            if (call !== null) {
+                call.answeredTime = event.Value;
+                self.saveCall(call);
+            }
+        });
+    } else if (event.Variable == 'HANGUPCAUSE') {
+        this.getCall(event.Uniqueid, function(call) {
+            if (call !== null) {
+                call.hangupCause = event.Value;
+                self.saveCall(call);
+            }
+        });
+    }
+};
+
 MyApp.prototype.onDial = function (event) {
     var callEntity = new namiMongoModels.CallModel();
+    var self = this;
     if (event.SubEvent === 'Begin') {
         callEntity.channel1 = event.Channel;
-        callEntity.uniqueId1 = event.Uniqueid;
+        callEntity.uniqueId1 = event.UniqueID;
         callEntity.channel2 = event.Destination;
         callEntity.uniqueId2 = event.DestUniqueID;
         callEntity.dialString = event.Dialstring;
         callEntity.clidNum = event.CallerIDNum;
         callEntity.clidName = event.CallerIDName;
-        callEntity.save(function (err) {
-            if (err !== null) {
-                console.log("Error saving call: " + err);
-            }
-        });
+        this.saveCall(callEntity);
     } else if (event.SubEvent === 'End') {
-        namiMongoModels.CallModel.findOne( {uniqueId1: event.Uniqueid}, function(err, obj) {
-            if (err !== null) {
-                console.log("Error getting call: " + err);
-            } else if (obj !== null) {
-                obj.dialStatus = event.DialStatus;
-                obj.save(function (err) {
-                    if (err !== null) {
-                        console.log("Error saving call: " + err);
-                    }
-                });
+        this.getCall(event.Uniqueid, function(call) {
+            if (call !== null) {
+                call.dialStatus = event.DialStatus;
+                self.saveCall(call);
             }
         });
     }
