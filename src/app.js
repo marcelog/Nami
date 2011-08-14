@@ -19,6 +19,8 @@
 var nami = require("./nami.js");
 var namiAction = require("./message/action.js");
 var namiMongoModels = require("./mongomodels.js");
+var util = require("util");
+var events = require("events");
 
 function MyApp(config) {
 	var self = this;
@@ -26,9 +28,10 @@ function MyApp(config) {
     this.ami = new nami.Nami(config.amiData);
     this.ami.on('namiInvalidPeer', function () { self.onInvalidPeer(); });
     this.ami.on('namiLoginIncorrect', function () { self.onLoginIncorrect(); });
-    var self = this;
     this.ami.on('namiEvent', function (event) { self.onEventToClients(event); });
     this.ami.on('namiEvent', function (event) { self.onEventToMongo(event); });
+    this.ami.on('namiEvent', function (event) { self.onAnyEvent(event); });
+    this.on('Dial', function (event) { self.onDial(event); });
     this.clients = [];
     namiMongoModels.mongoose.connect(
     	'mongodb://' + config.mongo.user + ':' + config.mongo.password
@@ -36,6 +39,32 @@ function MyApp(config) {
     	+ '/' + config.mongo.dbname
     );
 };
+util.inherits(MyApp, events.EventEmitter);
+MyApp.prototype.onAnyEvent = function (event) {
+//    console.log(event);
+    this.emit(event.Event, event);
+};
+
+MyApp.prototype.onDial = function (event) {
+    if (event.SubEvent === 'Begin') {
+        var callEntity = new namiMongoModels.CallModel();
+        callEntity.channel1 = event.Channel;
+        callEntity.uniqueId1 = event.Uniqueid;
+        callEntity.channel2 = event.Destination;
+        callEntity.uniqueId2 = event.DestUniqueID;
+        callEntity.dialString = event.Dialstring;
+        callEntity.clidNum = event.CallerIDNum;
+        callEntity.clidName = event.CallerIDName;
+        callEntity.save(function (err) {
+            if (err !== null) {
+                console.log("Error saving call: " + err);
+            }
+        });
+    } else if (event.SubEvent === 'End') {
+        console.log('End');
+    }
+}
+
 MyApp.prototype.onEventToMongo = function (event) {
     var eventEntity = new namiMongoModels.EventModel();
     eventEntity.uniqueId = typeof(event.Uniqueid) !== 'undefined' ? event.Uniqueid : '';
@@ -43,11 +72,13 @@ MyApp.prototype.onEventToMongo = function (event) {
     eventEntity.channel = typeof(event.Channel) !== 'undefined' ? event.Channel : '';
     eventEntity.event = JSON.stringify(event); 
     eventEntity.save(function (err) {
+        if (err !== null) {
+            console.log("Error saving event: " + err);
+        }
     });
 };
 
 MyApp.prototype.onEventToClients = function (event) {
-//	console.log(event);
     for (client in this.clients) {
     	this.clients[client].emit('event', event);
     }

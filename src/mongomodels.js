@@ -9,13 +9,18 @@ var EventSchema = new Schema({
 });
 
 var CallSchema = new Schema({
-	channel1: { type: String },
-	channel2: { type: String },
+	channel1: { type: String, index: true },
+    uniqueId1: { type: String, index: true },
+	channel2: { type: String, index: true },
+    uniqueId2: { type: String, index: true },
+    dialString: { type: String, index: true },
+    clidNum: { type: String, index: true },
+    clidName: { type: String, index: true },
 	dialedTime: { type: Number },
 	answeredTime: { type: Number},
-	dialStatus: { type: String },
-	hangupCause: { type: Number },
-	hangupTxt: { type: String }
+	dialStatus: { type: String, index: true },
+	hangupCause: { type: Number, index: true },
+	hangupTxt: { type: String, index: true }
 });
 var EventModel = mongoose.model('Events', EventSchema);
 var CallModel = mongoose.model('Calls', CallSchema);
