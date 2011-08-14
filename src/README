@@ -1,0 +1,5 @@
+requirements:
+ * nodejs
+ * socket.io (if you want websocket clients)
+ * mongoose (if you want to save events to mongo database)
+
