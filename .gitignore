@@ -1,4 +1,5 @@
 .project
 .settings
 conf/config.js
+src/node_modules
 
