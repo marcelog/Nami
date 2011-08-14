@@ -158,6 +158,7 @@ MyApp.prototype.onWebSocketMessage = function (message, socket) {
         action.set(prop, message.arguments[prop]);
     }
 	this.ami.send(action, function (response) {
+        response.action = message.name;
         socket.emit('response', response); 
     });
 };

@@ -27,8 +27,9 @@ EventDispatcher.prototype.onEvent = function (event) {
     console.log(event);
 };
 EventDispatcher.prototype.onResponse = function (response) {
-//    document.createTextNode("Response to: " + response.Action);
-    var txt = document.createTextNode(JSON.stringify(response));
+    var txt = document.createTextNode(
+        'Response to: ' + response.action + ': ' + JSON.stringify(response)
+    );
     document.getElementById('responses').appendChild(txt);
 };
 
