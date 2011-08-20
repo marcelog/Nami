@@ -1,5 +1,5 @@
 /*!
- * Main entry point.
+ * Set ups Mongo.
  *
  * Copyright 2011 Marcelo Gornstein <marcelog@gmail.com>
  *
@@ -16,13 +16,13 @@
  * limitations under the License.
  *
  */
-// Validate arguments.
-if (process.argv.length != 3) {
-	console.log("Use: <config dir>\n");
-	process.exit();
+exports.bootstrap = function (resources) {
+    var mongo = require("../models/mongo.js");
+    mongo.mongoose.connect(
+    	'mongodb://' + resources.config.mongo.user + ':' + resources.config.mongo.password
+    	+ '@' + resources.config.mongo.host + ':' + resources.config.mongo.port
+    	+ '/' + resources.config.mongo.dbname
+    );
+    return mongo;
 };
-
-new (require("./app.js").MyApp)(
-    require("./bootstrap/bootstrap.js").run(process.argv[2])
-).run();
 

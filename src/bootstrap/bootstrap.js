@@ -1,5 +1,5 @@
 /*!
- * Main entry point.
+ * Bootstrapping code for all resources.
  *
  * Copyright 2011 Marcelo Gornstein <marcelog@gmail.com>
  *
@@ -16,13 +16,17 @@
  * limitations under the License.
  *
  */
-// Validate arguments.
-if (process.argv.length != 3) {
-	console.log("Use: <config dir>\n");
-	process.exit();
+exports.run = function () {
+	var resources = {
+        config: {},
+	    httpServer: {},
+	    nami: {},
+        mongo: {},
+        websocket: {}
+	};
+    for (resource in resources) {
+        resources[resource] = require("./" + resource + ".js").bootstrap(resources);
+    }
+    return resources;
 };
-
-new (require("./app.js").MyApp)(
-    require("./bootstrap/bootstrap.js").run(process.argv[2])
-).run();
 

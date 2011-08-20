@@ -1,5 +1,5 @@
 /*!
- * Main entry point.
+ * Set ups Nami.
  *
  * Copyright 2011 Marcelo Gornstein <marcelog@gmail.com>
  *
@@ -16,13 +16,7 @@
  * limitations under the License.
  *
  */
-// Validate arguments.
-if (process.argv.length != 3) {
-	console.log("Use: <config dir>\n");
-	process.exit();
+exports.bootstrap = function (resources) {
+    return new (require("../nami.js").Nami)(resources.config.amiData);
 };
-
-new (require("./app.js").MyApp)(
-    require("./bootstrap/bootstrap.js").run(process.argv[2])
-).run();
 

@@ -32,5 +32,8 @@ var NamiConfig = {
     },
     webSocket: {
     	port: 1028
+    },
+    httpServer: {
+    	port: 1029
     }
 };

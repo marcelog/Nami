@@ -16,29 +16,23 @@
  * limitations under the License.
  *
  */
-var nami = require("./nami.js");
+
 var namiAction = require("./message/action.js");
-var namiMongoModels = require("./mongomodels.js");
 var util = require("util");
 var events = require("events");
 
-function MyApp(config) {
+function MyApp(resources) {
+    MyApp.super_.call(this);
 	var self = this;
-	this.config = config;
-    this.ami = new nami.Nami(config.amiData);
-    this.ami.on('namiInvalidPeer', function () { self.onInvalidPeer(); });
-    this.ami.on('namiLoginIncorrect', function () { self.onLoginIncorrect(); });
-    this.ami.on('namiEvent', function (event) { self.onEventToClients(event); });
-    this.ami.on('namiEvent', function (event) { self.onEventToMongo(event); });
-    this.ami.on('namiEvent', function (event) { self.onAnyEvent(event); });
+    this.clients = [];
+    this.resources = resources;
+    resources.nami.on('namiInvalidPeer', function () { self.onInvalidPeer(); });
+    resources.nami.on('namiLoginIncorrect', function () { self.onLoginIncorrect(); });
+    resources.nami.on('namiEvent', function (event) { self.onEventToClients(event); });
+    resources.nami.on('namiEvent', function (event) { self.onEventToMongo(event); });
+    resources.nami.on('namiEvent', function (event) { self.onAnyEvent(event); });
     this.on('Dial', function (event) { self.onDial(event); });
     this.on('VarSet', function (event) { self.onVarSet(event); });
-    this.clients = [];
-    namiMongoModels.mongoose.connect(
-    	'mongodb://' + config.mongo.user + ':' + config.mongo.password
-    	+ '@' + config.mongo.host + ':' + config.mongo.port
-    	+ '/' + config.mongo.dbname
-    );
 };
 util.inherits(MyApp, events.EventEmitter);
 MyApp.prototype.onAnyEvent = function (event) {
@@ -58,7 +52,7 @@ MyApp.prototype.saveCall = function (call) {
 }
 
 MyApp.prototype.getCall = function (uniqueId, callback) {
-    namiMongoModels.CallModel.findOne( {uniqueId1: uniqueId}, function(err, obj) {
+    this.resources.mongo.CallModel.findOne( {uniqueId1: uniqueId}, function(err, obj) {
         if (err !== null) {
             console.log("Error getting call: " + err);
         } else {
@@ -95,7 +89,7 @@ MyApp.prototype.onVarSet = function (event) {
 };
 
 MyApp.prototype.onDial = function (event) {
-    var callEntity = new namiMongoModels.CallModel();
+    var callEntity = new this.resources.mongo.CallModel();
     var self = this;
     if (event.SubEvent === 'Begin') {
         callEntity.channel1 = event.Channel;
@@ -120,7 +114,7 @@ MyApp.prototype.onEventToMongo = function (event) {
     if (event.Event === 'DTMF') {
         return;
     }
-    var eventEntity = new namiMongoModels.EventModel();
+    var eventEntity = new this.resources.mongo.EventModel();
     eventEntity.uniqueId = typeof(event.Uniqueid) !== 'undefined' ? event.Uniqueid : '';
     eventEntity.name = typeof(event.Event) !== 'undefined' ? event.Event : '';
     eventEntity.channel = typeof(event.Channel) !== 'undefined' ? event.Channel : '';
@@ -157,8 +151,9 @@ MyApp.prototype.onWebSocketMessage = function (message, socket) {
     for (prop in message.arguments) {
         action.set(prop, message.arguments[prop]);
     }
-	this.ami.send(action, function (response) {
+	this.resources.nami.send(action, function (response) {
         response.action = message.name;
+        response.id = message.id;
         socket.emit('response', response); 
     });
 };
@@ -166,18 +161,17 @@ MyApp.prototype.onWebSocketConnect = function (socket) {
 	var self = this;
 	this.clients.push(socket);
     socket.on('message', function (message) {
+console.log("asdasd");
         self.onWebSocketMessage(message, socket);
     });
     socket.on('disconnect', this.onWebSocketDisconnect);
 };
 MyApp.prototype.run = function() {
-	var io = require('socket.io').listen(this.config.webSocket.port);
 	var self = this;
-	io.sockets.on('connection', function (socket) {
+	this.resources.nami.open();
+	this.resources.websocket.sockets.on('connection', function (socket) {
 		self.onWebSocketConnect(socket);
 	});
-	this.ami.open();
 };
 
 exports.MyApp = MyApp;
-
