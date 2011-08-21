@@ -1,5 +1,5 @@
 /*!
- * "Controller" for websocket clients.
+ * "Listener" for websocket clients.
  *
  * Copyright 2011 Marcelo Gornstein <marcelog@gmail.com>
  *
@@ -18,17 +18,20 @@
  */
 var namiAction = require("../message/action.js");
 
-function WebSocketController(resources) {
+function WebSocketListener(resources) {
 	var self = this;
     this.clients = [];
     this.resources = resources;
     this.logger = require('log4js').getLogger('Nami.WebSocket');
+   	this.resources.websocket.sockets.on('connection', function (socket) {
+		self.onWebSocketConnect(socket);
+	});
     this.resources.nami.on('namiEvent', function (event) {
         self.onEventToClients(event);
     });
 };
 
-WebSocketController.prototype.onEventToClients = function (event) {
+WebSocketListener.prototype.onEventToClients = function (event) {
     this.logger.debug('Dispatching event: ' + util.inspect(event));
     if (event.Event === 'DTMF') {
         return;
@@ -38,10 +41,10 @@ WebSocketController.prototype.onEventToClients = function (event) {
     }
 };
 
-WebSocketController.prototype.onWebSocketDisconnect = function () {
+WebSocketListener.prototype.onWebSocketDisconnect = function (message, socket) {
 	this.logger.info('disconnect');
 };
-WebSocketController.prototype.onWebSocketMessage = function (message, socket) {
+WebSocketListener.prototype.onWebSocketMessage = function (message, socket) {
     var self = this;
     this.logger.debug(
         socket.remoteAddres + ':' + socket.remotePort
@@ -59,13 +62,17 @@ WebSocketController.prototype.onWebSocketMessage = function (message, socket) {
         socket.emit('response', response); 
     });
 };
-WebSocketController.prototype.onWebSocketConnect = function (socket) {
+WebSocketListener.prototype.onWebSocketConnect = function (socket) {
 	var self = this;
 	this.clients.push(socket);
     socket.on('message', function (message) {
         self.onWebSocketMessage(message, socket);
     });
-    socket.on('disconnect', this.onWebSocketDisconnect);
+    socket.on('disconnect', function (message) {
+        self.onWebSocketDisconnect(message, socket);
+    });
 };
 
-exports.WebSocketController = WebSocketController;
+exports.run = function (resources) {
+    new WebSocketListener(resources);
+}

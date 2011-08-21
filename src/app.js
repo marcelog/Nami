@@ -25,6 +25,7 @@ function MyApp(resources) {
 	var self = this;
     this.clients = [];
     this.resources = resources;
+    this.listeners = require("./listeners/listeners.js").run(resources);
     resources.nami.on('namiInvalidPeer', function (data) { self.onInvalidPeer(data); });
     resources.nami.on('namiLoginIncorrect', function () { self.onLoginIncorrect(); });
     resources.nami.on('namiEvent', function (event) { self.onEventToMongo(event); });

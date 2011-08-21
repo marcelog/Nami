@@ -1,5 +1,5 @@
 /*!
- * Set ups Socket.io.
+ * Bootstrapping code for all listeners.
  *
  * Copyright 2011 Marcelo Gornstein <marcelog@gmail.com>
  *
@@ -16,11 +16,13 @@
  * limitations under the License.
  *
  */
-exports.bootstrap = function (resources) {
-	var io = require('socket.io').listen(resources.config.webSocket.port);
-    io.configure(function() {
-       /* XXX Does this actually work at all? */
-       //io.set('logger', resources.logger.getLogger('Nami.WebSocket'));
-    });
-    return io;
+exports.run = function (resources) {
+	var listeners = {
+        websocket: {}
+	};
+    for (listener in listeners) {
+        listeners[listener] = require("./" + listener + ".js").run(resources);
+    }
+    return listeners;
 };
+
