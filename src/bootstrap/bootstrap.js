@@ -18,14 +18,22 @@
  */
 exports.run = function () {
 	var resources = {
-        config: {},
-        logger: {},
-	    httpServer: {},
-	    nami: {},
-        mongo: {},
-        websocket: {}
+        config: null,
+        logger: null,
+	    nami: null,
+        mongo: null,
+        websocket: null,
+        express: null
 	};
+    var logger = null;
     for (resource in resources) {
+        if (logger === null) {
+            if (resources.logger !== null) {
+                logger = resources.logger.getLogger('Nami.App');
+            }
+        } else {
+            logger.debug('Bootstrapping: ' + resource);
+        }
         resources[resource] = require("./" + resource + ".js").bootstrap(resources);
     }
     return resources;
