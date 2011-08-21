@@ -44,8 +44,16 @@ EventListener.prototype.onEventToMongo = function (event) {
     });
 };
 
-
-exports.run = function (resources) {
-    new EventListener(resources);
+EventListener.prototype.shutdown = function () {
+    this.logger.info('Shutting down');
 };
 
+exports.listener = null;
+
+exports.run = function (resources) {
+    exports.listener = new EventListener(resources);
+};
+
+exports.shutdown = function (resources) {
+    exports.listener.shutdown();
+};

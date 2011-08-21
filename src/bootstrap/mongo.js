@@ -29,3 +29,6 @@ exports.bootstrap = function (resources) {
     return mongo;
 };
 
+exports.shutdown = function (resources) {
+};
+

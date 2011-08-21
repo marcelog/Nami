@@ -112,8 +112,16 @@ CallListener.prototype.onDial = function (event) {
     }
 }
 
-
-exports.run = function (resources) {
-    new CallListener(resources);
+CallListener.prototype.shutdown = function () {
+    this.logger.info('Shutting down');
 };
 
+exports.listener = null;
+
+exports.run = function (resources) {
+    exports.listener = new CallListener(resources);
+};
+
+exports.shutdown = function (resources) {
+    exports.listener.shutdown();
+};

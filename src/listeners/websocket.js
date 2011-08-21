@@ -72,7 +72,20 @@ WebSocketListener.prototype.onWebSocketConnect = function (socket) {
         self.onWebSocketDisconnect(message, socket);
     });
 };
+WebSocketListener.prototype.shutdown = function () {
+    this.logger.info('Shutting down');
+    for (client in this.clients) {
+        this.logger.debug('Disconnecting: ' + this.clients[client].address);
+        this.clients[client].disconnect();
+    }
+};
+
+exports.listener = null;
 
 exports.run = function (resources) {
-    new WebSocketListener(resources);
+    exports.listener = new WebSocketListener(resources);
+};
+
+exports.shutdown = function (resources) {
+    exports.listener.shutdown();
 };

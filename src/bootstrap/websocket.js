@@ -27,3 +27,6 @@ exports.bootstrap = function (resources) {
     });
     return io;
 };
+
+exports.shutdown = function (resources) {
+};

@@ -17,16 +17,30 @@
  *
  */
 var util = require("util");
-var events = require("events");
 
-function MyApp(resources) {
+function MyApp(configDir) {
 	var self = this;
-    this.logger = resources.logger.getLogger('Nami.App');
+    this.bootstrap = require("./bootstrap/bootstrap.js");
+    this.bootstrap.run(configDir);
+    this.resources = this.bootstrap.resources;
+    this.listeners = this.bootstrap.listeners;
+    this.logger = this.bootstrap.logger;
     this.clients = [];
-    this.resources = resources;
-    this.listeners = require("./listeners/listeners.js").run(resources);
-    resources.nami.on('namiInvalidPeer', function (data) { self.onInvalidPeer(data); });
-    resources.nami.on('namiLoginIncorrect', function () { self.onLoginIncorrect(); });
+    process.on('SIGINT', function () {
+        self.quit();
+    });
+    this.resources.nami.on('namiInvalidPeer', function (data) {
+        self.onInvalidPeer(data);
+    });
+    this.resources.nami.on('namiLoginIncorrect', function () {
+        self.onLoginIncorrect();
+    });
+};
+
+MyApp.prototype.quit = function () {
+    this.logger.info('Quitting');
+    this.bootstrap.shutdown();
+    process.exit();
 };
 
 MyApp.prototype.onInvalidPeer = function (data) {
@@ -44,5 +58,5 @@ if (process.argv.length != 3) {
 	process.exit();
 };
 
-new MyApp(require("./bootstrap/bootstrap.js").run(process.argv[2]));
+new MyApp(process.argv[2]);
 

@@ -22,3 +22,6 @@ exports.bootstrap = function (resources) {
     return nami;
 };
 
+exports.shutdown = function (resources) {
+};
+

@@ -23,3 +23,7 @@ exports.bootstrap = function (resources) {
     NamiConfig.dir = process.env.NAMI_CONFIG_DIR;
     return NamiConfig;
 };
+
+exports.shutdown = function (resources) {
+};
+

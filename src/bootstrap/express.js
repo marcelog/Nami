@@ -42,3 +42,7 @@ exports.bootstrap = function (resources) {
     app.listen(resources.config.httpServer.port);
     return app;
 };
+
+exports.shutdown = function (resources) {
+};
+

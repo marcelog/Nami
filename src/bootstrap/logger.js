@@ -22,3 +22,6 @@ exports.bootstrap = function (resources) {
     return log4js;
 };
 
+exports.shutdown = function (resources) {
+};
+
