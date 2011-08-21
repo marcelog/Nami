@@ -1,0 +1,60 @@
+{
+  "appenders": [
+    { 
+      "category": "Nami.Client", 
+      "type": "logLevelFilter",
+      "level": "DEBUG",
+      "appender": {
+        "type": "file",
+        "filename": "/tmp/nami.log"
+      }
+    },
+    { 
+      "category": "Nami.Client", 
+      "type": "logLevelFilter",
+      "level": "DEBUG",
+      "appender": {
+        "type": "console"
+      }
+    },
+    { 
+      "category": "Nami.App", 
+      "type": "logLevelFilter",
+      "level": "DEBUG",
+      "appender": {
+        "type": "console"
+      }
+    },
+    { 
+      "category": "Nami.App", 
+      "type": "logLevelFilter",
+      "level": "DEBUG",
+      "appender": {
+        "type": "file",
+        "filename": "/tmp/nami.log"
+      }
+    },
+    { 
+      "category": "Nami.WebSocket", 
+      "type": "logLevelFilter",
+      "level": "DEBUG",
+      "appender": {
+        "type": "console"
+      }
+    },
+    { 
+      "category": "Nami.WebSocket", 
+      "type": "logLevelFilter",
+      "level": "DEBUG",
+      "appender": {
+        "type": "file",
+        "filename": "/tmp/nami.log"
+      }
+    }
+  ],
+  "levels": {
+    "Nami.Client":  "DEBUG",
+    "Nami.WebSocket":  "DEBUG",
+    "Nami.App":  "DEBUG"
+  }
+}

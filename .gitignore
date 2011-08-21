@@ -2,4 +2,4 @@
 .settings
 conf/config.js
 src/node_modules
-
+conf/nami.logger.json

@@ -31,6 +31,7 @@ function MyApp(resources) {
     resources.nami.on('namiEvent', function (event) { self.onEventToClients(event); });
     resources.nami.on('namiEvent', function (event) { self.onEventToMongo(event); });
     resources.nami.on('namiEvent', function (event) { self.onAnyEvent(event); });
+    this.logger = resources.logger.getLogger('Nami.App');
     this.on('Dial', function (event) { self.onDial(event); });
     this.on('VarSet', function (event) { self.onVarSet(event); });
 };
@@ -39,14 +40,14 @@ MyApp.prototype.onAnyEvent = function (event) {
     if (event.Event === 'DTMF') {
         return;
     }
-    this.resources.logger.debug(event);
+    this.logger.debug(event);
     this.emit(event.Event, event);
 };
 
 MyApp.prototype.saveCall = function (call) {
     call.save(function (err) {
         if (err !== null) {
-            this.resources.logger.error("Error saving call: " + err);
+            this.logger.error("Error saving call: " + err);
         }
     });
 }
@@ -54,7 +55,7 @@ MyApp.prototype.saveCall = function (call) {
 MyApp.prototype.getCall = function (uniqueId, callback) {
     this.resources.mongo.CallModel.findOne( {uniqueId1: uniqueId}, function(err, obj) {
         if (err !== null) {
-            this.resources.logger.error("Error getting call: " + err);
+            this.logger.error("Error getting call: " + err);
         } else {
             callback(obj);
         }
@@ -135,15 +136,15 @@ MyApp.prototype.onEventToClients = function (event) {
     }
 };
 MyApp.prototype.onInvalidPeer = function (data) {
-    this.resources.logger.fatal('invalid peer: ' + util.inspect(data));
+    this.logger.fatal('invalid peer: ' + util.inspect(data));
     process.exit();
 };
 MyApp.prototype.onLoginIncorrect = function (data) {
-    this.resources.logger.fatal('login incorrect');
+    this.logger.fatal('login incorrect');
     process.exit();
 };
 MyApp.prototype.onWebSocketDisconnect = function () {
-	this.resources.logger.info('disconnect');
+	this.logger.info('disconnect');
 };
 MyApp.prototype.onWebSocketMessage = function (message, socket) {
     message = JSON.parse(message);
@@ -167,6 +168,7 @@ MyApp.prototype.onWebSocketConnect = function (socket) {
 };
 MyApp.prototype.run = function() {
 	var self = this;
+    this.logger.debug('New connection');
 	this.resources.websocket.sockets.on('connection', function (socket) {
 		self.onWebSocketConnect(socket);
 	});
