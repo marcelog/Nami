@@ -75,4 +75,4 @@ WebSocketListener.prototype.onWebSocketConnect = function (socket) {
 
 exports.run = function (resources) {
     new WebSocketListener(resources);
-}
+};

@@ -18,7 +18,9 @@
  */
 exports.run = function (resources) {
 	var listeners = {
-        websocket: {}
+        websocket: {},
+        event: {},
+        call: {}
 	};
     for (listener in listeners) {
         listeners[listener] = require("./" + listener + ".js").run(resources);
