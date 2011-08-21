@@ -32,11 +32,11 @@ function WebSocketListener(resources) {
 };
 
 WebSocketListener.prototype.onEventToClients = function (event) {
-    this.logger.debug('Dispatching event: ' + util.inspect(event));
     if (event.Event === 'DTMF') {
         return;
     }
     for (client in this.clients) {
+        this.logger.debug('Dispatching event: ' + util.inspect(event));
     	this.clients[client].emit('event', event);
     }
 };
