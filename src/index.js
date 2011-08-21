@@ -1,5 +1,5 @@
 /*!
- * Main entry point.
+ * Main entry point. Nami application.
  *
  * Copyright 2011 Marcelo Gornstein <marcelog@gmail.com>
  *
@@ -16,13 +16,33 @@
  * limitations under the License.
  *
  */
+var util = require("util");
+var events = require("events");
+
+function MyApp(resources) {
+	var self = this;
+    this.logger = resources.logger.getLogger('Nami.App');
+    this.clients = [];
+    this.resources = resources;
+    this.listeners = require("./listeners/listeners.js").run(resources);
+    resources.nami.on('namiInvalidPeer', function (data) { self.onInvalidPeer(data); });
+    resources.nami.on('namiLoginIncorrect', function () { self.onLoginIncorrect(); });
+};
+
+MyApp.prototype.onInvalidPeer = function (data) {
+    this.logger.fatal('invalid peer: ' + util.inspect(data));
+    process.exit();
+};
+MyApp.prototype.onLoginIncorrect = function (data) {
+    this.logger.fatal('login incorrect');
+    process.exit();
+};
+
 // Validate arguments.
 if (process.argv.length != 3) {
 	console.log("Use: <config dir>\n");
 	process.exit();
 };
 
-new (require("./app.js").MyApp)(
-    require("./bootstrap/bootstrap.js").run(process.argv[2])
-);
+new MyApp(require("./bootstrap/bootstrap.js").run(process.argv[2]));
 

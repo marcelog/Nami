@@ -16,7 +16,7 @@
  * limitations under the License.
  *
  */
-var namiAction = require("../message/action.js");
+var namiAction = require("../lib/message/action.js");
 
 function WebSocketListener(resources) {
 	var self = this;
