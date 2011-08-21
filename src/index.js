@@ -24,5 +24,5 @@ if (process.argv.length != 3) {
 
 new (require("./app.js").MyApp)(
     require("./bootstrap/bootstrap.js").run(process.argv[2])
-).run();
+);
 

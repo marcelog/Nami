@@ -19,7 +19,12 @@
 exports.bootstrap = function (resources) {
 	var io = require('socket.io').listen(resources.config.webSocket.port);
     io.configure(function() {
-        io.set('log level', 0);
+       /* XXX Does this actually work at all? */
+       //io.set('logger', resources.logger.getLogger('Nami.WebSocket'));
     });
+    var controller = new (require('../controllers/websocket.js').WebSocketController)(resources);
+   	io.sockets.on('connection', function (socket) {
+		controller.onWebSocketConnect(socket);
+	});
     return io;
 };

@@ -16,7 +16,6 @@
  * limitations under the License.
  *
  */
-
 var namiAction = require("./message/action.js");
 var util = require("util");
 var events = require("events");
@@ -28,7 +27,6 @@ function MyApp(resources) {
     this.resources = resources;
     resources.nami.on('namiInvalidPeer', function (data) { self.onInvalidPeer(data); });
     resources.nami.on('namiLoginIncorrect', function () { self.onLoginIncorrect(); });
-    resources.nami.on('namiEvent', function (event) { self.onEventToClients(event); });
     resources.nami.on('namiEvent', function (event) { self.onEventToMongo(event); });
     resources.nami.on('namiEvent', function (event) { self.onAnyEvent(event); });
     this.logger = resources.logger.getLogger('Nami.App');
@@ -127,14 +125,6 @@ MyApp.prototype.onEventToMongo = function (event) {
     });
 };
 
-MyApp.prototype.onEventToClients = function (event) {
-    if (event.Event === 'DTMF') {
-        return;
-    }
-    for (client in this.clients) {
-    	this.clients[client].emit('event', event);
-    }
-};
 MyApp.prototype.onInvalidPeer = function (data) {
     this.logger.fatal('invalid peer: ' + util.inspect(data));
     process.exit();
@@ -142,36 +132,6 @@ MyApp.prototype.onInvalidPeer = function (data) {
 MyApp.prototype.onLoginIncorrect = function (data) {
     this.logger.fatal('login incorrect');
     process.exit();
-};
-MyApp.prototype.onWebSocketDisconnect = function () {
-	this.logger.info('disconnect');
-};
-MyApp.prototype.onWebSocketMessage = function (message, socket) {
-    message = JSON.parse(message);
-    var action = new namiAction[message.name]();
-    for (prop in message.arguments) {
-        action.set(prop, message.arguments[prop]);
-    }
-	this.resources.nami.send(action, function (response) {
-        response.action = message.name;
-        response.id = message.id;
-        socket.emit('response', response); 
-    });
-};
-MyApp.prototype.onWebSocketConnect = function (socket) {
-	var self = this;
-	this.clients.push(socket);
-    socket.on('message', function (message) {
-        self.onWebSocketMessage(message, socket);
-    });
-    socket.on('disconnect', this.onWebSocketDisconnect);
-};
-MyApp.prototype.run = function() {
-	var self = this;
-    this.logger.debug('New connection');
-	this.resources.websocket.sockets.on('connection', function (socket) {
-		self.onWebSocketConnect(socket);
-	});
 };
 
 exports.MyApp = MyApp;
