@@ -26,7 +26,7 @@ function MyApp(resources) {
 	var self = this;
     this.clients = [];
     this.resources = resources;
-    resources.nami.on('namiInvalidPeer', function () { self.onInvalidPeer(); });
+    resources.nami.on('namiInvalidPeer', function (data) { self.onInvalidPeer(data); });
     resources.nami.on('namiLoginIncorrect', function () { self.onLoginIncorrect(); });
     resources.nami.on('namiEvent', function (event) { self.onEventToClients(event); });
     resources.nami.on('namiEvent', function (event) { self.onEventToMongo(event); });
@@ -135,7 +135,7 @@ MyApp.prototype.onEventToClients = function (event) {
     }
 };
 MyApp.prototype.onInvalidPeer = function (data) {
-    this.resources.logger.fatal('invalid peer: ' + data);
+    this.resources.logger.fatal('invalid peer: ' + util.inspect(data));
     process.exit();
 };
 MyApp.prototype.onLoginIncorrect = function (data) {
