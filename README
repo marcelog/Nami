@@ -5,4 +5,5 @@ requirements:
  * nodejs
  * socket.io (to accept websocket clients)
  * mongoose (to save events and outgoing calls to mongo database)
+ * log4js (for logging)
 
