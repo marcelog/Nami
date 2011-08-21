@@ -23,7 +23,9 @@ exports.run = function (resources) {
         call: {}
 	};
     for (listener in listeners) {
-        listeners[listener] = require("./" + listener + ".js").run(resources);
+        if (resources.config.listeners[listener].enable === true) {
+            listeners[listener] = require("./" + listener + ".js").run(resources);
+        }
     }
     return listeners;
 };

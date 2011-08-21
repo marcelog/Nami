@@ -17,6 +17,9 @@
  *
  */
 exports.bootstrap = function (resources) {
+    if (resources.config.mongo.enable !== true) {
+        return null;
+    }
     var mongo = require("../models/mongo.js");
     mongo.mongoose.connect(
     	'mongodb://' + resources.config.mongo.user + ':' + resources.config.mongo.password

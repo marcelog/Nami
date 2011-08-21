@@ -17,6 +17,9 @@
  *
  */
 exports.bootstrap = function (resources) {
+    if (resources.config.webSocket.enable !== true) {
+        return null;
+    }
 	var io = require('socket.io').listen(resources.config.webSocket.port);
     io.configure(function() {
        /* XXX Does this actually work at all? */

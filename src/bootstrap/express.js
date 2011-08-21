@@ -17,6 +17,9 @@
  *
  */
 exports.bootstrap = function (resources) {
+    if (resources.config.httpServer.enable !== true) {
+        return null;
+    }
     var logger = resources.logger.getLogger('Nami.Express');
     var express = require('express');
     var app = express.createServer();

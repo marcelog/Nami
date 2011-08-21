@@ -17,27 +17,37 @@
  *
  */
 var NamiConfig = {
+    listeners: {
+        call: {
+            enable: true
+        },
+        event: {
+            enable: true
+        },
+        websocket: {
+            enable: true
+        }
+    },
 	mongo: {
-		host: "127.0.0.1",
-		port: 10000,
+		host: "mongodomain.com",
+		port: 1234,
 		dbname: "dbname",
 		user: "username",
-		password: "password"
+		password: "password",
+        enable: true
 	},
     amiData: {
-        host: "127.0.0.1",
-        port: 9999,
-        username: "admin",
-        secret: "admin"
+        host: "asteriskdomain.com",
+        port: 2134,
+        username: "username",
+        secret: "secret"
     },
     webSocket: {
-    	port: 1028
+        enable: true,
+        port: 1028
     },
     httpServer: {
+        enable: true,
     	port: 1029
-    },
-    logger: {
-        file: '/tmp/nami.log',
-        level: 'debug'
     }
 };
