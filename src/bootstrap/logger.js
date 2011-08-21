@@ -1,5 +1,5 @@
 /*!
- * Set ups Socket.io.
+ * Bootstraps logger.
  *
  * Copyright 2011 Marcelo Gornstein <marcelog@gmail.com>
  *
@@ -17,9 +17,10 @@
  *
  */
 exports.bootstrap = function (resources) {
-	var io = require('socket.io').listen(resources.config.webSocket.port);
-    io.configure(function() {
-        io.set('log level', 0);
-    });
-    return io;
+    var log4js = require('log4js');
+    log4js.addAppender(log4js.fileAppender(resources.config.logger.file), 'Nami');
+    var logger = log4js.getLogger('Nami');
+    logger.setLevel(resources.config.logger.level);
+    return logger;
 };
+

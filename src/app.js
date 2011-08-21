@@ -39,14 +39,14 @@ MyApp.prototype.onAnyEvent = function (event) {
     if (event.Event === 'DTMF') {
         return;
     }
-    console.log(event);
+    this.resources.logger.debug(event);
     this.emit(event.Event, event);
 };
 
 MyApp.prototype.saveCall = function (call) {
     call.save(function (err) {
         if (err !== null) {
-            console.log("Error saving call: " + err);
+            this.resources.logger.error("Error saving call: " + err);
         }
     });
 }
@@ -54,7 +54,7 @@ MyApp.prototype.saveCall = function (call) {
 MyApp.prototype.getCall = function (uniqueId, callback) {
     this.resources.mongo.CallModel.findOne( {uniqueId1: uniqueId}, function(err, obj) {
         if (err !== null) {
-            console.log("Error getting call: " + err);
+            this.resources.logger.error("Error getting call: " + err);
         } else {
             callback(obj);
         }
@@ -121,7 +121,7 @@ MyApp.prototype.onEventToMongo = function (event) {
     eventEntity.event = JSON.stringify(event); 
     eventEntity.save(function (err) {
         if (err !== null) {
-            console.log("Error saving event: " + err);
+            this.logger.error("Error saving event: " + err);
         }
     });
 };
@@ -135,15 +135,15 @@ MyApp.prototype.onEventToClients = function (event) {
     }
 };
 MyApp.prototype.onInvalidPeer = function (data) {
-    console.log('invalid peer: ' + data);
+    this.resources.logger.fatal('invalid peer: ' + data);
     process.exit();
 };
 MyApp.prototype.onLoginIncorrect = function (data) {
-    console.log('login incorrect');
+    this.resources.logger.fatal('login incorrect');
     process.exit();
 };
 MyApp.prototype.onWebSocketDisconnect = function () {
-	console.log('disconnect');
+	this.resources.logger.info('disconnect');
 };
 MyApp.prototype.onWebSocketMessage = function (message, socket) {
     message = JSON.parse(message);
@@ -161,14 +161,12 @@ MyApp.prototype.onWebSocketConnect = function (socket) {
 	var self = this;
 	this.clients.push(socket);
     socket.on('message', function (message) {
-console.log("asdasd");
         self.onWebSocketMessage(message, socket);
     });
     socket.on('disconnect', this.onWebSocketDisconnect);
 };
 MyApp.prototype.run = function() {
 	var self = this;
-	this.resources.nami.open();
 	this.resources.websocket.sockets.on('connection', function (socket) {
 		self.onWebSocketConnect(socket);
 	});

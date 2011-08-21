@@ -19,6 +19,7 @@
 exports.run = function () {
 	var resources = {
         config: {},
+        logger: {},
 	    httpServer: {},
 	    nami: {},
         mongo: {},

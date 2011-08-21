@@ -27,6 +27,7 @@ var timer = require('timers');
 // Constructor
 function Nami(amiData) {
     Nami.super_.call(this);
+    this.logger = require('log4js').getLogger('Nami');
     this.connected = false;
     this.amiData = amiData;
     this.EOL = "\r\n";
@@ -40,6 +41,7 @@ function Nami(amiData) {
 util.inherits(Nami, events.EventEmitter);
 
 Nami.prototype.onRawEvent = function (event) {
+    this.logger.debug('Got event: ' + util.inspect(event));
 	if (typeof (event.ActionID) !== 'undefined') {
 		this.responses[event.ActionID].events.push(event);
 	}
@@ -54,6 +56,7 @@ Nami.prototype.onRawEvent = function (event) {
 };
 
 Nami.prototype.onRawResponse = function (response) {
+    this.logger.debug('Got response: ' + util.inspect(response));
 	if (response.Message.indexOf('follow') != -1) {
 		this.responses[response.ActionID] = response;			
 	} else if (typeof (this.callbacks[response.ActionID]) !== 'undefined') {
@@ -62,6 +65,7 @@ Nami.prototype.onRawResponse = function (response) {
 };
 
 Nami.prototype.onRawMessage = function (buffer) {
+    this.logger.debug('Building raw message: ' + util.inspect(buffer));
 	if (buffer.indexOf('Event: ') != -1) {
 		var event = new namiEvents.Event(buffer);
 		this.emit('namiRawEvent', event);
@@ -69,11 +73,12 @@ Nami.prototype.onRawMessage = function (buffer) {
 		var response = new namiResponse.Response(buffer);
 		this.emit('namiRawResponse', response);
 	} else {
-		console.log("Discarded: |" + buffer + "|");
+		this.logger.warn("Discarded: |" + buffer + "|");
 	}
 };
 
 Nami.prototype.onData = function (data) {
+    this.logger.debug('Got data: ' + util.inspect(data));
     while ((theEOM = data.indexOf(this.EOM)) != -1) {
         this.received = this.received.concat(data.substr(0, theEOM));
         this.emit('namiRawMessage', this.received);
@@ -87,6 +92,7 @@ Nami.prototype.onConnect = function () {
 };
 
 Nami.prototype.onWelcomeMessage = function (data) {
+    this.logger.debug('Got welcome message: ' + util.inspect(data));
     var welcome = data.indexOf(this.welcomeMessage);
 	var self = this;
     if (welcome == -1) {
@@ -106,6 +112,7 @@ Nami.prototype.onWelcomeMessage = function (data) {
     }
 };
 Nami.prototype.open = function () {
+    this.logger.debug('Opening connection');
     this.socket = new net.Socket();
     var self = this;
     this.socket.on('connect', this.onConnect);
@@ -121,6 +128,7 @@ Nami.prototype.open = function () {
 };
 
 Nami.prototype.send = function (action, callback) {
+    this.logger.debug('Sending: ' + util.inspect(action));
     this.callbacks[action.ActionID] = callback;
     this.responses[action.ActionID] = "";
     this.socket.write(action.marshall());

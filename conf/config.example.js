@@ -35,5 +35,9 @@ var NamiConfig = {
     },
     httpServer: {
     	port: 1029
+    },
+    logger: {
+        file: '/tmp/nami.log',
+        level: 'debug'
     }
 };
