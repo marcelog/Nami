@@ -1,5 +1,6 @@
+// Validate arguments.
 /*!
- * Main entry point. Nami application.
+ * Example ami client.
  *
  * Copyright 2011 Marcelo Gornstein <marcelog@gmail.com>
  *
@@ -16,47 +17,35 @@
  * limitations under the License.
  *
  */
-var util = require("util");
-
-function MyApp(configDir) {
-	var self = this;
-    this.bootstrap = require("./bootstrap/bootstrap.js");
-    this.bootstrap.run(configDir);
-    this.resources = this.bootstrap.resources;
-    this.listeners = this.bootstrap.listeners;
-    this.logger = this.bootstrap.logger;
-    this.clients = [];
-    process.on('SIGINT', function () {
-        self.quit();
-    });
-    this.resources.nami.on('namiInvalidPeer', function (data) {
-        self.onInvalidPeer(data);
-    });
-    this.resources.nami.on('namiLoginIncorrect', function () {
-        self.onLoginIncorrect();
-    });
-};
-
-MyApp.prototype.quit = function () {
-    this.logger.info('Quitting');
-    this.bootstrap.shutdown();
-    process.exit();
-};
-
-MyApp.prototype.onInvalidPeer = function (data) {
-    this.logger.fatal('invalid peer: ' + util.inspect(data));
-    process.exit();
-};
-MyApp.prototype.onLoginIncorrect = function (data) {
-    this.logger.fatal('login incorrect');
-    process.exit();
-};
-
-// Validate arguments.
-if (process.argv.length != 3) {
-	console.log("Use: <config dir>\n");
+var logger = require("log4js").getLogger('Nami.App');
+if (process.argv.length != 6) {
+	logger.fatal("Use: <host> <port> <user> <secret>");
 	process.exit();
 };
 
-new MyApp(process.argv[2]);
+var namiConfig = {
+    host: process.argv[2],
+    port: process.argv[3],
+    username: process.argv[4],
+    secret: process.argv[5]
+};
+
+var nami = new (require("./nami.js").Nami)(namiConfig);
+process.on('SIGINT', function () {
+    nami.close();
+    process.exit();
+});
+nami.on('namiInvalidPeer', function (data) {
+	logger.fatal("Invalid AMI Salute. Not an AMI?");
+	process.exit();
+});
+nami.on('namiLoginIncorrect', function () {
+	logger.fatal("Invalid Credentials");
+	process.exit();
+});
+nami.on('namiEvent', function (event) {
+    logger.debug('Got Event: ' + util.inspect(event));
+});
+nami.open();
+
 

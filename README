@@ -4,16 +4,16 @@ Introduction
 ------------
 Nami by itself is just a library that allows your nodejs code to communicate to an
 Asterisk Manager Interface (AMI). However, it includes a full application useful to
-monitor an asterisk installation (see Sample Application below).
-
-This is very much like AsterTrace, so you might be interesting in checking that out too, 
-at http://marcelog.github.com/articles/php_asterisk_listener_example_using_pami_and_ding.html
+monitor an asterisk installation.
 
 You will be able to login, receive asynchronous events, and send actions (also,
 asynchronously receiving the according response with their optional related events).
 
 This is supported by the Nami class (er.. function) which inherits from EventEmitter, so
 your application is able to subscribe to the interesting nami events. 
+
+This is very much like PAMI, so you might be interesting in checking that out too, 
+at http://marcelog.github.com/PAMI/index.html
 
 Requirements
 ------------
@@ -46,6 +46,14 @@ classified the received message as an async event from server.
 * namiRawResponse: Emitted when the decodification routine classified the received
 message as a response to an action.
 
+Installation
+------------
+1.- install log4js:
+$ npm install log4js
+
+2.- Testrun:
+$ node src/index.js <host> <port> <username> <secret>
+
 Configuration
 -------------
 Nami expects a configuration object, very much like this:
@@ -65,14 +73,5 @@ nami.on('namiEventVarSet', function (event) { });
 nami.on('namiEventHangup', function (event) { });
 nami.open();
 
-That's about it. See below for an included sample application that does a little of
-everything.
-
-Sample Application
-------------------
-
-Optional Requirements
----------------------
- * socket.io (to accept websocket clients, tested with 0.7.8)
- * mongoose (to save events and outgoing calls to mongo database, tested with 1.8.1)
+That's about it.
 

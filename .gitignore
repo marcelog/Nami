@@ -1,5 +1,4 @@
 .project
 .settings
-conf/config.js
+.buildpath
 src/node_modules
-conf/nami.logger.json
