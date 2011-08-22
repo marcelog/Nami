@@ -151,6 +151,7 @@ Nami.prototype.onConnect = function () {
  * will be fired. If not, a login is tried, and onData() is set as the new handler
  * for incoming data. An anonymous function will handle the login response, firing
  * "namiLoginIncorrect" if the username/password were not correctly validated.
+ * On successfull connection, "namiConnected" is emitted.
  * @param {String} data The data read from server.
  * @see Nami#onData(String)
  * @see LoginAction(String, String)

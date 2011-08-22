@@ -22,6 +22,9 @@ Requirements
 
 Events used in Nami
 -------------------
+* namiConnected: Emitted when nami could successfully connect and logged in to an AMI
+server.
+
 * namiEvent: Emitted for all events. Listen to this generic event if you want to catch
 any events.
 
