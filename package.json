@@ -1,29 +1,32 @@
 {
-    "name": "nami",
-    "version": "0.1.0",
-    "description": "Port of PAMI to node.",
-    "keywords": [
-        "asterisk",
-        "manager",
-        "interface",
-        "nami",
-        "action",
-        "response",
-        "event",
-        "node"
-    ],
-    "repository":{
-      "type": "git",
-      "url": "https://github.com/marcelog/Nami.git"
-    },
-    "main": "src/nami",
-    "author": "Marcelo Gornstein <marcelog@gmail.com>",
-    "engines": [ "node >=0.4.0" ],
-    "directories": {
-        "src": "src"
-    },
-    "dependencies": {
-        "log4js": "0.3.8"
-    }
+  "author": "Marcelo Gornstein <marcelog@gmail.com> (http://marcelog.github.com/)",
+  "name": "nami",
+  "description": "Port of PAMI to node",
+  "version": "0.1.0",
+  "homepage": "https://github.com/marcelog/Nami",
+  "keywords": [
+    "asterisk",
+    "manager",
+    "interface",
+    "nami",
+    "action",
+    "response",
+    "event",
+    "node"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/marcelog/Nami.git"
+  },
+  "main": "src/nami",
+  "scripts": {
+    "test": "index"
+  },
+  "engines": {
+    "node": "~v0.4.10"
+  },
+  "dependencies": {
+    "log4js": "0.3.8"
+  },
+  "devDependencies": {}
 }
-
