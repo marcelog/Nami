@@ -112,6 +112,13 @@ Nami.prototype.onWelcomeMessage = function (data) {
         );
     }
 };
+Nami.prototype.close = function () {
+    this.logger.info('Closing connection');
+    this.removeAllListeners();
+    this.socket.removeAllListeners();
+    this.socket.end();
+};
+
 Nami.prototype.open = function () {
     this.logger.debug('Opening connection');
     this.socket = new net.Socket();

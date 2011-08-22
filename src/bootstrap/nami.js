@@ -23,5 +23,6 @@ exports.bootstrap = function (resources) {
 };
 
 exports.shutdown = function (resources) {
+    resources.nami.close();
 };
 
