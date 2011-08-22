@@ -47,7 +47,10 @@ nami.on('namiEvent', function (event) {
     logger.debug('Got Event: ' + util.inspect(event));
 });
 nami.on('namiConnected', function (event) {
-    nami.send(new namiLib.Actions.CoreShowChannelsAction(), function(response) {
+    nami.send(new namiLib.Actions.Ping(), function(response) {
+        logger.debug(' ---- Response: ' + util.inspect(response));
+    });
+    nami.send(new namiLib.Actions.CoreShowChannels(), function(response) {
         logger.debug(' ---- Response: ' + util.inspect(response));
     });
 });

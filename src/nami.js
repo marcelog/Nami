@@ -92,7 +92,10 @@ Nami.prototype.onRawEvent = function (event) {
  */
 Nami.prototype.onRawResponse = function (response) {
     this.logger.debug('Got response: ' + util.inspect(response));
-	if (response.Message.indexOf('follow') != -1) {
+	if (
+        (typeof(response.Message) !== 'undefined')
+        && (response.Message.indexOf('follow') != -1)
+    ) {
 		this.responses[response.ActionID] = response;			
 	} else if (typeof (this.callbacks[response.ActionID]) !== 'undefined') {
 		this.callbacks[response.ActionID](response);
@@ -154,7 +157,7 @@ Nami.prototype.onConnect = function () {
  * On successfull connection, "namiConnected" is emitted.
  * @param {String} data The data read from server.
  * @see Nami#onData(String)
- * @see LoginAction(String, String)
+ * @see Login(String, String)
  * @returns void
  */
 Nami.prototype.onWelcomeMessage = function (data) {
@@ -168,7 +171,7 @@ Nami.prototype.onWelcomeMessage = function (data) {
         	self.onData(data);
         });
         this.send(
-        	new action.LoginAction(this.amiData.username, this.amiData.secret),
+        	new action.Login(this.amiData.username, this.amiData.secret),
         	function (response) {
         		if (response.Response != 'Success') {
         			self.emit('namiLoginIncorrect');

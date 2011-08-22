@@ -48,8 +48,8 @@ function Action(name) {
  * @see Action(String)
  * @augments Action
  */
-function LoginAction(username, secret) {
-    LoginAction.super_.call(this, 'Login');
+function Login(username, secret) {
+    Login.super_.call(this, 'Login');
     this.set('Username', username);
     this.set('Secret', secret );
 };
@@ -59,14 +59,27 @@ function LoginAction(username, secret) {
  * @see Action(String)
  * @augments Action
  */
-function CoreShowChannelsAction() {
-	CoreShowChannelsAction.super_.call(this, 'CoreShowChannels');
+function CoreShowChannels() {
+	CoreShowChannels.super_.call(this, 'CoreShowChannels');
 };
+
+/**
+ * Ping Action.
+ * @constructor
+ * @see Action(String)
+ * @augments Action
+ */
+function Ping() {
+	Ping.super_.call(this, 'Ping');
+};
+
 
 // Inheritance for this module
 util.inherits(Action, message.Message);
-util.inherits(LoginAction, Action);
-util.inherits(CoreShowChannelsAction, Action);
+util.inherits(Login, Action);
+util.inherits(Ping, Action);
+util.inherits(CoreShowChannels, Action);
 // Exports for this module
-exports.LoginAction = LoginAction;
-exports.CoreShowChannelsAction = CoreShowChannelsAction;
+exports.Login = Login;
+exports.CoreShowChannels = CoreShowChannels;
+exports.Ping = Ping;
