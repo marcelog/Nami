@@ -16,9 +16,26 @@
  * limitations under the License.
  *
  */
+/**
+ * @fileoverview Base response class.
+ *
+ * @author Marcelo Gornstein - http://marcelog.github.com
+ * Website: http://marcelog.github.com/Nami
+ */
 message = require('./message.js');
 util = require('util');
 
+/**
+ * Base response class.
+ * @constructor
+ * @param {String} data A message received from AMI. The End-Of-Message indicator
+ * has to be already stripped out. This will call unserialize() to build the actual
+ * Message object.
+ * @see Message(String)
+ * @see Message#unmarshall(String)
+ * @augments Message
+ * @property {Event[]} events Events related to this response (can be empty).
+ */
 function Response(data) {
 	Response.super_.call(this);
     this.unmarshall(data);

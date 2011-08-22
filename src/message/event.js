@@ -16,9 +16,24 @@
  * limitations under the License.
  *
  */
+/**
+ * @fileoverview Base event class.
+ *
+ * @author Marcelo Gornstein - http://marcelog.github.com
+ * Website: http://marcelog.github.com/Nami
+ */
 message = require('./message.js');
 util = require('util');
 
+/**
+ * Base event class. Every async event from the server ends up being an Event()
+ * @constructor
+ * @param {String} data A message received from AMI. The End-Of-Message indicator
+ * has to be already stripped out. This will call unserialize() to build the actual
+ * Message object.
+ * @see Message#unmarshall(String)
+ * @augments Message
+ */
 function Event(data) {
     Event.super_.call(this);
     this.unmarshall(data);

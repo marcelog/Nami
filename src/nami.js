@@ -16,6 +16,14 @@
  * limitations under the License.
  *
  */
+
+/**
+ * @fileoverview Nami client code.
+ *
+ * @author Marcelo Gornstein - http://marcelog.github.com
+ * Website: http://marcelog.github.com/Nami
+ */
+
 var net = require('net');
 var events = require('events');
 var action = require('./message/action.js');
@@ -24,7 +32,12 @@ var util = require('util');
 var namiEvents = require('./message/event.js');
 var timer = require('timers');
 
-// Constructor
+/**
+ * Nami client.
+ * @constructor
+ * @param amiData The configuration for ami.
+ * @augments EventEmitter
+ */
 function Nami(amiData) {
     Nami.super_.call(this);
     this.logger = require('log4js').getLogger('Nami.Client');
@@ -40,6 +53,17 @@ function Nami(amiData) {
 // Nami inherits from the EventEmitter so Nami itself can throw events.
 util.inherits(Nami, events.EventEmitter);
 
+/**
+ * Called when a message arrives and is decoded as an event (namiRawEvent event).
+ * This will actually instantiate an Event. If the event has an ActionID,
+ * the corresponding response is looked up and will have this event appended.
+ * Otherwise, the event "namiEvent" is fired. Also, the event "namiEvent<EventName>"
+ * is fired (i.e: on event Dial, namiEventDial will be fired).
+ * 
+ * @see Nami#onRawMessage(String)
+ * @param {Event} response An Event message.
+ * @returns void
+ */
 Nami.prototype.onRawEvent = function (event) {
     this.logger.debug('Got event: ' + util.inspect(event));
 	if (typeof (event.ActionID) !== 'undefined') {
@@ -56,6 +80,16 @@ Nami.prototype.onRawEvent = function (event) {
 	}
 };
 
+/**
+ * Called when a message arrives and is decoded as a response (namiRawResponse event).
+ * This will actually instantiate a Response. If this response has associated events
+ * (still to be received), it is buffered.
+ * Otherwise, the callback used in send() will be called with the response.
+ * @see Nami#onRawMessage(String)
+ * @see Nami#send(String)
+ * @param {Response} response A Response message.
+ * @returns void
+ */
 Nami.prototype.onRawResponse = function (response) {
     this.logger.debug('Got response: ' + util.inspect(response));
 	if (response.Message.indexOf('follow') != -1) {
@@ -65,6 +99,14 @@ Nami.prototype.onRawResponse = function (response) {
 	}
 };
 
+/**
+ * Called by onData() whenever a raw message has been read.
+ * Will fire "namiRawEvent" if the raw message represents an event.
+ * Will fire "namiRawResponse" if the raw message represents a response.
+ * @see Nami#onData(String)
+ * @param {String} buffer The raw message read from server.
+ * @returns void
+ */
 Nami.prototype.onRawMessage = function (buffer) {
     this.logger.debug('Building raw message: ' + util.inspect(buffer));
 	if (buffer.indexOf('Event: ') != -1) {
@@ -78,6 +120,13 @@ Nami.prototype.onRawMessage = function (buffer) {
 	}
 };
 
+/**
+ * Called by node whenever data is available to be read from AMI.
+ * Will fire "namiRawMessage" for every complete message read.
+ * @param {String} data The data read from server.
+ * @see Nami#onRawMessage(String)
+ * @returns void
+ */
 Nami.prototype.onData = function (data) {
     this.logger.debug('Got data: ' + util.inspect(data));
     while ((theEOM = data.indexOf(this.EOM)) != -1) {
@@ -88,10 +137,25 @@ Nami.prototype.onData = function (data) {
     }
     this.received = data;
 };
+/**
+ * Called when the connection is established to AMI.
+ * @returns void
+ */
 Nami.prototype.onConnect = function () {
     this.connected = true;
 };
 
+/**
+ * Called when the first line is received from the server. It will check that
+ * the other peer is a valid AMI server. If not valid, the event "namiInvalidPeer"
+ * will be fired. If not, a login is tried, and onData() is set as the new handler
+ * for incoming data. An anonymous function will handle the login response, firing
+ * "namiLoginIncorrect" if the username/password were not correctly validated.
+ * @param {String} data The data read from server.
+ * @see Nami#onData(String)
+ * @see LoginAction(String, String)
+ * @returns void
+ */
 Nami.prototype.onWelcomeMessage = function (data) {
     this.logger.debug('Got welcome message: ' + util.inspect(data));
     var welcome = data.indexOf(this.welcomeMessage);
@@ -112,6 +176,10 @@ Nami.prototype.onWelcomeMessage = function (data) {
         );
     }
 };
+/**
+ * Closes the connection to AMI.
+ * @returns void
+ */
 Nami.prototype.close = function () {
     this.logger.info('Closing connection');
     this.removeAllListeners();
@@ -119,6 +187,10 @@ Nami.prototype.close = function () {
     this.socket.end();
 };
 
+/**
+ * Opens the connection to AMI.
+ * @returns void
+ */
 Nami.prototype.open = function () {
     this.logger.debug('Opening connection');
     this.socket = new net.Socket();
@@ -135,6 +207,15 @@ Nami.prototype.open = function () {
     this.socket.connect(this.amiData.port, this.amiData.host);
 };
 
+/**
+ * Sends an action to AMI.
+ *
+ * @param {Action} action The action to be sent.
+ * @param {function} callback The optional callback to be invoked when the
+ * responses arrives.
+ *
+ * @returns void
+ */
 Nami.prototype.send = function (action, callback) {
     this.logger.debug('Sending: ' + util.inspect(action));
     this.callbacks[action.ActionID] = callback;

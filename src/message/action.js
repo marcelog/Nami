@@ -16,9 +16,23 @@
  * limitations under the License.
  *
  */
+/**
+ * @fileoverview Base action class.
+ *
+ * @author Marcelo Gornstein - http://marcelog.github.com
+ * Website: http://marcelog.github.com/Nami
+ */
 message = require('./message.js');
 util = require('util');
 
+/**
+ * Base action class. Every action sent to AMI must be one of these.
+ * @constructor
+ * @param {String} name The name of the action, this is the actual value of the 
+ * "Action" key in the action message.
+ * @see Message#marshall(String)
+ * @augments Message
+ */
 function Action(name) {
     Action.super_.call(this);
     this.id = new Date().getTime();
@@ -26,11 +40,25 @@ function Action(name) {
     this.set('Action', name);
 };
 
+/**
+ * Login Action.
+ * @constructor
+ * @param {String} username The username. The value of the "Username" key.
+ * @param {String} secret The password. The value of the "Secret" key.
+ * @see Action(String)
+ * @augments Action
+ */
 function LoginAction(username, secret) {
     LoginAction.super_.call(this, 'Login');
     this.set('Username', username);
     this.set('Secret', secret );
 };
+/**
+ * CoreShowChannels Action.
+ * @constructor
+ * @see Action(String)
+ * @augments Action
+ */
 function CoreShowChannelsAction() {
 	CoreShowChannelsAction.super_.call(this, 'CoreShowChannels');
 };
