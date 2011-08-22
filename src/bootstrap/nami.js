@@ -17,7 +17,7 @@
  *
  */
 exports.bootstrap = function (resources) {
-    nami = new (require("../lib/nami.js").Nami)(resources.config.amiData);
+    nami = new (require("../lib/nami.js").Nami)(resources.config.resources.nami);
     nami.open();
     return nami;
 };

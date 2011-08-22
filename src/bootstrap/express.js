@@ -17,9 +17,6 @@
  *
  */
 exports.bootstrap = function (resources) {
-    if (resources.config.httpServer.enable !== true) {
-        return null;
-    }
     var logger = resources.logger.getLogger('Nami.Express');
     var express = require('express');
     var app = express.createServer();
@@ -39,7 +36,7 @@ exports.bootstrap = function (resources) {
     app.get('/', function(req, res){
         res.send('hello world');
     });
-    app.listen(resources.config.httpServer.port);
+    app.listen(resources.config.resources.express.port);
     return app;
 };
 

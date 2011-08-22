@@ -113,7 +113,6 @@ CallListener.prototype.onDial = function (event) {
 }
 
 CallListener.prototype.shutdown = function () {
-    this.logger.info('Shutting down');
 };
 
 exports.listener = null;

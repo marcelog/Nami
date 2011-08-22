@@ -17,18 +17,17 @@
  *
  */
 exports.bootstrap = function (resources) {
-    if (resources.config.mongo.enable !== true) {
-        return null;
-    }
     var mongo = require("../models/mongo.js");
+    var config = resources.config.resources.mongo;
     mongo.mongoose.connect(
-    	'mongodb://' + resources.config.mongo.user + ':' + resources.config.mongo.password
-    	+ '@' + resources.config.mongo.host + ':' + resources.config.mongo.port
-    	+ '/' + resources.config.mongo.dbname
+    	'mongodb://' + config.user + ':' + config.password
+    	+ '@' + config.host + ':' + config.port
+    	+ '/' + config.dbname
     );
     return mongo;
 };
 
 exports.shutdown = function (resources) {
+    resources.mongo.mongoose.disconnect();
 };
 

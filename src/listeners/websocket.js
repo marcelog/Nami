@@ -73,7 +73,6 @@ WebSocketListener.prototype.onWebSocketConnect = function (socket) {
     });
 };
 WebSocketListener.prototype.shutdown = function () {
-    this.logger.info('Shutting down');
     for (client in this.clients) {
         this.logger.debug('Disconnecting: ' + this.clients[client].address);
         this.clients[client].disconnect();

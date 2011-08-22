@@ -17,10 +17,7 @@
  *
  */
 exports.bootstrap = function (resources) {
-    if (resources.config.webSocket.enable !== true) {
-        return null;
-    }
-	var io = require('socket.io').listen(resources.config.webSocket.port);
+	var io = require('socket.io').listen(resources.config.resources.websocket.port);
     io.configure(function() {
        /* XXX Does this actually work at all? */
        //io.set('logger', resources.logger.getLogger('Nami.WebSocket'));
@@ -29,4 +26,5 @@ exports.bootstrap = function (resources) {
 };
 
 exports.shutdown = function (resources) {
+    /** TODO: How to shutdown & cleanup socket.io? */
 };

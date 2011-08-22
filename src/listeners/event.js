@@ -45,7 +45,6 @@ EventListener.prototype.onEventToMongo = function (event) {
 };
 
 EventListener.prototype.shutdown = function () {
-    this.logger.info('Shutting down');
 };
 
 exports.listener = null;

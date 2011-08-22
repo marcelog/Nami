@@ -18,10 +18,13 @@
  */
 exports.shutdown = function () {
     for (listener in exports.listeners) {
-        exports.logger.debug('Stopping Listener: ' + listener);
-        if (exports.resources.config.listeners[listener].enable === true) {
-            exports.listeners[listener] = require("../listeners/" + listener + ".js").shutdown(exports.resources);
-        }
+        shutdownListener(listener);
+    }
+    /**
+     * TODO: resources should be shutdown in reverse order
+     */
+    for (resource in exports.resources) {
+        shutdownResource(resource);
     }
 };
 
@@ -42,24 +45,55 @@ exports.listeners = {
     call: null
 };
 
-exports.run = function () {
-    for (resource in exports.resources) {
-        if (exports.logger === null) {
-            if (exports.resources.logger !== null) {
-                exports.logger = exports.resources.logger.getLogger('Nami.App');
-            }
-        } else {
-            exports.logger.debug('Bootstrapping: ' + resource);
-        }
+function shutdownResource(resource) {
+    if (exports.resources[resource] !== null) {
+        exports.logger.debug('Shutting down resource: ' + resource);
         exports.resources[resource]
-            = require("./" + resource + ".js").bootstrap(exports.resources)
+            = require("./" + resource + ".js").shutdown(exports.resources)
         ;
     }
-    for (listener in exports.listeners) {
+};
+
+function shutdownListener(listener) {
+    if (exports.resources.config.listeners[listener].enable === true) {
+        exports.logger.debug('Stopping Listener: ' + listener);
+        exports.listeners[listener]
+            = require("../listeners/" + listener + ".js").shutdown(exports.resources)
+        ;
+    }
+};
+
+function bootstrapResource(resource) {
+    if (exports.logger !== null) {
+        exports.logger.debug('Bootstrapping: ' + resource);
+    }
+    exports.resources[resource]
+        = require("./" + resource + ".js").bootstrap(exports.resources)
+    ;
+};
+
+function bootstrapListener(listener) {
+    if (exports.resources.config.listeners[listener].enable === true) {
         exports.logger.debug('Starting listener: ' + listener);
-        if (exports.resources.config.listeners[listener].enable === true) {
-            exports.listeners[listener] = require("../listeners/" + listener + ".js").run(exports.resources);
+        exports.listeners[listener] = require("../listeners/" + listener + ".js").run(exports.resources);
+    }
+};
+
+exports.run = function () {
+    bootstrapResource('config');
+    bootstrapResource('logger');
+    exports.logger = exports.resources.logger.getLogger('Nami.App');
+    for (resource in exports.resources) {
+        if (exports.resources[resource] !== null) {
+            continue;
         }
+        if (exports.resources.config.resources[resource].enable !== true) {
+            continue;
+        }
+        bootstrapResource(resource);
+    }
+    for (listener in exports.listeners) {
+        bootstrapListener(listener);
     }
 };
 
