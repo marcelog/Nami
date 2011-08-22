@@ -171,7 +171,9 @@ Nami.prototype.onWelcomeMessage = function (data) {
         	function (response) {
         		if (response.Response != 'Success') {
         			self.emit('namiLoginIncorrect');
-        		}
+        		} else {
+        			self.emit('namiConnected');
+                }
         	}
         );
     }
@@ -224,3 +226,7 @@ Nami.prototype.send = function (action, callback) {
 };
 
 exports.Nami = Nami;
+exports.Actions = action;
+exports.Event = namiEvents;
+exports.Response = namiResponse;
+

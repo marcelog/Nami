@@ -17,6 +17,7 @@
  *
  */
 var logger = require("log4js").getLogger('Nami.App');
+var namiLib = require("./nami.js");
 if (process.argv.length != 6) {
 	logger.fatal("Use: <host> <port> <user> <secret>");
 	process.exit();
@@ -29,7 +30,7 @@ var namiConfig = {
     secret: process.argv[5]
 };
 
-var nami = new (require("./nami.js").Nami)(namiConfig);
+var nami = new namiLib.Nami(namiConfig);
 process.on('SIGINT', function () {
     nami.close();
     process.exit();
@@ -45,6 +46,10 @@ nami.on('namiLoginIncorrect', function () {
 nami.on('namiEvent', function (event) {
     logger.debug('Got Event: ' + util.inspect(event));
 });
+nami.on('namiConnected', function (event) {
+    nami.send(new namiLib.Actions.CoreShowChannelsAction(), function(response) {
+        logger.debug(' ---- Response: ' + util.inspect(response));
+    });
+});
 nami.open();
-
 
