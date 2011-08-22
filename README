@@ -54,7 +54,7 @@ $ npm install nami
 Configuration
 -------------
 Nami expects a configuration object, very much like this:
-namiConfig: {
+var namiConfig = {
     host: "amihost",
     port: 5038,
     username: "admin",
@@ -72,7 +72,15 @@ nami.on('namiEvent', function (event) { });
 nami.on('namiEventDial', function (event) { });
 nami.on('namiEventVarSet', function (event) { });
 nami.on('namiEventHangup', function (event) { });
+process.on('SIGINT', function () {
+    nami.close();
+    process.exit();
+});
 nami.open();
+
+A Better example
+----------------
+See src/index.js for a better example.
 
 That's about it.
 
