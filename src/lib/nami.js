@@ -52,6 +52,7 @@ Nami.prototype.onRawEvent = function (event) {
 		this.callbacks[event.ActionID](this.responses[event.ActionID]);
 	} else {
 		this.emit('namiEvent', event);
+		this.emit('namiEvent' + event.Event, event);
 	}
 };
 

@@ -84,6 +84,23 @@
         "type": "file",
         "filename": "/tmp/nami.log"
       }
+    },
+    { 
+      "category": "Nami.Express", 
+      "type": "logLevelFilter",
+      "level": "DEBUG",
+      "appender": {
+        "type": "console"
+      }
+    },
+    { 
+      "category": "Nami.Express", 
+      "type": "logLevelFilter",
+      "level": "DEBUG",
+      "appender": {
+        "type": "file",
+        "filename": "/tmp/nami.log"
+      }
     }
   ],
   "levels": {
@@ -91,6 +108,7 @@
     "Nami.WebSocket":  "ERROR",
     "Nami.App":  "ERROR",
     "Nami.Mongo.Event":  "ERROR",
-    "Nami.Mongo.Call":  "ERROR"
+    "Nami.Mongo.Call":  "ERROR",
+    "Nami.Express":  "ERROR"
   }
 }

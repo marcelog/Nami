@@ -25,20 +25,10 @@ function CallListener(resources) {
     this.logger = require('log4js').getLogger('Nami.Mongo.Call');
     this.logger.debug('Init');
     this.mongo = this.resources.mongo;
-    this.resources.nami.on('namiEvent', function (event) {
-        self.onAnyEvent(event);
-    });
-    this.on('Dial', function (event) { self.onDial(event); });
-    this.on('VarSet', function (event) { self.onVarSet(event); });
+    this.resources.nami.on('namiEventDial', function (event) { self.onDial(event); });
+    this.resources.nami.on('namiEventVarSet', function (event) { self.onVarSet(event); });
 };
 util.inherits(CallListener, events.EventEmitter);
-
-CallListener.prototype.onAnyEvent = function (event) {
-    if (event.Event === 'DTMF') {
-        return;
-    }
-    this.emit(event.Event, event);
-};
 
 CallListener.prototype.saveCall = function (call) {
     call.save(function (err) {
@@ -103,7 +93,7 @@ CallListener.prototype.onDial = function (event) {
         this.saveCall(callEntity);
     } else if (event.SubEvent === 'End') {
         this.logger.debug('End Call: ' + util.inspect(event));
-        this.getCall(event.Uniqueid, function(call) {
+        this.getCall(event.UniqueID, function(call) {
             if (call !== null) {
                 call.dialStatus = event.DialStatus;
                 self.saveCall(call);

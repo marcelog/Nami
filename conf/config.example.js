@@ -19,7 +19,7 @@
 var NamiConfig = {
     listeners: {
         call: {
-            enable: true
+            enable: true 
         },
         event: {
             enable: true
@@ -28,26 +28,29 @@ var NamiConfig = {
             enable: true
         }
     },
-	mongo: {
-		host: "mongodomain.com",
-		port: 1234,
-		dbname: "dbname",
-		user: "username",
-		password: "password",
-        enable: true
-	},
-    amiData: {
-        host: "asteriskdomain.com",
-        port: 2134,
-        username: "username",
-        secret: "secret"
-    },
-    webSocket: {
-        enable: true,
-        port: 1028
-    },
-    httpServer: {
-        enable: true,
-    	port: 1029
+    resources: {
+        mongo: {
+		    host: "mongohost",
+            port: 10071,
+		    dbname: "dbname",
+		    user: "user",
+		    password: "pass",
+            enable: true
+	    },
+        nami: {
+            host: "amihost",
+            port: 5048,
+            username: "admin",
+            secret: "secret",
+            enable: true
+        },
+        websocket: {
+            enable: true,
+            port: 1028
+        },
+        express: {
+            enable: true,
+    	    port: 1029
+        }
     }
 };

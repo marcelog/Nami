@@ -1,9 +1,78 @@
-This is an experimental work. It works, but it's still experimental. I'll be updating
-it and its documentation with time.
+NOTE: This is an experimental work. It works, but it's still experimental. I'll be updating it and its documentation with time.
 
-requirements:
- * nodejs
- * socket.io (to accept websocket clients)
- * mongoose (to save events and outgoing calls to mongo database)
- * log4js (for logging)
+Introduction
+------------
+Nami by itself is just a library that allows your nodejs code to communicate to an
+Asterisk Manager Interface (AMI). However, it includes a full application useful to
+monitor an asterisk installation (see Sample Application below).
+
+This is very much like AsterTrace, so you might be interesting in checking that out too, 
+at http://marcelog.github.com/articles/php_asterisk_listener_example_using_pami_and_ding.html
+
+You will be able to login, receive asynchronous events, and send actions (also,
+asynchronously receiving the according response with their optional related events).
+
+This is supported by the Nami class (er.. function) which inherits from EventEmitter, so
+your application is able to subscribe to the interesting nami events. 
+
+Requirements
+------------
+ * Nodejs (Tested with 0.4.10)
+ * log4js (For logging, tested with 0.3.8)
+
+Events used in Nami
+-------------------
+* namiEvent: Emitted for all events. Listen to this generic event if you want to catch
+any events.
+
+* namiEvent(EventName): These events are thrown based on the event name received. Let's
+say nami gets an event named "Dial", "VarSet", or "Hangup". This will emit the
+events: "namiEventDial", "namiEventVarSet", and "NamiEventHangup".
+
+* namiLoginIncorrect: Emitted when the login action fails (wrong password, etc).
+* namiInvalidPeer: Emitted if nami tried to connect to anything that did not salute like
+an AMI 1.1.
+
+Internal Nami events
+--------------------
+* namiRawMessage: Whenever a full message is received from the
+AMI (delimited by double crlf), this is emitted to invoke the decode routine. After
+namiRawMessage, the decodification routine runs to properly identify this message as a
+response, an event that belongs to a response, or an async event from server.
+
+* namiRawEvent: Emitted when the decodification routine 
+classified the received message as an async event from server.
+
+* namiRawResponse: Emitted when the decodification routine classified the received
+message as a response to an action.
+
+Configuration
+-------------
+Nami expects a configuration object, very much like this:
+namiConfig: {
+    host: "amihost",
+    port: 5038,
+    username: "admin",
+    secret: "secret"
+};
+
+Quickstart
+----------
+nami = new (require("lib/nami.js").Nami)(namiConfig);
+nami.on('namiEvent', function (event) { });
+nami.on('namiEventDial', function (event) { });
+nami.on('namiEventVarSet', function (event) { });
+nami.on('namiEventHangup', function (event) { });
+nami.open();
+
+That's about it. See below for an included sample application that does a little of
+everything.
+
+Sample Application
+------------------
+
+Optional Requirements
+---------------------
+ * socket.io (to accept websocket clients, tested with 0.7.8)
+ * mongoose (to save events and outgoing calls to mongo database, tested with 1.8.1)
 
