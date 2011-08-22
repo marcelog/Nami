@@ -1,4 +1,3 @@
-// Validate arguments.
 /*!
  * Example ami client.
  *
@@ -30,7 +29,7 @@ var namiConfig = {
     secret: process.argv[5]
 };
 
-var nami = new (require("./nami.js").Nami)(namiConfig);
+var nami = new (require("nami").Nami)(namiConfig);
 process.on('SIGINT', function () {
     nami.close();
     process.exit();
