@@ -23,30 +23,58 @@
 <span class='line'> 16</span>  * limitations under the License.
 <span class='line'> 17</span>  *
 <span class='line'> 18</span>  */</span><span class="WHIT">
-<span class='line'> 19</span> </span><span class="NAME">message</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">require</span><span class="PUNC">(</span><span class="STRN">'./message.js'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 20</span> </span><span class="NAME">util</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">require</span><span class="PUNC">(</span><span class="STRN">'util'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 21</span> 
-<span class='line'> 22</span> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">(</span><span class="NAME">name</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'> 23</span> </span><span class="WHIT">    </span><span class="NAME">Action.super_.call</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 24</span> </span><span class="WHIT">    </span><span class="NAME">this.id</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">Date</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">getTime</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 25</span> </span><span class="WHIT">    </span><span class="NAME">this.set</span><span class="PUNC">(</span><span class="STRN">'ActionID'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">this.id</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 26</span> </span><span class="WHIT">    </span><span class="NAME">this.set</span><span class="PUNC">(</span><span class="STRN">'Action'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">name</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 27</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 28</span> 
-<span class='line'> 29</span> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">LoginAction</span><span class="PUNC">(</span><span class="NAME">username</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">secret</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'> 30</span> </span><span class="WHIT">    </span><span class="NAME">LoginAction.super_.call</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'Login'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 31</span> </span><span class="WHIT">    </span><span class="NAME">this.set</span><span class="PUNC">(</span><span class="STRN">'Username'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">username</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 32</span> </span><span class="WHIT">    </span><span class="NAME">this.set</span><span class="PUNC">(</span><span class="STRN">'Secret'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">secret</span><span class="WHIT"> </span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 33</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 34</span> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">CoreShowChannelsAction</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'> 35</span> </span><span class="WHIT">	</span><span class="NAME">CoreShowChannelsAction.super_.call</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'CoreShowChannels'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 36</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 37</span> 
-<span class='line'> 38</span> </span><span class="COMM">// Inheritance for this module</span><span class="WHIT">
-<span class='line'> 39</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">Action</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">message.Message</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 40</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">LoginAction</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 41</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">CoreShowChannelsAction</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 42</span> </span><span class="COMM">// Exports for this module</span><span class="WHIT">
-<span class='line'> 43</span> </span><span class="NAME">exports.LoginAction</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">LoginAction</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 44</span> </span><span class="NAME">exports.CoreShowChannelsAction</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">CoreShowChannelsAction</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 45</span> </span></pre></body></html>
+<span class='line'> 19</span> </span><span class="COMM">/**
+<span class='line'> 20</span>  * @fileoverview Base action class.
+<span class='line'> 21</span>  *
+<span class='line'> 22</span>  * @author Marcelo Gornstein - http://marcelog.github.com
+<span class='line'> 23</span>  * Website: http://marcelog.github.com/Nami
+<span class='line'> 24</span>  */</span><span class="WHIT">
+<span class='line'> 25</span> </span><span class="NAME">message</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">require</span><span class="PUNC">(</span><span class="STRN">'./message.js'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 26</span> </span><span class="NAME">util</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">require</span><span class="PUNC">(</span><span class="STRN">'util'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 27</span> 
+<span class='line'> 28</span> </span><span class="COMM">/**
+<span class='line'> 29</span>  * Base action class. Every action sent to AMI must be one of these.
+<span class='line'> 30</span>  * @constructor
+<span class='line'> 31</span>  * @param {String} name The name of the action, this is the actual value of the 
+<span class='line'> 32</span>  * "Action" key in the action message.
+<span class='line'> 33</span>  * @see Message#marshall(String)
+<span class='line'> 34</span>  * @augments Message
+<span class='line'> 35</span>  */</span><span class="WHIT">
+<span class='line'> 36</span> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">(</span><span class="NAME">name</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 37</span> </span><span class="WHIT">    </span><span class="NAME">Action.super_.call</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 38</span> </span><span class="WHIT">    </span><span class="NAME">this.id</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">Date</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">.</span><span class="NAME">getTime</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 39</span> </span><span class="WHIT">    </span><span class="NAME">this.set</span><span class="PUNC">(</span><span class="STRN">'ActionID'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">this.id</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 40</span> </span><span class="WHIT">    </span><span class="NAME">this.set</span><span class="PUNC">(</span><span class="STRN">'Action'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">name</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 41</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 42</span> 
+<span class='line'> 43</span> </span><span class="COMM">/**
+<span class='line'> 44</span>  * Login Action.
+<span class='line'> 45</span>  * @constructor
+<span class='line'> 46</span>  * @param {String} username The username. The value of the "Username" key.
+<span class='line'> 47</span>  * @param {String} secret The password. The value of the "Secret" key.
+<span class='line'> 48</span>  * @see Action(String)
+<span class='line'> 49</span>  * @augments Action
+<span class='line'> 50</span>  */</span><span class="WHIT">
+<span class='line'> 51</span> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">LoginAction</span><span class="PUNC">(</span><span class="NAME">username</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">secret</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 52</span> </span><span class="WHIT">    </span><span class="NAME">LoginAction.super_.call</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'Login'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 53</span> </span><span class="WHIT">    </span><span class="NAME">this.set</span><span class="PUNC">(</span><span class="STRN">'Username'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">username</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 54</span> </span><span class="WHIT">    </span><span class="NAME">this.set</span><span class="PUNC">(</span><span class="STRN">'Secret'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">secret</span><span class="WHIT"> </span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 55</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 56</span> </span><span class="COMM">/**
+<span class='line'> 57</span>  * CoreShowChannels Action.
+<span class='line'> 58</span>  * @constructor
+<span class='line'> 59</span>  * @see Action(String)
+<span class='line'> 60</span>  * @augments Action
+<span class='line'> 61</span>  */</span><span class="WHIT">
+<span class='line'> 62</span> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">CoreShowChannelsAction</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 63</span> </span><span class="WHIT">	</span><span class="NAME">CoreShowChannelsAction.super_.call</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'CoreShowChannels'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 64</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 65</span> 
+<span class='line'> 66</span> </span><span class="COMM">// Inheritance for this module</span><span class="WHIT">
+<span class='line'> 67</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">Action</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">message.Message</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 68</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">LoginAction</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 69</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">CoreShowChannelsAction</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 70</span> </span><span class="COMM">// Exports for this module</span><span class="WHIT">
+<span class='line'> 71</span> </span><span class="NAME">exports.LoginAction</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">LoginAction</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 72</span> </span><span class="NAME">exports.CoreShowChannelsAction</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">CoreShowChannelsAction</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 73</span> </span></pre></body></html>

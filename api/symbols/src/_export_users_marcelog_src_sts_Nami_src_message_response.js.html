@@ -23,16 +23,33 @@
 <span class='line'> 16</span>  * limitations under the License.
 <span class='line'> 17</span>  *
 <span class='line'> 18</span>  */</span><span class="WHIT">
-<span class='line'> 19</span> </span><span class="NAME">message</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">require</span><span class="PUNC">(</span><span class="STRN">'./message.js'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 20</span> </span><span class="NAME">util</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">require</span><span class="PUNC">(</span><span class="STRN">'util'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 21</span> 
-<span class='line'> 22</span> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">Response</span><span class="PUNC">(</span><span class="NAME">data</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'> 23</span> </span><span class="WHIT">	</span><span class="NAME">Response.super_.call</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 24</span> </span><span class="WHIT">    </span><span class="NAME">this.unmarshall</span><span class="PUNC">(</span><span class="NAME">data</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 25</span> </span><span class="WHIT">    </span><span class="NAME">this.events</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 26</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 27</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">Response</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">message.Message</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 28</span> </span><span class="NAME">exports.Response</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Response</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 29</span> 
-<span class='line'> 30</span> 
-<span class='line'> 31</span> </span></pre></body></html>
+<span class='line'> 19</span> </span><span class="COMM">/**
+<span class='line'> 20</span>  * @fileoverview Base response class.
+<span class='line'> 21</span>  *
+<span class='line'> 22</span>  * @author Marcelo Gornstein - http://marcelog.github.com
+<span class='line'> 23</span>  * Website: http://marcelog.github.com/Nami
+<span class='line'> 24</span>  */</span><span class="WHIT">
+<span class='line'> 25</span> </span><span class="NAME">message</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">require</span><span class="PUNC">(</span><span class="STRN">'./message.js'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 26</span> </span><span class="NAME">util</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">require</span><span class="PUNC">(</span><span class="STRN">'util'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 27</span> 
+<span class='line'> 28</span> </span><span class="COMM">/**
+<span class='line'> 29</span>  * Base response class.
+<span class='line'> 30</span>  * @constructor
+<span class='line'> 31</span>  * @param {String} data A message received from AMI. The End-Of-Message indicator
+<span class='line'> 32</span>  * has to be already stripped out. This will call unserialize() to build the actual
+<span class='line'> 33</span>  * Message object.
+<span class='line'> 34</span>  * @see Message(String)
+<span class='line'> 35</span>  * @see Message#unmarshall(String)
+<span class='line'> 36</span>  * @augments Message
+<span class='line'> 37</span>  * @property {Event[]} events Events related to this response (can be empty).
+<span class='line'> 38</span>  */</span><span class="WHIT">
+<span class='line'> 39</span> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">Response</span><span class="PUNC">(</span><span class="NAME">data</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 40</span> </span><span class="WHIT">	</span><span class="NAME">Response.super_.call</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 41</span> </span><span class="WHIT">    </span><span class="NAME">this.unmarshall</span><span class="PUNC">(</span><span class="NAME">data</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 42</span> </span><span class="WHIT">    </span><span class="NAME">this.events</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 43</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 44</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">Response</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">message.Message</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 45</span> </span><span class="NAME">exports.Response</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Response</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 46</span> 
+<span class='line'> 47</span> 
+<span class='line'> 48</span> </span></pre></body></html>
