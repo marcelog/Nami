@@ -51,6 +51,9 @@ Installation
 $ npm install log4js
 $ npm install nami
 
+ -or-
+Download it from this repo :)
+
 Configuration
 -------------
 Nami expects a configuration object, very much like this:
