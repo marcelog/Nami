@@ -48,11 +48,8 @@ message as a response to an action.
 
 Installation
 ------------
-1.- install log4js:
 $ npm install log4js
-
-2.- Testrun:
-$ node src/index.js <host> <port> <username> <secret>
+$ npm install nami
 
 Configuration
 -------------
@@ -66,7 +63,11 @@ namiConfig: {
 
 Quickstart
 ----------
-nami = new (require("lib/nami.js").Nami)(namiConfig);
+$ mkdir testnami
+$ npm install log4js
+$ npm install nami
+
+var nami = new (require("nami").Nami)(namiConfig);
 nami.on('namiEvent', function (event) { });
 nami.on('namiEventDial', function (event) { });
 nami.on('namiEventVarSet', function (event) { });
