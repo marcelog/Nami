@@ -82,6 +82,11 @@ process.on('SIGINT', function () {
     nami.close();
     process.exit();
 });
+nami.on('namiConnected', function (event) {
+    nami.send(new namiLib.Actions.CoreShowChannelsAction(), function(response) {
+        logger.debug(' ---- Response: ' + util.inspect(response));
+    });
+});
 nami.open();
 
 A Better example
