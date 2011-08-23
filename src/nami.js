@@ -70,13 +70,13 @@ Nami.prototype.onRawEvent = function (event) {
 		this.responses[event.ActionID].events.push(event);
 	}
 	if (
-		event.Event.indexOf('Complete') !== -1
-		|| ((typeof(event.EventList) !== 'undefined') && event.EventList.indexOf('Complete') != -1)
+		event.event.indexOf('Complete') !== -1
+		|| ((typeof(event.eventlist) !== 'undefined') && event.eventlist.indexOf('Complete') != -1)
 	) {
-		this.callbacks[event.ActionID](this.responses[event.ActionID]);
+		this.callbacks[event.actionid](this.responses[event.actionid]);
 	} else {
 		this.emit('namiEvent', event);
-		this.emit('namiEvent' + event.Event, event);
+		this.emit('namiEvent' + event.event, event);
 	}
 };
 
@@ -93,12 +93,12 @@ Nami.prototype.onRawEvent = function (event) {
 Nami.prototype.onRawResponse = function (response) {
     this.logger.debug('Got response: ' + util.inspect(response));
 	if (
-        (typeof(response.Message) !== 'undefined')
-        && (response.Message.indexOf('follow') != -1)
+        (typeof(response.message) !== 'undefined')
+        && (response.message.indexOf('follow') != -1)
     ) {
-		this.responses[response.ActionID] = response;			
-	} else if (typeof (this.callbacks[response.ActionID]) !== 'undefined') {
-		this.callbacks[response.ActionID](response);
+		this.responses[response.actionid] = response;			
+	} else if (typeof (this.callbacks[response.actionid]) !== 'undefined') {
+		this.callbacks[response.actionid](response);
 	}
 };
 
@@ -173,7 +173,7 @@ Nami.prototype.onWelcomeMessage = function (data) {
         this.send(
         	new action.Login(this.amiData.username, this.amiData.secret),
         	function (response) {
-        		if (response.Response != 'Success') {
+        		if (response.response != 'Success') {
         			self.emit('namiLoginIncorrect');
         		} else {
         			self.emit('namiConnected');

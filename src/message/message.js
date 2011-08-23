@@ -64,7 +64,10 @@ Message.prototype.unmarshall = function (data) {
         if (typeof(key[1]) === 'undefined') {
             continue;
         }
-        this[key[0].replace(/-/, '_')] = key[1].replace(/^\s+/g, '').replace(/\s+$/g, '');
+        this.set(
+            key[0].replace(/-/, '_').toLowerCase(),
+            key[1].replace(/^\s+/g, '').replace(/\s+$/g, '')
+        );
     }
 };
 
