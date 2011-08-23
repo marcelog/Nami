@@ -55,8 +55,8 @@
 <span class='line'> 48</span>  * @see Action(String)
 <span class='line'> 49</span>  * @augments Action
 <span class='line'> 50</span>  */</span><span class="WHIT">
-<span class='line'> 51</span> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">LoginAction</span><span class="PUNC">(</span><span class="NAME">username</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">secret</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'> 52</span> </span><span class="WHIT">    </span><span class="NAME">LoginAction.super_.call</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'Login'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 51</span> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">Login</span><span class="PUNC">(</span><span class="NAME">username</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">secret</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 52</span> </span><span class="WHIT">    </span><span class="NAME">Login.super_.call</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'Login'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 53</span> </span><span class="WHIT">    </span><span class="NAME">this.set</span><span class="PUNC">(</span><span class="STRN">'Username'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">username</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 54</span> </span><span class="WHIT">    </span><span class="NAME">this.set</span><span class="PUNC">(</span><span class="STRN">'Secret'</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">secret</span><span class="WHIT"> </span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 55</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
@@ -66,15 +66,39 @@
 <span class='line'> 59</span>  * @see Action(String)
 <span class='line'> 60</span>  * @augments Action
 <span class='line'> 61</span>  */</span><span class="WHIT">
-<span class='line'> 62</span> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">CoreShowChannelsAction</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'> 63</span> </span><span class="WHIT">	</span><span class="NAME">CoreShowChannelsAction.super_.call</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'CoreShowChannels'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 62</span> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">CoreShowChannels</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 63</span> </span><span class="WHIT">	</span><span class="NAME">CoreShowChannels.super_.call</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'CoreShowChannels'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 64</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 65</span> 
-<span class='line'> 66</span> </span><span class="COMM">// Inheritance for this module</span><span class="WHIT">
-<span class='line'> 67</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">Action</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">message.Message</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 68</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">LoginAction</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 69</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">CoreShowChannelsAction</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 70</span> </span><span class="COMM">// Exports for this module</span><span class="WHIT">
-<span class='line'> 71</span> </span><span class="NAME">exports.LoginAction</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">LoginAction</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 72</span> </span><span class="NAME">exports.CoreShowChannelsAction</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">CoreShowChannelsAction</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 73</span> </span></pre></body></html>
+<span class='line'> 66</span> </span><span class="COMM">/**
+<span class='line'> 67</span>  * Ping Action.
+<span class='line'> 68</span>  * @constructor
+<span class='line'> 69</span>  * @see Action(String)
+<span class='line'> 70</span>  * @augments Action
+<span class='line'> 71</span>  */</span><span class="WHIT">
+<span class='line'> 72</span> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">Ping</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 73</span> </span><span class="WHIT">	</span><span class="NAME">Ping.super_.call</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'Ping'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 74</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 75</span> 
+<span class='line'> 76</span> </span><span class="COMM">/**
+<span class='line'> 77</span>  * Hangup Action.
+<span class='line'> 78</span>  * @constructor
+<span class='line'> 79</span>  * @see Action(String)
+<span class='line'> 80</span>  * @augments Action
+<span class='line'> 81</span>  */</span><span class="WHIT">
+<span class='line'> 82</span> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">Hangup</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'> 83</span> </span><span class="WHIT">	</span><span class="NAME">Ping.super_.call</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'Hangup'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 84</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 85</span> 
+<span class='line'> 86</span> </span><span class="COMM">// Inheritance for this module</span><span class="WHIT">
+<span class='line'> 87</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">Action</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">message.Message</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 88</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">Login</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 89</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">Ping</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 90</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">Hangup</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 91</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">CoreShowChannels</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 92</span> </span><span class="COMM">// Exports for this module</span><span class="WHIT">
+<span class='line'> 93</span> </span><span class="NAME">exports.Login</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Login</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 94</span> </span><span class="NAME">exports.CoreShowChannels</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">CoreShowChannels</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 95</span> </span><span class="NAME">exports.Ping</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Ping</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 96</span> </span><span class="NAME">exports.Hangup</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Hangup</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 97</span> </span></pre></body></html>
