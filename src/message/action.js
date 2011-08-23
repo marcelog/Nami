@@ -73,13 +73,24 @@ function Ping() {
 	Ping.super_.call(this, 'Ping');
 };
 
+/**
+ * Hangup Action.
+ * @constructor
+ * @see Action(String)
+ * @augments Action
+ */
+function Hangup() {
+	Ping.super_.call(this, 'Hangup');
+};
 
 // Inheritance for this module
 util.inherits(Action, message.Message);
 util.inherits(Login, Action);
 util.inherits(Ping, Action);
+util.inherits(Hangup, Action);
 util.inherits(CoreShowChannels, Action);
 // Exports for this module
 exports.Login = Login;
 exports.CoreShowChannels = CoreShowChannels;
 exports.Ping = Ping;
+exports.Hangup = Hangup;
