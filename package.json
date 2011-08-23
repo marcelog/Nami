@@ -2,7 +2,7 @@
   "author": "Marcelo Gornstein <marcelog@gmail.com> (http://marcelog.github.com/)",
   "name": "nami",
   "description": "Port of PAMI to node. An asterisk manager interface client, will allow you to send actions, and receive responses (and associated events), and also receive async events from server",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "homepage": "https://github.com/marcelog/Nami",
   "keywords": [
     "asterisk",
