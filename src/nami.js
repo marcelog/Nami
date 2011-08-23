@@ -66,8 +66,8 @@ util.inherits(Nami, events.EventEmitter);
  */
 Nami.prototype.onRawEvent = function (event) {
     this.logger.debug('Got event: ' + util.inspect(event));
-	if (typeof (event.ActionID) !== 'undefined') {
-		this.responses[event.ActionID].events.push(event);
+	if (typeof (event.actionid) !== 'undefined') {
+		this.responses[event.actionid].events.push(event);
 	}
 	if (
 		event.event.indexOf('Complete') !== -1
