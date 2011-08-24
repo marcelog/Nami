@@ -18,10 +18,10 @@
  */
 var logger = require("log4js").getLogger('Nami.App');
 var namiLib = require("./nami.js");
-if (process.argv.length != 6) {
+if (process.argv.length !== 6) {
 	logger.fatal("Use: <host> <port> <user> <secret>");
 	process.exit();
-};
+}
 
 var namiConfig = {
     host: process.argv[2],
@@ -47,10 +47,10 @@ nami.on('namiEvent', function (event) {
     logger.debug('Got Event: ' + util.inspect(event));
 });
 function standardSend(action) {
-    nami.send(action, function(response) {
+    nami.send(action, function (response) {
         logger.debug(' ---- Response: ' + util.inspect(response));
     });
-};
+}
 
 nami.on('namiConnected', function (event) {
     standardSend(new namiLib.Actions.Status());
@@ -65,11 +65,10 @@ nami.on('namiConnected', function (event) {
     action.channel = "SIP/asdasd";
     standardSend(action);
 
-    action= new namiLib.Actions.AbsoluteTimeout();
+    action = new namiLib.Actions.AbsoluteTimeout();
     action.channel = "SIP/asdasd";
     action.timeout = "3";
     standardSend(action);
-    
 });
 nami.open();
 

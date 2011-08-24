@@ -30,7 +30,7 @@
 function Message() {
     this.lines = [];
     this.EOL = "\r\n";
-};
+}
 
 /**
  * Used to serialize this message to a text representation understood by
@@ -39,12 +39,13 @@ function Message() {
  * @returns {String}
  */
 Message.prototype.marshall = function () {
-    var output = "";
+    var output = "", key;
     for (key in this) {
-    	if (key == 'lines' || key == 'EOL' || (typeof this[key] === 'function')) {
-    		continue;
-    	}
-    	output = output + key + ": " + this[key] + this.EOL;
+        if (this.hasOwnProperty(key)) {
+            if (key !== 'lines' && key !== 'EOL' && (typeof (this[key]) !== 'function')) {
+                output = output + key + ": " + this[key] + this.EOL;
+            }
+        }
     }
     output = output + this.EOL;
     return output;
@@ -57,13 +58,10 @@ Message.prototype.marshall = function () {
  * @returns void
  */
 Message.prototype.unmarshall = function (data) {
+    var key, line = 0;
     this.lines = data.split(this.EOL);
-    for (line in this.lines) {
+    for (; line < this.lines.length; line = line + 1) {
         key = this.lines[line].split(":");
-        /* XXX This should not be needed... */
-        if (typeof(key[1]) === 'undefined') {
-            continue;
-        }
         this.set(
             key[0].replace(/-/, '_').toLowerCase(),
             key[1].replace(/^\s+/g, '').replace(/\s+$/g, '')
@@ -77,7 +75,7 @@ Message.prototype.unmarshall = function (data) {
  * @param {String} value The value for the property.
  * @returns void
  */
-Message.prototype.set = function(name, value) {
+Message.prototype.set = function (name, value) {
     this[name] = value;
 };
 
@@ -85,7 +83,7 @@ Message.prototype.set = function(name, value) {
  * Returns the value for the given Message property.
  * @returns {String}
  */
-Message.prototype.get = function(name) {
+Message.prototype.get = function (name) {
     return this[name];
 };
 

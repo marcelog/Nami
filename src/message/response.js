@@ -40,7 +40,7 @@ function Response(data) {
 	Response.super_.call(this);
     this.unmarshall(data);
     this.events = [];
-};
+}
 util.inherits(Response, message.Message);
 exports.Response = Response;
 

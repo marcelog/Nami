@@ -38,7 +38,7 @@ function Action(name) {
     this.id = new Date().getTime();
     this.set('ActionID', this.id);
     this.set('Action', name);
-};
+}
 
 /**
  * Login Action.
@@ -53,7 +53,7 @@ function Login(username, secret) {
     Login.super_.call(this, 'Login');
     this.set('Username', username);
     this.set('Secret', secret );
-};
+}
 /**
  * CoreShowChannels Action.
  * @constructor
@@ -63,7 +63,7 @@ function Login(username, secret) {
  */
 function CoreShowChannels() {
 	CoreShowChannels.super_.call(this, 'CoreShowChannels');
-};
+}
 
 /**
  * Ping Action.
@@ -74,7 +74,7 @@ function CoreShowChannels() {
  */
 function Ping() {
 	Ping.super_.call(this, 'Ping');
-};
+}
 
 /**
  * Hangup Action.
@@ -86,7 +86,7 @@ function Ping() {
  */
 function Hangup() {
 	Ping.super_.call(this, 'Hangup');
-};
+}
 
 /**
  * CoreStatus Action.
@@ -97,7 +97,7 @@ function Hangup() {
  */
 function CoreStatus() {
 	CoreStatus.super_.call(this, 'CoreStatus');
-};
+}
 
 /**
  * Status Action.
@@ -110,7 +110,7 @@ function CoreStatus() {
  */
 function Status() {
 	Status.super_.call(this, 'Status');
-};
+}
 
 /**
  * DahdiShowChannels Action.
@@ -121,7 +121,7 @@ function Status() {
  */
 function DahdiShowChannels() {
 	DahdiShowChannels.super_.call(this, 'DahdiShowChannels');
-};
+}
 
 /**
  * CoreSettings Action.
@@ -132,7 +132,7 @@ function DahdiShowChannels() {
  */
 function CoreSettings() {
 	CoreSettings.super_.call(this, 'CoreSettings');
-};
+}
 
 /**
  * ListCommands Action.
@@ -143,7 +143,7 @@ function CoreSettings() {
  */
 function ListCommands() {
 	ListCommands.super_.call(this, 'ListCommands');
-};
+}
 
 /**
  * Logoff Action.
@@ -154,7 +154,7 @@ function ListCommands() {
  */
 function Logoff() {
 	ListCommands.super_.call(this, 'Logoff');
-};
+}
 
 /**
  * AbsoluteTimeout Action.
@@ -167,7 +167,7 @@ function Logoff() {
  */
 function AbsoluteTimeout() {
 	ListCommands.super_.call(this, 'AbsoluteTimeout');
-};
+}
 
 // Inheritance for this module
 util.inherits(Action, message.Message);
