@@ -83,14 +83,75 @@ function Hangup() {
 	Ping.super_.call(this, 'Hangup');
 };
 
+/**
+ * CoreStatus Action.
+ * @constructor
+ * @see Action(String)
+ * @augments Action
+ */
+function CoreStatus() {
+	CoreStatus.super_.call(this, 'CoreStatus');
+};
+
+/**
+ * Status Action.
+ * @constructor
+ * @see Action(String)
+ * @augments Action
+ */
+function Status() {
+	Status.super_.call(this, 'Status');
+};
+
+/**
+ * DahdiShowChannels Action.
+ * @constructor
+ * @see Action(String)
+ * @augments Action
+ */
+function DahdiShowChannels() {
+	DahdiShowChannels.super_.call(this, 'DahdiShowChannels');
+};
+
+/**
+ * CoreSettings Action.
+ * @constructor
+ * @see Action(String)
+ * @augments Action
+ */
+function CoreSettings() {
+	CoreSettings.super_.call(this, 'CoreSettings');
+};
+
+/**
+ * ListCommands Action.
+ * @constructor
+ * @see Action(String)
+ * @augments Action
+ */
+function ListCommands() {
+	ListCommands.super_.call(this, 'ListCommands');
+};
+
 // Inheritance for this module
 util.inherits(Action, message.Message);
 util.inherits(Login, Action);
 util.inherits(Ping, Action);
 util.inherits(Hangup, Action);
 util.inherits(CoreShowChannels, Action);
+util.inherits(CoreStatus, Action);
+util.inherits(CoreSettings, Action);
+util.inherits(Status, Action);
+util.inherits(DahdiShowChannels, Action);
+util.inherits(ListCommands, Action);
 // Exports for this module
 exports.Login = Login;
 exports.CoreShowChannels = CoreShowChannels;
 exports.Ping = Ping;
 exports.Hangup = Hangup;
+exports.CoreStatus = CoreStatus;
+exports.CoreSettings= CoreSettings;
+exports.Status = Status;
+exports.DahdiShowChannels = DahdiShowChannels;
+exports.ListCommands = ListCommands;
+
