@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - Message</title>
+		<title>JsDoc Reference - Logoff</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -232,24 +232,26 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Class Message
+				Class Logoff
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
 			<p class="description">
 				
+				<br />Extends
+					<a href="../symbols/Action.html">Action</a>.<br />
 				
 			
 				
 				
 				
-					<br /><i>Defined in: </i> <a href="../symbols/src/_export_users_marcelog_src_sts_Nami_src_message_message.js.html">message.js</a>.
+					<br /><i>Defined in: </i> <a href="../symbols/src/_export_users_marcelog_src_sts_Nami_src_message_action.js.html">action.js</a>.
 				
 			</p>
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Message.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Logoff.">
 				<caption>Class Summary</caption>
 				<thead>
 					<tr>
@@ -262,9 +264,9 @@ ul.inheritsList
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/Message.html#constructor">Message</a></b>()
+								<b><a href="../symbols/Logoff.html#constructor">Logoff</a></b>()
 							</div>
-							<div class="description">Base message class.</div>
+							<div class="description">Logoff Action.</div>
 						</td>
 					</tr>
 				</tbody>
@@ -278,57 +280,11 @@ ul.inheritsList
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the methods documented in the class Message.">
-					<caption>Method Summary</caption>
-					<thead>
-						<tr>
-							<th scope="col">Method Attributes</th>
-							<th scope="col">Method Name and Description</th>
-						</tr>
-					</thead>
-					<tbody>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/Message.html#get">get</a></b>(name)
-								</div>
-								<div class="description">Returns the value for the given Message property.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/Message.html#marshall">marshall</a></b>()
-								</div>
-								<div class="description">Used to serialize this message to a text representation understood by
-AMI.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/Message.html#set">set</a></b>(name, value)
-								</div>
-								<div class="description">Call this one to set a property into this message.</div>
-							</td>
-						</tr>
-					
-						<tr>
-							<td class="attributes">&nbsp;</td>
-							<td class="nameDescription">
-								<div class="fixedFont"><b><a href="../symbols/Message.html#unmarshall">unmarshall</a></b>(data)
-								</div>
-								<div class="description">Used to unserialize this message given a text representation understood by AMI.</div>
-							</td>
-						</tr>
-					
-					</tbody>
-				</table>
 				
 				
+				<dl class="inheritsList">
+				<dt>Methods borrowed from class <a href="../symbols/Message.html">Message</a>: </dt><dd><a href="../symbols/Message.html#get">get</a>, <a href="../symbols/Message.html#marshall">marshall</a>, <a href="../symbols/Message.html#set">set</a>, <a href="../symbols/Message.html#unmarshall">unmarshall</a></dd>
+				</dl>
 				
 			
 <!-- ============================== events summary ======================== -->
@@ -342,11 +298,11 @@ AMI.</div>
 				</div>
 				
 				<div class="fixedFont">
-						<b>Message</b>()
+						<b>Logoff</b>()
 				</div>
 				
 				<div class="description">
-					Base message class.
+					Logoff Action.
 					
 				</div>
 				
@@ -359,6 +315,13 @@ AMI.</div>
 					
 					
 					
+					
+						<dl class="detailList">
+						<dt class="heading">See:</dt>
+						
+							<dd><a href="../symbols/Action.html">Action</a>(String)</dd>
+						
+						</dl>
 					
 
 			</div>
@@ -368,182 +331,6 @@ AMI.</div>
 			
 
 <!-- ============================== method details ========================= -->		
-			
-				<div class="sectionTitle">
-					Method Detail
-				</div>
-				
-					<a name="get"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{String}</span>
-					<b>get</b>(name)
-					
-					</div>
-					<div class="description">
-						Returns the value for the given Message property.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<b>name</b>
-									
-								</dt>
-								<dd></dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd><span class="light fixedFont">{String}</span> </dd>
-							
-							</dl>
-						
-						
-						
-
-					<hr />
-				
-					<a name="marshall"> </a>
-					<div class="fixedFont">
-					
-					<span class="light">{String}</span>
-					<b>marshall</b>()
-					
-					</div>
-					<div class="description">
-						Used to serialize this message to a text representation understood by
-AMI. Will return a set of lines delimited by \r\n and the message is delimited by
-\r\n\r\n.
-						
-						
-					</div>
-					
-					
-					
-						
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd><span class="light fixedFont">{String}</span> </dd>
-							
-							</dl>
-						
-						
-						
-
-					<hr />
-				
-					<a name="set"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>set</b>(name, value)
-					
-					</div>
-					<div class="description">
-						Call this one to set a property into this message.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<span class="light fixedFont">{String}</span> <b>name</b>
-									
-								</dt>
-								<dd>The name of the property.</dd>
-							
-								<dt>
-									<span class="light fixedFont">{String}</span> <b>value</b>
-									
-								</dt>
-								<dd>The value for the property.</dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd>void</dd>
-							
-							</dl>
-						
-						
-						
-
-					<hr />
-				
-					<a name="unmarshall"> </a>
-					<div class="fixedFont">
-					
-					
-					<b>unmarshall</b>(data)
-					
-					</div>
-					<div class="description">
-						Used to unserialize this message given a text representation understood by AMI.
-Will split each line by \r\n and extract "key: value" pairs. Each key will be set
-as a property inside this Message object with the corresponding value.
-						
-						
-					</div>
-					
-					
-					
-						
-							<dl class="detailList">
-							<dt class="heading">Parameters:</dt>
-							
-								<dt>
-									<b>data</b>
-									
-								</dt>
-								<dd></dd>
-							
-							</dl>
-						
-						
-						
-						
-						
-							<dl class="detailList">
-							<dt class="heading">Returns:</dt>
-							
-								<dd>void</dd>
-							
-							</dl>
-						
-						
-						
-
-					
-				
 			
 			
 <!-- ============================== event details ========================= -->		

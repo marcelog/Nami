@@ -140,26 +140,50 @@
 <span class='line'>133</span> </span><span class="WHIT">	</span><span class="NAME">ListCommands.super_.call</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'ListCommands'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'>134</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'>135</span> 
-<span class='line'>136</span> </span><span class="COMM">// Inheritance for this module</span><span class="WHIT">
-<span class='line'>137</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">Action</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">message.Message</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>138</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">Login</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>139</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">Ping</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>140</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">Hangup</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>141</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">CoreShowChannels</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>142</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">CoreStatus</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>143</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">CoreSettings</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>144</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">Status</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>145</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">DahdiShowChannels</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>146</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">ListCommands</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>147</span> </span><span class="COMM">// Exports for this module</span><span class="WHIT">
-<span class='line'>148</span> </span><span class="NAME">exports.Login</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Login</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>149</span> </span><span class="NAME">exports.CoreShowChannels</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">CoreShowChannels</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>150</span> </span><span class="NAME">exports.Ping</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Ping</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>151</span> </span><span class="NAME">exports.Hangup</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Hangup</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>152</span> </span><span class="NAME">exports.CoreStatus</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">CoreStatus</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>153</span> </span><span class="NAME">exports.CoreSettings</span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">CoreSettings</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>154</span> </span><span class="NAME">exports.Status</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Status</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>155</span> </span><span class="NAME">exports.DahdiShowChannels</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">DahdiShowChannels</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>156</span> </span><span class="NAME">exports.ListCommands</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">ListCommands</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>157</span> 
-<span class='line'>158</span> </span></pre></body></html>
+<span class='line'>136</span> </span><span class="COMM">/**
+<span class='line'>137</span>  * Logoff Action.
+<span class='line'>138</span>  * @constructor
+<span class='line'>139</span>  * @see Action(String)
+<span class='line'>140</span>  * @augments Action
+<span class='line'>141</span>  */</span><span class="WHIT">
+<span class='line'>142</span> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">Logoff</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>143</span> </span><span class="WHIT">	</span><span class="NAME">ListCommands.super_.call</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'Logoff'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>144</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>145</span> 
+<span class='line'>146</span> </span><span class="COMM">/**
+<span class='line'>147</span>  * AbsoluteTimeout Action.
+<span class='line'>148</span>  * @constructor
+<span class='line'>149</span>  * @see Action(String)
+<span class='line'>150</span>  * @augments Action
+<span class='line'>151</span>  */</span><span class="WHIT">
+<span class='line'>152</span> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">AbsoluteTimeout</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>153</span> </span><span class="WHIT">	</span><span class="NAME">ListCommands.super_.call</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'AbsoluteTimeout'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>154</span> </span><span class="PUNC">}</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>155</span> 
+<span class='line'>156</span> </span><span class="COMM">// Inheritance for this module</span><span class="WHIT">
+<span class='line'>157</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">Action</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">message.Message</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>158</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">Login</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>159</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">Logoff</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>160</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">Ping</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>161</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">Hangup</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>162</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">CoreShowChannels</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>163</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">CoreStatus</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>164</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">CoreSettings</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>165</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">Status</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>166</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">DahdiShowChannels</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>167</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">ListCommands</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>168</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">AbsoluteTimeout</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>169</span> </span><span class="COMM">// Exports for this module</span><span class="WHIT">
+<span class='line'>170</span> </span><span class="NAME">exports.Login</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Login</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>171</span> </span><span class="NAME">exports.Logoff</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Logoff</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>172</span> </span><span class="NAME">exports.CoreShowChannels</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">CoreShowChannels</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>173</span> </span><span class="NAME">exports.Ping</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Ping</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>174</span> </span><span class="NAME">exports.Hangup</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Hangup</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>175</span> </span><span class="NAME">exports.CoreStatus</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">CoreStatus</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>176</span> </span><span class="NAME">exports.CoreSettings</span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">CoreSettings</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>177</span> </span><span class="NAME">exports.Status</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">Status</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>178</span> </span><span class="NAME">exports.DahdiShowChannels</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">DahdiShowChannels</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>179</span> </span><span class="NAME">exports.ListCommands</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">ListCommands</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>180</span> </span><span class="NAME">exports.AbsoluteTimeout</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">AbsoluteTimeout</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>181</span> 
+<span class='line'>182</span> </span></pre></body></html>
