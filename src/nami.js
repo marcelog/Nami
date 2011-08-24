@@ -186,6 +186,8 @@ Nami.prototype.onWelcomeMessage = function (data) {
  * @returns void
  */
 Nami.prototype.close = function () {
+    var self = this;
+    this.send(new action.Logoff(), function () { self.logger.info('Logged out'); });
     this.logger.info('Closing connection');
     this.removeAllListeners();
     this.socket.removeAllListeners();
