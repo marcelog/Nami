@@ -112,10 +112,10 @@ Nami.prototype.onRawResponse = function (response) {
  */
 Nami.prototype.onRawMessage = function (buffer) {
     this.logger.debug('Building raw message: ' + util.inspect(buffer));
-	if (buffer.indexOf('Event: ') != -1) {
+	if (buffer.match(/^Event: /) !== null) {
 		var event = new namiEvents.Event(buffer);
 		this.emit('namiRawEvent', event);
-	} else if (buffer.indexOf('Response: ') != -1) {
+	} else if (buffer.match(/^Response: /) !== null) {
 		var response = new namiResponse.Response(buffer);
 		this.emit('namiRawResponse', response);
 	} else {
@@ -132,13 +132,12 @@ Nami.prototype.onRawMessage = function (buffer) {
  */
 Nami.prototype.onData = function (data) {
     this.logger.debug('Got data: ' + util.inspect(data));
-    while ((theEOM = data.indexOf(this.EOM)) != -1) {
-        this.received = this.received.concat(data.substr(0, theEOM));
-        this.emit('namiRawMessage', this.received);
-        this.received = "";
-        data = data.substr(theEOM + this.EOM.length);
+    this.received = this.received.concat(data);
+    while ((theEOM = this.received.indexOf(this.EOM)) != -1) {
+        var msg = this.received.substr(0, theEOM);
+        this.emit('namiRawMessage', msg);
+        this.received = this.received.substr(theEOM + this.EOM.length);
     }
-    this.received = data;
 };
 /**
  * Called when the connection is established to AMI.
