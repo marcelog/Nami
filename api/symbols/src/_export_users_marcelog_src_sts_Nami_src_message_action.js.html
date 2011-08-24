@@ -106,7 +106,7 @@
 <span class='line'> 99</span>  * @constructor
 <span class='line'>100</span>  * @see Action(String)
 <span class='line'>101</span>  * @augments Action
-<span class='line'>102</span>  * @property {channel} Optional channel to get status from. Do not set this property
+<span class='line'>102</span>  * @property {String} Optional channel to get status from. Do not set this property
 <span class='line'>103</span>  * if you want to get all channels
 <span class='line'>104</span>  */</span><span class="WHIT">
 <span class='line'>105</span> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">Status</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
@@ -158,8 +158,8 @@
 <span class='line'>151</span>  * @constructor
 <span class='line'>152</span>  * @see Action(String)
 <span class='line'>153</span>  * @augments Action
-<span class='line'>154</span>  * @property {channel} Channel to hangup.
-<span class='line'>155</span>  * @property {timeout} Timeout in seconds.
+<span class='line'>154</span>  * @property {String} Channel to hangup.
+<span class='line'>155</span>  * @property {Integer} Timeout in seconds.
 <span class='line'>156</span>  */</span><span class="WHIT">
 <span class='line'>157</span> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">AbsoluteTimeout</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
 <span class='line'>158</span> </span><span class="WHIT">	</span><span class="NAME">ListCommands.super_.call</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'AbsoluteTimeout'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
