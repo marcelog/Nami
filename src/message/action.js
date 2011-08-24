@@ -78,7 +78,7 @@ function Ping() {
  * @constructor
  * @see Action(String)
  * @augments Action
- * @property {channel} Channel to hangup.
+ * @property {String} Channel to hangup.
  */
 function Hangup() {
 	Ping.super_.call(this, 'Hangup');
