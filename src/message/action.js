@@ -78,6 +78,7 @@ function Ping() {
  * @constructor
  * @see Action(String)
  * @augments Action
+ * @property {channel} Channel to hangup.
  */
 function Hangup() {
 	Ping.super_.call(this, 'Hangup');
@@ -98,6 +99,8 @@ function CoreStatus() {
  * @constructor
  * @see Action(String)
  * @augments Action
+ * @property {String} Optional channel to get status from. Do not set this property
+ * if you want to get all channels
  */
 function Status() {
 	Status.super_.call(this, 'Status');
@@ -148,6 +151,8 @@ function Logoff() {
  * @constructor
  * @see Action(String)
  * @augments Action
+ * @property {String} Channel to hangup.
+ * @property {Integer} Timeout in seconds.
  */
 function AbsoluteTimeout() {
 	ListCommands.super_.call(this, 'AbsoluteTimeout');
