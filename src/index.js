@@ -46,13 +46,30 @@ nami.on('namiLoginIncorrect', function () {
 nami.on('namiEvent', function (event) {
     logger.debug('Got Event: ' + util.inspect(event));
 });
+function standardSend(action) {
+    nami.send(action, function(response) {
+        logger.debug(' ---- Response: ' + util.inspect(response));
+    });
+};
+
 nami.on('namiConnected', function (event) {
-    nami.send(new namiLib.Actions.Ping(), function(response) {
-        logger.debug(' ---- Response: ' + util.inspect(response));
-    });
-    nami.send(new namiLib.Actions.CoreShowChannels(), function(response) {
-        logger.debug(' ---- Response: ' + util.inspect(response));
-    });
+    standardSend(new namiLib.Actions.Status());
+    standardSend(new namiLib.Actions.CoreStatus());
+    standardSend(new namiLib.Actions.CoreSettings());
+    standardSend(new namiLib.Actions.Ping());
+    standardSend(new namiLib.Actions.CoreShowChannels());
+    standardSend(new namiLib.Actions.DahdiShowChannels());
+    standardSend(new namiLib.Actions.ListCommands());
+
+    var action = new namiLib.Actions.Hangup();
+    action.channel = "SIP/asdasd";
+    standardSend(action);
+
+    action= new namiLib.Actions.AbsoluteTimeout();
+    action.channel = "SIP/asdasd";
+    action.timeout = "3";
+    standardSend(action);
+    
 });
 nami.open();
 
