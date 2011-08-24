@@ -133,9 +133,30 @@ function ListCommands() {
 	ListCommands.super_.call(this, 'ListCommands');
 };
 
+/**
+ * Logoff Action.
+ * @constructor
+ * @see Action(String)
+ * @augments Action
+ */
+function Logoff() {
+	ListCommands.super_.call(this, 'Logoff');
+};
+
+/**
+ * AbsoluteTimeout Action.
+ * @constructor
+ * @see Action(String)
+ * @augments Action
+ */
+function AbsoluteTimeout() {
+	ListCommands.super_.call(this, 'AbsoluteTimeout');
+};
+
 // Inheritance for this module
 util.inherits(Action, message.Message);
 util.inherits(Login, Action);
+util.inherits(Logoff, Action);
 util.inherits(Ping, Action);
 util.inherits(Hangup, Action);
 util.inherits(CoreShowChannels, Action);
@@ -144,8 +165,10 @@ util.inherits(CoreSettings, Action);
 util.inherits(Status, Action);
 util.inherits(DahdiShowChannels, Action);
 util.inherits(ListCommands, Action);
+util.inherits(AbsoluteTimeout, Action);
 // Exports for this module
 exports.Login = Login;
+exports.Logoff = Logoff;
 exports.CoreShowChannels = CoreShowChannels;
 exports.Ping = Ping;
 exports.Hangup = Hangup;
@@ -154,4 +177,5 @@ exports.CoreSettings= CoreSettings;
 exports.Status = Status;
 exports.DahdiShowChannels = DahdiShowChannels;
 exports.ListCommands = ListCommands;
+exports.AbsoluteTimeout = AbsoluteTimeout;
 
