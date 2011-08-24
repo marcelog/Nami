@@ -46,6 +46,7 @@ function Action(name) {
  * @param {String} username The username. The value of the "Username" key.
  * @param {String} secret The password. The value of the "Secret" key.
  * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Login">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Login</a>.
  * @augments Action
  */
 function Login(username, secret) {
@@ -57,6 +58,7 @@ function Login(username, secret) {
  * CoreShowChannels Action.
  * @constructor
  * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_CoreShowChannels">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_CoreShowChannels</a>.
  * @augments Action
  */
 function CoreShowChannels() {
@@ -67,6 +69,7 @@ function CoreShowChannels() {
  * Ping Action.
  * @constructor
  * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Ping">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Ping</a>.
  * @augments Action
  */
 function Ping() {
@@ -77,6 +80,7 @@ function Ping() {
  * Hangup Action.
  * @constructor
  * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Hangup">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Hangup</a>.
  * @augments Action
  * @property {String} Channel to hangup.
  */
@@ -88,6 +92,7 @@ function Hangup() {
  * CoreStatus Action.
  * @constructor
  * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_CoreStatus">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_CoreStatus</a>.
  * @augments Action
  */
 function CoreStatus() {
@@ -98,6 +103,7 @@ function CoreStatus() {
  * Status Action.
  * @constructor
  * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Status">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Status</a>.
  * @augments Action
  * @property {String} Optional channel to get status from. Do not set this property
  * if you want to get all channels
@@ -110,6 +116,7 @@ function Status() {
  * DahdiShowChannels Action.
  * @constructor
  * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_DAHDIShowChannels">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_DAHDIShowChannels</a>.
  * @augments Action
  */
 function DahdiShowChannels() {
@@ -120,6 +127,7 @@ function DahdiShowChannels() {
  * CoreSettings Action.
  * @constructor
  * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_CoreSettings">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_CoreSettings</a>.
  * @augments Action
  */
 function CoreSettings() {
@@ -130,6 +138,7 @@ function CoreSettings() {
  * ListCommands Action.
  * @constructor
  * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_ListCommands">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_ListCommands</a>.
  * @augments Action
  */
 function ListCommands() {
@@ -140,6 +149,7 @@ function ListCommands() {
  * Logoff Action.
  * @constructor
  * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Logoff">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Logoff</a>.
  * @augments Action
  */
 function Logoff() {
@@ -150,6 +160,7 @@ function Logoff() {
  * AbsoluteTimeout Action.
  * @constructor
  * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_AbsoluteTimeout">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_AbsoluteTimeout</a>.
  * @augments Action
  * @property {String} Channel to hangup.
  * @property {Integer} Timeout in seconds.
