@@ -26,10 +26,10 @@
 
 var net = require('net');
 var events = require('events');
-var action = require('./message/action.js');
-var namiResponse = require('./message/response.js');
+var action = require(__dirname + '/message/action.js');
+var namiResponse = require(__dirname + '/message/response.js');
 var util = require('util');
-var namiEvents = require('./message/event.js');
+var namiEvents = require(__dirname + '/message/event.js');
 var timer = require('timers');
 
 /**

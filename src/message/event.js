@@ -22,7 +22,7 @@
  * @author Marcelo Gornstein - http://marcelog.github.com
  * Website: http://marcelog.github.com/Nami
  */
-message = require('./message.js');
+message = require(__dirname + '/message.js');
 util = require('util');
 
 /**

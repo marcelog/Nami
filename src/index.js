@@ -17,7 +17,7 @@
  *
  */
 var logger = require("log4js").getLogger('Nami.App');
-var namiLib = require("./nami.js");
+var namiLib = require(__dirname + "/nami.js");
 if (process.argv.length !== 6) {
 	logger.fatal("Use: <host> <port> <user> <secret>");
 	process.exit();
