@@ -153,7 +153,7 @@ function ListCommands() {
  * @augments Action
  */
 function Logoff() {
-	ListCommands.super_.call(this, 'Logoff');
+	Logoff.super_.call(this, 'Logoff');
 }
 
 /**
@@ -166,8 +166,55 @@ function Logoff() {
  * @property {Integer} Timeout in seconds.
  */
 function AbsoluteTimeout() {
-	ListCommands.super_.call(this, 'AbsoluteTimeout');
+	AbsoluteTimeout.super_.call(this, 'AbsoluteTimeout');
 }
+
+/**
+ * SIPShowPeer Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_SIPshowpeer">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_SIPshowpeer</a>.
+ * @augments Action
+ * @property {String} SIP peer name
+ */
+function SipShowPeer() {
+	SipShowPeer.super_.call(this, 'SIPshowpeer');
+}
+
+/**
+ * SIPShowRegistry Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_SIPshowregistry">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_SIPshowregistry</a>.
+ * @augments Action
+ */
+function SipShowRegistry() {
+	SipShowRegistry.super_.call(this, 'SIPshowregistry');
+}
+
+/**
+ * SIPQualifyPeer Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_SIPqualifypeer">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_SIPqualifypeer</a>.
+ * @augments Action
+ * @property {String} SIP peer name
+ */
+function SipQualifyPeer() {
+	SipQualifyPeer.super_.call(this, 'SIPqualifypeer');
+}
+
+/**
+ * SIPPeers Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_SIPpeers">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_SIPpeers</a>.
+ * @augments Action
+ */
+function SipPeers() {
+	SipPeers.super_.call(this, 'SIPpeers');
+}
+
 
 // Inheritance for this module
 util.inherits(Action, message.Message);
@@ -182,6 +229,10 @@ util.inherits(Status, Action);
 util.inherits(DahdiShowChannels, Action);
 util.inherits(ListCommands, Action);
 util.inherits(AbsoluteTimeout, Action);
+util.inherits(SipShowPeer, Action);
+util.inherits(SipShowRegistry, Action);
+util.inherits(SipQualifyPeer, Action);
+util.inherits(SipPeers, Action);
 // Exports for this module
 exports.Login = Login;
 exports.Logoff = Logoff;
@@ -194,4 +245,8 @@ exports.Status = Status;
 exports.DahdiShowChannels = DahdiShowChannels;
 exports.ListCommands = ListCommands;
 exports.AbsoluteTimeout = AbsoluteTimeout;
+exports.SipShowPeer = SipShowPeer;
+exports.SipShowRegistry = SipShowRegistry;
+exports.SipQualifyPeer = SipQualifyPeer;
+exports.SipPeers = SipPeers;
 
