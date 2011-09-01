@@ -82,10 +82,10 @@ function Ping() {
  * @see Action(String)
  * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Hangup">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Hangup</a>.
  * @augments Action
- * @property {String} Channel to hangup.
+ * @property {String} Channel Channel to hangup.
  */
 function Hangup() {
-	Ping.super_.call(this, 'Hangup');
+	Hangup.super_.call(this, 'Hangup');
 }
 
 /**
@@ -105,7 +105,7 @@ function CoreStatus() {
  * @see Action(String)
  * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Status">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Status</a>.
  * @augments Action
- * @property {String} Optional channel to get status from. Do not set this property
+ * @property {String} Channel Optional channel to get status from. Do not set this property
  * if you want to get all channels
  */
 function Status() {
@@ -175,7 +175,7 @@ function AbsoluteTimeout() {
  * @see Action(String)
  * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_SIPshowpeer">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_SIPshowpeer</a>.
  * @augments Action
- * @property {String} SIP peer name
+ * @property {String} Peer SIP peer name
  */
 function SipShowPeer() {
 	SipShowPeer.super_.call(this, 'SIPshowpeer');
@@ -198,7 +198,7 @@ function SipShowRegistry() {
  * @see Action(String)
  * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_SIPqualifypeer">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_SIPqualifypeer</a>.
  * @augments Action
- * @property {String} SIP peer name
+ * @property {String} Peer SIP peer name
  */
 function SipQualifyPeer() {
 	SipQualifyPeer.super_.call(this, 'SIPqualifypeer');
@@ -215,38 +215,58 @@ function SipPeers() {
 	SipPeers.super_.call(this, 'SIPpeers');
 }
 
+/**
+ * AgentLogoff Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_AgentLogoff">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_AgentLogoff</a>.
+ * @property {String} Agent Agent name
+ * @property {String} Soft Set to true to not hangup existing calls
+ * @augments Action
+ */
+function AgentLogoff() {
+	AgentLogoff.super_.call(this, 'AgentLogoff');
+}
+
+/**
+ * Agents Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Agents">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Agents</a>.
+ * @augments Action
+ */
+function Agents() {
+	Agents.super_.call(this, 'Agents');
+}
 
 // Inheritance for this module
 util.inherits(Action, message.Message);
-util.inherits(Login, Action);
-util.inherits(Logoff, Action);
-util.inherits(Ping, Action);
-util.inherits(Hangup, Action);
-util.inherits(CoreShowChannels, Action);
-util.inherits(CoreStatus, Action);
-util.inherits(CoreSettings, Action);
-util.inherits(Status, Action);
-util.inherits(DahdiShowChannels, Action);
-util.inherits(ListCommands, Action);
-util.inherits(AbsoluteTimeout, Action);
-util.inherits(SipShowPeer, Action);
-util.inherits(SipShowRegistry, Action);
-util.inherits(SipQualifyPeer, Action);
-util.inherits(SipPeers, Action);
-// Exports for this module
-exports.Login = Login;
-exports.Logoff = Logoff;
-exports.CoreShowChannels = CoreShowChannels;
-exports.Ping = Ping;
-exports.Hangup = Hangup;
-exports.CoreStatus = CoreStatus;
-exports.CoreSettings= CoreSettings;
-exports.Status = Status;
-exports.DahdiShowChannels = DahdiShowChannels;
-exports.ListCommands = ListCommands;
-exports.AbsoluteTimeout = AbsoluteTimeout;
-exports.SipShowPeer = SipShowPeer;
-exports.SipShowRegistry = SipShowRegistry;
-exports.SipQualifyPeer = SipQualifyPeer;
-exports.SipPeers = SipPeers;
+(function() {
+    var i;
+    var actions = [
+        Login,
+        Logoff,
+        Ping,
+        Hangup,
+        CoreShowChannels,
+        CoreStatus,
+        CoreSettings,
+        Status,
+        DahdiShowChannels,
+        ListCommands,
+        AbsoluteTimeout,
+        SipShowPeer,
+        SipShowRegistry,
+        SipQualifyPeer,
+        SipQualifyPeer,
+        SipPeers,
+        AgentLogoff,
+        Agents
+    ];
+    for (i in actions) {
+        util.inherits(actions[i], Action);
+        exports[actions[i].name] = actions[i];
+    }
+})();
+
 
