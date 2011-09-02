@@ -76,7 +76,11 @@
 <span class='line'> 69</span> </span><span class="WHIT">    </span><span class="NAME">action.channel</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="STRN">"SIP/asdasd"</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 70</span> </span><span class="WHIT">    </span><span class="NAME">action.timeout</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="STRN">"3"</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'> 71</span> </span><span class="WHIT">    </span><span class="NAME">standardSend</span><span class="PUNC">(</span><span class="NAME">action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 72</span> </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 73</span> </span><span class="NAME">nami.open</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'> 74</span> 
-<span class='line'> 75</span> </span></pre></body></html>
+<span class='line'> 72</span> 
+<span class='line'> 73</span> </span><span class="WHIT">    </span><span class="NAME">action</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="KEYW">new</span><span class="WHIT"> </span><span class="NAME">namiLib.Actions.Command</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 74</span> </span><span class="WHIT">    </span><span class="NAME">action.command</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="STRN">"core show channels"</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 75</span> </span><span class="WHIT">    </span><span class="NAME">standardSend</span><span class="PUNC">(</span><span class="NAME">action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 76</span> </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 77</span> </span><span class="NAME">nami.open</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'> 78</span> 
+<span class='line'> 79</span> </span></pre></body></html>
