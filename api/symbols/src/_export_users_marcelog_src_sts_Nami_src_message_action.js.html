@@ -298,39 +298,93 @@
 <span class='line'>291</span> </span><span class="WHIT">	</span><span class="NAME">CreateConfig.super_.call</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'CreateConfig'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'>292</span> </span><span class="PUNC">}</span><span class="WHIT">
 <span class='line'>293</span> 
-<span class='line'>294</span> </span><span class="COMM">// Inheritance for this module</span><span class="WHIT">
-<span class='line'>295</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">Action</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">message.Message</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>296</span> </span><span class="PUNC">(</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'>297</span> </span><span class="WHIT">    </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">i</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>298</span> </span><span class="WHIT">    </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">actions</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="WHIT">
-<span class='line'>299</span> </span><span class="WHIT">        </span><span class="NAME">Login</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>300</span> </span><span class="WHIT">        </span><span class="NAME">Logoff</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>301</span> </span><span class="WHIT">        </span><span class="NAME">Ping</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>302</span> </span><span class="WHIT">        </span><span class="NAME">Hangup</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>303</span> </span><span class="WHIT">        </span><span class="NAME">CoreShowChannels</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>304</span> </span><span class="WHIT">        </span><span class="NAME">CoreStatus</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>305</span> </span><span class="WHIT">        </span><span class="NAME">CoreSettings</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>306</span> </span><span class="WHIT">        </span><span class="NAME">Status</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>307</span> </span><span class="WHIT">        </span><span class="NAME">DahdiShowChannels</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>308</span> </span><span class="WHIT">        </span><span class="NAME">ListCommands</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>309</span> </span><span class="WHIT">        </span><span class="NAME">AbsoluteTimeout</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>310</span> </span><span class="WHIT">        </span><span class="NAME">SipShowPeer</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>311</span> </span><span class="WHIT">        </span><span class="NAME">SipShowRegistry</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>312</span> </span><span class="WHIT">        </span><span class="NAME">SipQualifyPeer</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>313</span> </span><span class="WHIT">        </span><span class="NAME">SipQualifyPeer</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>314</span> </span><span class="WHIT">        </span><span class="NAME">SipPeers</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>315</span> </span><span class="WHIT">        </span><span class="NAME">AgentLogoff</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>316</span> </span><span class="WHIT">        </span><span class="NAME">Agents</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>317</span> </span><span class="WHIT">        </span><span class="NAME">AttendedTransfer</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>318</span> </span><span class="WHIT">        </span><span class="NAME">ChangeMonitor</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>319</span> </span><span class="WHIT">        </span><span class="NAME">Command</span><span class="PUNC">,</span><span class="WHIT">
-<span class='line'>320</span> </span><span class="WHIT">        </span><span class="NAME">CreateConfig</span><span class="WHIT">
-<span class='line'>321</span> </span><span class="WHIT">    </span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>322</span> </span><span class="WHIT">    </span><span class="KEYW">for</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">i</span><span class="WHIT"> </span><span class="KEYW">in</span><span class="WHIT"> </span><span class="NAME">actions</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
-<span class='line'>323</span> </span><span class="WHIT">        </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">actions</span><span class="PUNC">[</span><span class="NAME">i</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>324</span> </span><span class="WHIT">        </span><span class="NAME">exports</span><span class="PUNC">[</span><span class="NAME">actions</span><span class="PUNC">[</span><span class="NAME">i</span><span class="PUNC">]</span><span class="PUNC">.</span><span class="NAME">name</span><span class="PUNC">]</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">actions</span><span class="PUNC">[</span><span class="NAME">i</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>325</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="WHIT">
-<span class='line'>326</span> </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>327</span> 
-<span class='line'>328</span> 
-<span class='line'>329</span> </span></pre></body></html>
+<span class='line'>294</span> </span><span class="COMM">/**
+<span class='line'>295</span>  * DahdiDialOffHook Action.
+<span class='line'>296</span>  * @constructor
+<span class='line'>297</span>  * @see Action(String)
+<span class='line'>298</span>  * @see See &lt;a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_DAHDIDialOffhook">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_DAHDIDialOffhook&lt;/a>.
+<span class='line'>299</span>  * @property {String} DAHDIChannel Dahdi Channel to use
+<span class='line'>300</span>  * @property {String} Number Number to dial
+<span class='line'>301</span>  * @augments Action
+<span class='line'>302</span>  */</span><span class="WHIT">
+<span class='line'>303</span> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">DahdiDialOffHook</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>304</span> </span><span class="WHIT">	</span><span class="NAME">DahdiDialOffHook.super_.call</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'DahdiDialOffHook'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>305</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>306</span> 
+<span class='line'>307</span> </span><span class="COMM">/**
+<span class='line'>308</span>  * DahdiDndOff Action.
+<span class='line'>309</span>  * @constructor
+<span class='line'>310</span>  * @see Action(String)
+<span class='line'>311</span>  * @see See &lt;a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_DAHDIDNDOff">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_DAHDIDNDOff&lt;/a>.
+<span class='line'>312</span>  * @property {String} DAHDIChannel Dahdi Channel
+<span class='line'>313</span>  * @augments Action
+<span class='line'>314</span>  */</span><span class="WHIT">
+<span class='line'>315</span> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">DahdiDndOff</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>316</span> </span><span class="WHIT">	</span><span class="NAME">DahdiDndOff.super_.call</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'DahdiDndOff'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>317</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>318</span> 
+<span class='line'>319</span> </span><span class="COMM">/**
+<span class='line'>320</span>  * DahdiDndOn Action.
+<span class='line'>321</span>  * @constructor
+<span class='line'>322</span>  * @see Action(String)
+<span class='line'>323</span>  * @see See &lt;a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_DAHDIDNDOn">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_DAHDIDNDOn&lt;/a>.
+<span class='line'>324</span>  * @property {String} DAHDIChannel Dahdi Channel
+<span class='line'>325</span>  * @augments Action
+<span class='line'>326</span>  */</span><span class="WHIT">
+<span class='line'>327</span> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">DahdiDndOn</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>328</span> </span><span class="WHIT">	</span><span class="NAME">DahdiDndOn.super_.call</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'DahdiDndOn'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>329</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>330</span> 
+<span class='line'>331</span> </span><span class="COMM">/**
+<span class='line'>332</span>  * DahdiHangup Action.
+<span class='line'>333</span>  * @constructor
+<span class='line'>334</span>  * @see Action(String)
+<span class='line'>335</span>  * @see See &lt;a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_DAHDIHangup">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_DAHDIHangup&lt;/a>.
+<span class='line'>336</span>  * @property {String} DAHDIChannel Dahdi Channel
+<span class='line'>337</span>  * @augments Action
+<span class='line'>338</span>  */</span><span class="WHIT">
+<span class='line'>339</span> </span><span class="KEYW">function</span><span class="WHIT"> </span><span class="NAME">DahdiHangup</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>340</span> </span><span class="WHIT">	</span><span class="NAME">DahdiHangup.super_.call</span><span class="PUNC">(</span><span class="KEYW">this</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="STRN">'DahdiHangup'</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>341</span> </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>342</span> 
+<span class='line'>343</span> 
+<span class='line'>344</span> </span><span class="COMM">// Inheritance for this module</span><span class="WHIT">
+<span class='line'>345</span> </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">Action</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">message.Message</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>346</span> </span><span class="PUNC">(</span><span class="KEYW">function</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>347</span> </span><span class="WHIT">    </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">i</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>348</span> </span><span class="WHIT">    </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">actions</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="PUNC">[</span><span class="WHIT">
+<span class='line'>349</span> </span><span class="WHIT">        </span><span class="NAME">Login</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>350</span> </span><span class="WHIT">        </span><span class="NAME">Logoff</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>351</span> </span><span class="WHIT">        </span><span class="NAME">Ping</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>352</span> </span><span class="WHIT">        </span><span class="NAME">Hangup</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>353</span> </span><span class="WHIT">        </span><span class="NAME">CoreShowChannels</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>354</span> </span><span class="WHIT">        </span><span class="NAME">CoreStatus</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>355</span> </span><span class="WHIT">        </span><span class="NAME">CoreSettings</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>356</span> </span><span class="WHIT">        </span><span class="NAME">Status</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>357</span> </span><span class="WHIT">        </span><span class="NAME">DahdiShowChannels</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>358</span> </span><span class="WHIT">        </span><span class="NAME">ListCommands</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>359</span> </span><span class="WHIT">        </span><span class="NAME">AbsoluteTimeout</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>360</span> </span><span class="WHIT">        </span><span class="NAME">SipShowPeer</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>361</span> </span><span class="WHIT">        </span><span class="NAME">SipShowRegistry</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>362</span> </span><span class="WHIT">        </span><span class="NAME">SipQualifyPeer</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>363</span> </span><span class="WHIT">        </span><span class="NAME">SipQualifyPeer</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>364</span> </span><span class="WHIT">        </span><span class="NAME">SipPeers</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>365</span> </span><span class="WHIT">        </span><span class="NAME">AgentLogoff</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>366</span> </span><span class="WHIT">        </span><span class="NAME">Agents</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>367</span> </span><span class="WHIT">        </span><span class="NAME">AttendedTransfer</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>368</span> </span><span class="WHIT">        </span><span class="NAME">ChangeMonitor</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>369</span> </span><span class="WHIT">        </span><span class="NAME">Command</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>370</span> </span><span class="WHIT">        </span><span class="NAME">CreateConfig</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>371</span> </span><span class="WHIT">        </span><span class="NAME">DahdiDialOffHook</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>372</span> </span><span class="WHIT">        </span><span class="NAME">DahdiDndOff</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>373</span> </span><span class="WHIT">        </span><span class="NAME">DahdiDndOn</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>374</span> </span><span class="WHIT">        </span><span class="NAME">DahdiHangup</span><span class="WHIT">
+<span class='line'>375</span> </span><span class="WHIT">    </span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>376</span> </span><span class="WHIT">    </span><span class="KEYW">for</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">i</span><span class="WHIT"> </span><span class="KEYW">in</span><span class="WHIT"> </span><span class="NAME">actions</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>377</span> </span><span class="WHIT">        </span><span class="NAME">util.inherits</span><span class="PUNC">(</span><span class="NAME">actions</span><span class="PUNC">[</span><span class="NAME">i</span><span class="PUNC">]</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">Action</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>378</span> </span><span class="WHIT">        </span><span class="NAME">exports</span><span class="PUNC">[</span><span class="NAME">actions</span><span class="PUNC">[</span><span class="NAME">i</span><span class="PUNC">]</span><span class="PUNC">.</span><span class="NAME">name</span><span class="PUNC">]</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">actions</span><span class="PUNC">[</span><span class="NAME">i</span><span class="PUNC">]</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>379</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>380</span> </span><span class="PUNC">}</span><span class="PUNC">)</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>381</span> 
+<span class='line'>382</span> 
+<span class='line'>383</span> </span></pre></body></html>
