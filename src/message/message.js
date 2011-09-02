@@ -58,13 +58,26 @@ Message.prototype.marshall = function () {
  * @returns void
  */
 Message.prototype.unmarshall = function (data) {
-    var key, line = 0;
+    var value, parts, key, line = 0;
     this.lines = data.split(this.EOL);
     for (; line < this.lines.length; line = line + 1) {
-        key = this.lines[line].split(":");
+        parts = this.lines[line].split(":");
+        key = parts.shift();
+        /*
+         * This is so, because if this message is a response, specifically a response to
+         * something like "ListCommands", the value of the keys, can contain the semicolon
+         * ":", which happens to be token to be used to split keys and values. AMI does not
+         * specify anything like an escape character, so we cant distinguis wether we're
+         * dealing with a multi semicolon line or a standard key/value line.
+         */
+        if (parts.length > 1) {
+            value = parts.join(':');
+        } else if (parts.length === 1) {
+            value = parts[0];
+        }
         this.set(
-            key[0].replace(/-/, '_').toLowerCase(),
-            key[1].replace(/^\s+/g, '').replace(/\s+$/g, '')
+            key.replace(/-/, '_').toLowerCase(),
+            value.replace(/^\s+/g, '').replace(/\s+$/g, '')
         );
     }
 };

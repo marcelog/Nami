@@ -291,6 +291,56 @@ function CreateConfig() {
 	CreateConfig.super_.call(this, 'CreateConfig');
 }
 
+/**
+ * DahdiDialOffHook Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_DAHDIDialOffhook">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_DAHDIDialOffhook</a>.
+ * @property {String} DAHDIChannel Dahdi Channel to use
+ * @property {String} Number Number to dial
+ * @augments Action
+ */
+function DahdiDialOffHook() {
+	DahdiDialOffHook.super_.call(this, 'DahdiDialOffHook');
+}
+
+/**
+ * DahdiDndOff Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_DAHDIDNDOff">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_DAHDIDNDOff</a>.
+ * @property {String} DAHDIChannel Dahdi Channel
+ * @augments Action
+ */
+function DahdiDndOff() {
+	DahdiDndOff.super_.call(this, 'DahdiDndOff');
+}
+
+/**
+ * DahdiDndOn Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_DAHDIDNDOn">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_DAHDIDNDOn</a>.
+ * @property {String} DAHDIChannel Dahdi Channel
+ * @augments Action
+ */
+function DahdiDndOn() {
+	DahdiDndOn.super_.call(this, 'DahdiDndOn');
+}
+
+/**
+ * DahdiHangup Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_DAHDIHangup">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_DAHDIHangup</a>.
+ * @property {String} DAHDIChannel Dahdi Channel
+ * @augments Action
+ */
+function DahdiHangup() {
+	DahdiHangup.super_.call(this, 'DahdiHangup');
+}
+
+
 // Inheritance for this module
 util.inherits(Action, message.Message);
 (function() {
@@ -317,7 +367,11 @@ util.inherits(Action, message.Message);
         AttendedTransfer,
         ChangeMonitor,
         Command,
-        CreateConfig
+        CreateConfig,
+        DahdiDialOffHook,
+        DahdiDndOff,
+        DahdiDndOn,
+        DahdiHangup
     ];
     for (i in actions) {
         util.inherits(actions[i], Action);
