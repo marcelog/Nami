@@ -239,6 +239,58 @@ function Agents() {
 	Agents.super_.call(this, 'Agents');
 }
 
+/**
+ * AttendedTransfer Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Atxfer">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Atxfer</a>.
+ * @property {String} Channel Channel to transfer
+ * @property {String} Exten Extension to transfer to
+ * @property {String} Context Context to transfer to
+ * @property {String} Priority Priority to transfer to
+ * @augments Action
+ */
+function AttendedTransfer() {
+	AttendedTransfer.super_.call(this, 'Atxfer');
+}
+
+/**
+ * ChangeMonitor Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_ChangeMonitor">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_ChangeMonitor</a>.
+ * @property {String} Channel Channel to monitor
+ * @property {String} File File where to save the audio
+ * @augments Action
+ */
+function ChangeMonitor() {
+	ChangeMonitor.super_.call(this, 'ChangeMonitor');
+}
+
+/**
+ * Command Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Command">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Command</a>.
+ * @property {String} Command Command to send
+ * @augments Action
+ */
+function Command() {
+	Command.super_.call(this, 'Command');
+}
+
+/**
+ * CreateConfig Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_CreateConfig">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_CreateConfig</a>.
+ * @property {String} Filename Filename to create
+ * @augments Action
+ */
+function CreateConfig() {
+	CreateConfig.super_.call(this, 'CreateConfig');
+}
+
 // Inheritance for this module
 util.inherits(Action, message.Message);
 (function() {
@@ -261,7 +313,11 @@ util.inherits(Action, message.Message);
         SipQualifyPeer,
         SipPeers,
         AgentLogoff,
-        Agents
+        Agents,
+        AttendedTransfer,
+        ChangeMonitor,
+        Command,
+        CreateConfig
     ];
     for (i in actions) {
         util.inherits(actions[i], Action);

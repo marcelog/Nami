@@ -69,6 +69,10 @@ nami.on('namiConnected', function (event) {
     action.channel = "SIP/asdasd";
     action.timeout = "3";
     standardSend(action);
+
+    action = new namiLib.Actions.Command();
+    action.command = "core show channels";
+    standardSend(action);
 });
 nami.open();
 
