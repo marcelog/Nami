@@ -4,6 +4,7 @@ Introduction
 ------------
 
 For API and docs, check out the homepage at http://marcelog.github.com/Nami
+A very similar, PHP alternative, is available at http://marcelog.github.com/PAMI
 
 Nami by itself is just a library that allows your nodejs code to communicate to an
 Asterisk Manager Interface (AMI). However, it includes a full application useful to
