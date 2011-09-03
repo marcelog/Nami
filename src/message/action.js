@@ -569,6 +569,73 @@ function Park() {
 function ParkedCalls() {
 	ParkedCalls.super_.call(this, 'ParkedCalls');
 }
+
+/**
+ * Monitor Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Monitor">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Monitor</a>.
+ * @property {String} Channel Channel name to park
+ * @property {String} Filename Path where to save the audio
+ * @augments Action
+ */
+function Monitor() {
+	Monitor.super_.call(this, 'Monitor');
+    this.format = 'wav';
+    this.mix = 'true';
+}
+
+/**
+ * ModuleCheck Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_ModuleCheck">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_ModuleCheck</a>.
+ * @property {String} Module Module name, including .so
+ * @augments Action
+ */
+function ModuleCheck() {
+	ModuleCheck.super_.call(this, 'ModuleCheck');
+}
+
+/**
+ * ModuleLoad Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_ModuleLoad">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_ModuleLoad</a>.
+ * @property {String} Module Module name, including .so
+ * @augments Action
+ */
+function ModuleLoad() {
+	ModuleLoad.super_.call(this, 'ModuleLoad');
+    this.LoadType = 'load';
+}
+
+/**
+ * ModuleUnload Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_ModuleUnload">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_ModuleUnload</a>.
+ * @property {String} Module Module name, including .so
+ * @augments Action
+ */
+function ModuleUnload() {
+	ModuleUnload.super_.call(this, 'ModuleUnload');
+    this.LoadType = 'unload';
+}
+
+/**
+ * ModuleReload Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_ModuleReload">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_ModuleReload</a>.
+ * @property {String} Module Module name, including .so
+ * @augments Action
+ */
+function ModuleReload() {
+	ModuleReload.super_.call(this, 'ModuleReload');
+    this.LoadType = 'reload';
+}
+
 // Inheritance for this module
 util.inherits(Action, message.Message);
 (function() {
@@ -615,7 +682,12 @@ util.inherits(Action, message.Message);
         Reload,
         PlayDtmf,
         Park,
-        ParkedCalls
+        ParkedCalls,
+        Monitor,
+        ModuleCheck,
+        ModuleLoad,
+        ModuleUnload,
+        ModuleReload
     ];
     for (i in actions) {
         util.inherits(actions[i], Action);
