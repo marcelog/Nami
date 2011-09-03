@@ -448,7 +448,8 @@ function GetConfigJson() {
  * @constructor
  * @see Action(String)
  * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_GetVar">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_GetVar</a>.
- * @property {String} Filename File to get configuration from.
+ * @property {String} Variable Variable Name
+ * @property {String} Channel Optional Channel name.
  * @augments Action
  */
 function GetVar() {
