@@ -505,7 +505,70 @@ function LocalOptimizeAway() {
 	LocalOptimizeAway.super_.call(this, 'LocalOptimizeAway');
 }
 
+/**
+ * SetVar Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_SetVar">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_SetVar</a>.
+ * @property {String} Variable Variable Name
+ * @property {String} Value Variable Value
+ * @property {String} Channel Optional Channel name.
+ * @augments Action
+ */
+function SetVar() {
+	SetVar.super_.call(this, 'SetVar');
+}
 
+/**
+ * Reload Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Reload">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Reload</a>.
+ * @property {String} Module Optional module name
+ * @augments Action
+ */
+function Reload() {
+	Reload.super_.call(this, 'Reload');
+}
+
+/**
+ * PlayDtmf Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_PlayDtmf">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_PlayDtmf</a>.
+ * @property {String} Channel Channel where to play the dtmf
+ * @property {String} Digit DTMF digit to play
+ * @augments Action
+ */
+function PlayDtmf() {
+	PlayDtmf.super_.call(this, 'PlayDtmf');
+}
+
+/**
+ * Park Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Park">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Park</a>.
+ * @property {String} Channel Channel name to park
+ * @property {String} Channel2 Channel to announce park info to (and return to if timeout)
+ * @property {String} Timeout Optional number of milliseconds to wait before callback
+ * @property {String} Parkinglot Optional parking lot to park channel in
+ * @augments Action
+ */
+function Park() {
+	Park.super_.call(this, 'Park');
+}
+
+/**
+ * ParkedCalls Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_ParkedCalls">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_ParkedCalls</a>.
+ * @augments Action
+ */
+function ParkedCalls() {
+	ParkedCalls.super_.call(this, 'ParkedCalls');
+}
 // Inheritance for this module
 util.inherits(Action, message.Message);
 (function() {
@@ -548,7 +611,11 @@ util.inherits(Action, message.Message);
         JabberSend,
         ListCategories,
         PauseMonitor,
-        LocalOptimizeAway
+        LocalOptimizeAway,
+        Reload,
+        PlayDtmf,
+        Park,
+        ParkedCalls
     ];
     for (i in actions) {
         util.inherits(actions[i], Action);

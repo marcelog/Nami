@@ -135,7 +135,14 @@ ExtensionState
 GetConfig
 GetConfigJson
 GetVar
+SetVar
 JabberSend
 ListCategories
 PauseMonitor
 LocalOptimizeAway
+Reload
+PlayDtmf
+Park
+ParkedCalls
+
+
