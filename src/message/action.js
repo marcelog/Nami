@@ -417,7 +417,43 @@ function ExtensionState() {
 	ExtensionState.super_.call(this, 'ExtensionState');
 }
 
+/**
+ * GetConfig Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_GetConfig">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_GetConfig</a>.
+ * @property {String} Filename File to get configuration from.
+ * @property {String} Category Optional category to retrieve.
+ * @augments Action
+ */
+function GetConfig() {
+	GetConfig.super_.call(this, 'GetConfig');
+}
 
+/**
+ * GetConfigJson Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_GetConfigJson">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_GetConfigJson</a>.
+ * @property {String} Filename File to get configuration from.
+ * @property {String} Category Optional category to retrieve.
+ * @augments Action
+ */
+function GetConfigJson() {
+	GetConfigJson.super_.call(this, 'GetConfigJson');
+}
+
+/**
+ * GetVar Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_GetVar">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_GetVar</a>.
+ * @property {String} Filename File to get configuration from.
+ * @augments Action
+ */
+function GetVar() {
+	GetVar.super_.call(this, 'GetVar');
+}
 // Inheritance for this module
 util.inherits(Action, message.Message);
 (function() {
@@ -437,7 +473,6 @@ util.inherits(Action, message.Message);
         SipShowPeer,
         SipShowRegistry,
         SipQualifyPeer,
-        SipQualifyPeer,
         SipPeers,
         AgentLogoff,
         Agents,
@@ -454,7 +489,10 @@ util.inherits(Action, message.Message);
         DbDeltree,
         DbGet,
         DbPut,
-        ExtensionState
+        ExtensionState,
+        GetConfig,
+        GetConfigJson,
+        GetVar,
     ];
     for (i in actions) {
         util.inherits(actions[i], Action);

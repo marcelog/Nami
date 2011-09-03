@@ -78,6 +78,14 @@ nami.on('namiConnected', function (event) {
     action.exten = 1;
     action.context = "default";
     standardSend(action);
+
+    action = new namiLib.Actions.GetConfig();
+    action.filename = "sip.conf";
+    standardSend(action);
+
+    action = new namiLib.Actions.GetConfigJson();
+    action.filename = "sip.conf";
+    standardSend(action);
 });
 nami.open();
 

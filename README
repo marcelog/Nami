@@ -114,7 +114,6 @@ AbsoluteTimeout
 SipShowPeer
 SipShowRegistry
 SipQualifyPeer
-SipQualifyPeer
 SipPeers
 AgentLogoff
 Agents
@@ -132,4 +131,7 @@ DbDeltree
 DbGet
 DbPut
 ExtensionState
+GetConfig
+GetConfigJson
+GetVar
 
