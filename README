@@ -135,4 +135,7 @@ ExtensionState
 GetConfig
 GetConfigJson
 GetVar
-
+JabberSend
+ListCategories
+PauseMonitor
+LocalOptimizeAway

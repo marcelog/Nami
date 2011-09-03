@@ -454,6 +454,58 @@ function GetConfigJson() {
 function GetVar() {
 	GetVar.super_.call(this, 'GetVar');
 }
+
+/**
+ * JabberSend Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_JabberSend">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_JabberSend</a>.
+ * @property {String} Jabber Client or transport Asterisk uses to connect to JABBER
+ * @property {String} JID XMPP/Jabber JID (Name) of recipient
+ * @property {String} Message Message to be sent to the buddy
+ * @augments Action
+ */
+function JabberSend() {
+	JabberSend.super_.call(this, 'JabberSend');
+}
+
+/**
+ * ListCategories Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_ListCategories">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_ListCategories</a>.
+ * @property {String} Filename File to get categories from.
+ * @augments Action
+ */
+function ListCategories() {
+	ListCategories.super_.call(this, 'ListCategories');
+}
+
+/**
+ * PauseMonitor Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_PauseMonitor">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_PauseMonitor</a>.
+ * @property {String} Channel Pause monitor on this channel
+ * @augments Action
+ */
+function PauseMonitor() {
+	PauseMonitor.super_.call(this, 'PauseMonitor');
+}
+
+/**
+ * LocalOptimizeAway Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_LocalOptimizeAway">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_LocalOptimizeAway</a>.
+ * @property {String} Channel Channel
+ * @augments Action
+ */
+function LocalOptimizeAway() {
+	LocalOptimizeAway.super_.call(this, 'LocalOptimizeAway');
+}
+
+
 // Inheritance for this module
 util.inherits(Action, message.Message);
 (function() {
@@ -493,6 +545,10 @@ util.inherits(Action, message.Message);
         GetConfig,
         GetConfigJson,
         GetVar,
+        JabberSend,
+        ListCategories,
+        PauseMonitor,
+        LocalOptimizeAway
     ];
     for (i in actions) {
         util.inherits(actions[i], Action);
