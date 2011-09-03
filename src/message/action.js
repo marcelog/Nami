@@ -436,7 +436,6 @@ function GetConfig() {
  * @see Action(String)
  * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_GetConfigJson">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_GetConfigJson</a>.
  * @property {String} Filename File to get configuration from.
- * @property {String} Category Optional category to retrieve.
  * @augments Action
  */
 function GetConfigJson() {
