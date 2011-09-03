@@ -2,6 +2,9 @@ NOTE: This is an experimental work. It works, but it's still experimental. I'll 
 
 Introduction
 ------------
+
+For API and docs, check out the homepage at http://marcelog.github.com/Nami
+
 Nami by itself is just a library that allows your nodejs code to communicate to an
 Asterisk Manager Interface (AMI). However, it includes a full application useful to
 monitor an asterisk installation.
@@ -94,4 +97,39 @@ A Better example
 See src/index.js for a better example.
 
 That's about it.
+
+Supported Actions (Check the api for details)
+---------------------------------------------
+Login
+Logoff
+Ping
+Hangup
+CoreShowChannels
+CoreStatus
+CoreSettings
+Status
+DahdiShowChannels
+ListCommands
+AbsoluteTimeout
+SipShowPeer
+SipShowRegistry
+SipQualifyPeer
+SipQualifyPeer
+SipPeers
+AgentLogoff
+Agents
+AttendedTransfer
+ChangeMonitor
+Command
+CreateConfig
+DahdiDialOffHook
+DahdiDndOff
+DahdiDndOn
+DahdiHangup
+DahdiRestart
+DbDel
+DbDeltree
+DbGet
+DbPut
+ExtensionState
 
