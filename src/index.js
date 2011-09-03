@@ -73,6 +73,11 @@ nami.on('namiConnected', function (event) {
     action = new namiLib.Actions.Command();
     action.command = "core show channels";
     standardSend(action);
+
+    action = new namiLib.Actions.ExtensionState();
+    action.exten = 1;
+    action.context = "default";
+    standardSend(action);
 });
 nami.open();
 

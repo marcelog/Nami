@@ -340,6 +340,83 @@ function DahdiHangup() {
 	DahdiHangup.super_.call(this, 'DahdiHangup');
 }
 
+/**
+ * DahdiRestart Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_DAHDIRestart">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_DAHDIRestart</a>.
+ * @augments Action
+ */
+function DahdiRestart() {
+	DahdiRestart.super_.call(this, 'DahdiRestart');
+}
+
+/**
+ * DbDel Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_DbDel">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_DbDel</a>.
+ * @property {String} Family Key Family
+ * @property {String} Key Key Name
+ * @augments Action
+ */
+function DbDel() {
+	DbDel.super_.call(this, 'DbDel');
+}
+
+/**
+ * DbDeltree Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_DbDeltree">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_DbDeltree</a>.
+ * @property {String} Family Key Family
+ * @property {String} Key Optional Key Name
+ * @augments Action
+ */
+function DbDeltree() {
+	DbDeltree.super_.call(this, 'DbDeltree');
+}
+
+/**
+ * DbGet Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_DbGet">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_DbGet</a>.
+ * @property {String} Family Key Family
+ * @property {String} Key Key Name
+ * @augments Action
+ */
+function DbGet() {
+	DbGet.super_.call(this, 'DbGet');
+}
+
+/**
+ * DbPut Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_DbPut">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_DbPut</a>.
+ * @property {String} Family Key Family
+ * @property {String} Key Key Name
+ * @property {String} Value Value
+ * @augments Action
+ */
+function DbPut() {
+	DbPut.super_.call(this, 'DbPut');
+}
+
+/**
+ * ExtensionState Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_ExtensionState">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_ExtensionState</a>.
+ * @property {String} Exten Extension
+ * @property {String} Context Context of the extension
+ * @augments Action
+ */
+function ExtensionState() {
+	ExtensionState.super_.call(this, 'ExtensionState');
+}
+
 
 // Inheritance for this module
 util.inherits(Action, message.Message);
@@ -371,7 +448,13 @@ util.inherits(Action, message.Message);
         DahdiDialOffHook,
         DahdiDndOff,
         DahdiDndOn,
-        DahdiHangup
+        DahdiHangup,
+        DahdiRestart,
+        DbDel,
+        DbDeltree,
+        DbGet,
+        DbPut,
+        ExtensionState
     ];
     for (i in actions) {
         util.inherits(actions[i], Action);
