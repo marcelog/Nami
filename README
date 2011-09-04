@@ -155,4 +155,6 @@ VoicemailUsersList
 Redirect
 UnpauseMonitor
 StopMonitor
+ShowDialPlan
+SendText
 

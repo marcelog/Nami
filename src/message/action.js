@@ -715,6 +715,31 @@ function Redirect() {
 	Redirect.super_.call(this, 'Redirect');
 }
 
+/**
+ * ShowDialPlan Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_ShowDialPlan">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_ShowDialPlan</a>.
+ * @property {String} Context Optional context to list
+ * @property {String} Extension Optional extension to list
+ * @augments Action
+ */
+function ShowDialPlan() {
+	ShowDialPlan.super_.call(this, 'ShowDialPlan');
+}
+
+/**
+ * SendText Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_SendText">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_SendText</a>.
+ * @property {String} Channel Channel where to send the message
+ * @property {String} Message Message to send
+ * @augments Action
+ */
+function SendText() {
+	SendText.super_.call(this, 'SendText');
+}
 
 // Inheritance for this module
 util.inherits(Action, message.Message);
@@ -773,7 +798,9 @@ util.inherits(Action, message.Message);
         VoicemailUsersList,
         Redirect,
         UnpauseMonitor,
-        StopMonitor
+        StopMonitor,
+        ShowDialPlan,
+        SendText
     ];
     for (i in actions) {
         util.inherits(actions[i], Action);
