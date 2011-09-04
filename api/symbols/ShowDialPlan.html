@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="generator" content="JsDoc Toolkit" />
 		
-		<title>JsDoc Reference - Response</title>
+		<title>JsDoc Reference - ShowDialPlan</title>
 
 		<style type="text/css">
 			/* default.css */
@@ -342,26 +342,26 @@ ul.inheritsList
 <!-- ============================== class title ============================ -->
 			<h1 class="classTitle">
 				
-				Class Response
+				Class ShowDialPlan
 			</h1>
 
 <!-- ============================== class summary ========================== -->			
 			<p class="description">
 				
 				<br />Extends
-					<a href="../symbols/Message.html">Message</a>.<br />
+					<a href="../symbols/Action.html">Action</a>.<br />
 				
 			
 				
 				
 				
-					<br /><i>Defined in: </i> <a href="../symbols/src/_export_users_marcelog_src_sts_Nami_src_message_response.js.html">response.js</a>.
+					<br /><i>Defined in: </i> <a href="../symbols/src/_export_users_marcelog_src_sts_Nami_src_message_action.js.html">action.js</a>.
 				
 			</p>
 
 <!-- ============================== constructor summary ==================== -->			
 			
-			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class Response.">
+			<table class="summaryTable" cellspacing="0" summary="A summary of the constructor documented in the class ShowDialPlan.">
 				<caption>Class Summary</caption>
 				<thead>
 					<tr>
@@ -374,9 +374,9 @@ ul.inheritsList
 						<td class="attributes">&nbsp;</td>
 						<td class="nameDescription" >
 							<div class="fixedFont">
-								<b><a href="../symbols/Response.html#constructor">Response</a></b>(data)
+								<b><a href="../symbols/ShowDialPlan.html#constructor">ShowDialPlan</a></b>()
 							</div>
-							<div class="description">Base response class.</div>
+							<div class="description">ShowDialPlan Action.</div>
 						</td>
 					</tr>
 				</tbody>
@@ -387,7 +387,7 @@ ul.inheritsList
 			
 				
 				
-				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class Response.">
+				<table class="summaryTable" cellspacing="0" summary="A summary of the fields documented in the class ShowDialPlan.">
 					<caption>Field Summary</caption>
 					<thead>
 						<tr>
@@ -401,9 +401,19 @@ ul.inheritsList
 							<td class="attributes">&nbsp;</td>
 							<td class="nameDescription">
 								<div class="fixedFont">
-								<b><a href="../symbols/Response.html#events">events</a></b>
+								<b><a href="../symbols/ShowDialPlan.html#Context">Context</a></b>
 								</div>
-								<div class="description">Events related to this response (can be empty).</div>
+								<div class="description">Optional context to list</div>
+							</td>
+						</tr>
+					
+						<tr>
+							<td class="attributes">&nbsp;</td>
+							<td class="nameDescription">
+								<div class="fixedFont">
+								<b><a href="../symbols/ShowDialPlan.html#Extension">Extension</a></b>
+								</div>
+								<div class="description">Optional extension to list</div>
 							</td>
 						</tr>
 					
@@ -440,30 +450,17 @@ ul.inheritsList
 				</div>
 				
 				<div class="fixedFont">
-						<b>Response</b>(data)
+						<b>ShowDialPlan</b>()
 				</div>
 				
 				<div class="description">
-					Base response class.
+					ShowDialPlan Action.
 					
 				</div>
 				
 				
 				
 				
-					
-						<dl class="detailList">
-						<dt class="heading">Parameters:</dt>
-						
-							<dt>
-								<span class="light fixedFont">{String}</span>  <b>data</b>
-								
-							</dt>
-								<dd>A message received from AMI. The End-Of-Message indicator
-has to be already stripped out. This will call unserialize() to build the actual
-Message object.</dd>
-						
-						</dl>
 					
 					
 					
@@ -474,9 +471,9 @@ Message object.</dd>
 						<dl class="detailList">
 						<dt class="heading">See:</dt>
 						
-							<dd><a href="../symbols/Message.html">Message</a>(String)</dd>
+							<dd><a href="../symbols/Action.html">Action</a>(String)</dd>
 						
-							<dd><a href="../symbols/Message.html#unmarshall">Message#unmarshall</a>(String)</dd>
+							<dd>See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_ShowDialPlan">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_ShowDialPlan</a>.</dd>
 						
 						</dl>
 					
@@ -490,15 +487,37 @@ Message object.</dd>
 					Field Detail
 				</div>
 				
-					<a name="events"> </a>
+					<a name="Context"> </a>
 					<div class="fixedFont">
 					
-					<span class="light">{<a href="../symbols/Event.html">Event</a>[]}</span>
-					<b>events</b>
+					<span class="light">{String}</span>
+					<b>Context</b>
 					
 					</div>
 					<div class="description">
-						Events related to this response (can be empty).
+						Optional context to list
+						
+						
+					</div>
+					
+					
+
+						
+						
+						
+						
+
+					<hr />
+				
+					<a name="Extension"> </a>
+					<div class="fixedFont">
+					
+					<span class="light">{String}</span>
+					<b>Extension</b>
+					
+					</div>
+					<div class="description">
+						Optional extension to list
 						
 						
 					</div>
