@@ -844,6 +844,39 @@ function QueueRemove() {
 	QueueRemove.super_.call(this, 'QueueRemove');
 }
 
+/**
+ * QueueAdd Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_QueueAdd">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_QueueAdd</a>.
+ * @property {String} Queue Queue
+ * @property {String} Interface Interface
+ * @property {String} Paused Optional, 'true' or 'false
+ * @property {String} MemberName Optional, Member name
+ * @property {String} Penalty Optional, Penalty
+ * @property {String} StateInterface Optional, State interface
+ * @augments Action
+ */
+function QueueAdd() {
+	QueueAdd.super_.call(this, 'QueueAdd');
+}
+
+/**
+ * QueueLog Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_QueueLog">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_QueueLog</a>.
+ * @property {String} Queue Queue
+ * @property {String} Event Event
+ * @property {String} Message Optional, Message
+ * @property {String} Interface Optional, Interface
+ * @property {String} UniqueId Optional, UniqueId
+ * @augments Action
+ */
+function QueueLog() {
+	QueueLog.super_.call(this, 'QueueLog');
+}
+
 
 // Inheritance for this module
 util.inherits(Action, message.Message);
@@ -911,7 +944,9 @@ util.inherits(Action, message.Message);
         QueueSummary,
         QueueStatus,
         QueueRemove,
-        QueueRule
+        QueueRule,
+        QueueAdd,
+        QueueLog
     ];
     for (i in actions) {
         util.inherits(actions[i], Action);

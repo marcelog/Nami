@@ -164,5 +164,6 @@ QueueSummary
 QueueStatus
 QueueRule
 QueueRemove
-
+QueueAdd
+QueueLog
 
