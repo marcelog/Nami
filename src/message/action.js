@@ -741,6 +741,110 @@ function SendText() {
 	SendText.super_.call(this, 'SendText');
 }
 
+/**
+ * Queues Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Queues">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Queues</a>.
+ * @augments Action
+ */
+function Queues() {
+	Queues.super_.call(this, 'Queues');
+}
+
+/**
+ * QueueUnpause Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_QueuePause">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_QueuePause</a>.
+ * @property {String} Interface Interface
+ * @property {String} Queue Optional, Queue
+ * @property {String} Reason Optional, reason description
+ * @augments Action
+ */
+function QueueUnpause() {
+	QueueUnpause.super_.call(this, 'QueueUnpause');
+    this.paused = 'false';
+}
+
+/**
+ * QueueUnpause Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_QueuePause">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_QueuePause</a>.
+ * @property {String} Interface Interface
+ * @property {String} Queue Optional, Queue
+ * @property {String} Reason Optional, reason description
+ * @augments Action
+ */
+function QueuePause() {
+	QueuePause.super_.call(this, 'QueuePause');
+    this.paused = 'true';
+}
+
+/**
+ * QueueSummary Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_QueueSummary">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_QueueSummary</a>.
+ * @property {String} Queue Optional, Queue
+ * @augments Action
+ */
+function QueueSummary() {
+	QueueSummary.super_.call(this, 'QueueSummary');
+}
+
+/**
+ * QueueRule Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_QueueRule">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_QueueRule</a>.
+ * @property {String} Rule Optional, Rule
+ * @augments Action
+ */
+function QueueRule() {
+	QueueRule.super_.call(this, 'QueueRule');
+}
+
+/**
+ * QueueStatus Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_QueueStatus">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_QueueStatus</a>.
+ * @property {String} Queue Optional, Queue
+ * @property {String} Member Optional, Member
+ * @augments Action
+ */
+function QueueStatus() {
+	QueueStatus.super_.call(this, 'QueueStatus');
+}
+
+/**
+ * QueueReset Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_QueueReset">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_QueueReset</a>.
+ * @property {String} Queue Optional, Queue
+ * @augments Action
+ */
+function QueueReset() {
+	QueueReset.super_.call(this, 'QueueReset');
+}
+
+/**
+ * QueueRemove Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_QueueRemove">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_QueueRemove</a>.
+ * @property {String} Queue Queue
+ * @property {String} Interface Interface
+ * @augments Action
+ */
+function QueueRemove() {
+	QueueRemove.super_.call(this, 'QueueRemove');
+}
+
+
 // Inheritance for this module
 util.inherits(Action, message.Message);
 (function() {
@@ -800,7 +904,14 @@ util.inherits(Action, message.Message);
         UnpauseMonitor,
         StopMonitor,
         ShowDialPlan,
-        SendText
+        SendText,
+        Queues,
+        QueueUnpause,
+        QueuePause,
+        QueueSummary,
+        QueueStatus,
+        QueueRemove,
+        QueueRule
     ];
     for (i in actions) {
         util.inherits(actions[i], Action);

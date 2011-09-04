@@ -157,4 +157,12 @@ UnpauseMonitor
 StopMonitor
 ShowDialPlan
 SendText
+Queues
+QueueUnpause
+QueuePause
+QueueSummary
+QueueStatus
+QueueRule
+QueueRemove
+
 
