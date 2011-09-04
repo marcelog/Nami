@@ -494,6 +494,31 @@ function PauseMonitor() {
 }
 
 /**
+ * UnpauseMonitor Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_UnpauseMonitor">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_UnpauseMonitor</a>.
+ * @property {String} Channel Continue monitor this channel
+ * @augments Action
+ */
+function UnpauseMonitor() {
+	UnpauseMonitor.super_.call(this, 'UnpauseMonitor');
+}
+
+/**
+ * StopMonitor Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_StopMonitor">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_StopMonitor</a>.
+ * @property {String} Channel Stop monitor this channel
+ * @augments Action
+ */
+function StopMonitor() {
+	StopMonitor.super_.call(this, 'StopMonitor');
+}
+
+
+/**
  * LocalOptimizeAway Action.
  * @constructor
  * @see Action(String)
@@ -636,6 +661,61 @@ function ModuleReload() {
     this.LoadType = 'reload';
 }
 
+/**
+ * MailboxCount Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_MailboxCount">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_MailboxCount</a>.
+ * @property {String} Mailbox Mailbox to retrieve count from
+ * @augments Action
+ */
+function MailboxCount() {
+	MailboxCount.super_.call(this, 'MailboxCount');
+}
+
+/**
+ * MailboxStatus Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_MailboxStatus">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_MailboxStatus</a>.
+ * @property {String} Mailbox Mailbox to retrieve count from
+ * @augments Action
+ */
+function MailboxStatus() {
+	MailboxStatus.super_.call(this, 'MailboxStatus');
+}
+
+/**
+ * VoicemailUsersList Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_VoicemailUsersList">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_VoicemailUsersList</a>.
+ * @augments Action
+ */
+function VoicemailUsersList() {
+	VoicemailUsersList.super_.call(this, 'VoicemailUsersList');
+}
+
+/**
+ * Redirect Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Redirect">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Redirect</a>.
+ * @augments Action
+ * @property {String} Channel Channel to transfer
+ * @property {String} Exten Extension to transfer to
+ * @property {String} Context Context to transfer to
+ * @property {String} Priority Priority to transfer to
+ * @property {String} ExtraChannel Optional Second call leg to transfer
+ * @property {String} ExtraExten Optional Extension to transfer extra channel
+ * @property {String} ExtraContext Optional Context to transfer extra channel
+ * @property {String} ExtraPriority Optional Priority to transfer extra channel
+ */
+function Redirect() {
+	Redirect.super_.call(this, 'Redirect');
+}
+
+
 // Inheritance for this module
 util.inherits(Action, message.Message);
 (function() {
@@ -687,7 +767,13 @@ util.inherits(Action, message.Message);
         ModuleCheck,
         ModuleLoad,
         ModuleUnload,
-        ModuleReload
+        ModuleReload,
+        MailboxCount,
+        MailboxStatus,
+        VoicemailUsersList,
+        Redirect,
+        UnpauseMonitor,
+        StopMonitor
     ];
     for (i in actions) {
         util.inherits(actions[i], Action);

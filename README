@@ -149,4 +149,10 @@ ModuleCheck
 ModuleLoad
 ModuleReload
 ModuleUnload
+MailboxCount
+MailboxStatus
+VoicemailUsersList
+Redirect
+UnpauseMonitor
+StopMonitor
 
