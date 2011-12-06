@@ -21,8 +21,8 @@ at http://marcelog.github.com/PAMI/index.html
 
 Requirements
 ------------
- * Nodejs (Tested with 0.4.10)
- * log4js (For logging, tested with 0.3.8)
+ * Nodejs (Tested with 0.6.5)
+ * log4js (For logging, tested with 0.3.9)
 
 Events used in Nami
 -------------------
