@@ -22,9 +22,7 @@
   "scripts": {
     "test": "index"
   },
-  "engines": {
-    "node": "~v0.4.10"
-  },
+    { "engines" : { "node" : ">=0.4.10" } },
   "dependencies": {
     "log4js": "0.3.8"
   },
