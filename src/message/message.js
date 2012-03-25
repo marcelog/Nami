@@ -67,7 +67,7 @@ Message.prototype.unmarshall = function (data) {
          * This is so, because if this message is a response, specifically a response to
          * something like "ListCommands", the value of the keys, can contain the semicolon
          * ":", which happens to be token to be used to split keys and values. AMI does not
-         * specify anything like an escape character, so we cant distinguis wether we're
+         * specify anything like an escape character, so we cant distinguish wether we're
          * dealing with a multi semicolon line or a standard key/value line.
          */
         if (parts.length > 1) {
