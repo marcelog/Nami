@@ -72,6 +72,7 @@ Nami.prototype.onRawEvent = function (event) {
     if (
         event.event.indexOf('Complete') !== -1
             || ((typeof (event.eventlist) !== 'undefined') && event.eventlist.indexOf('Complete') !== -1)
+            || event.event.indexOf('DBGetResponse') !== -1
     ) {
         this.callbacks[event.actionid](this.responses[event.actionid]);
     } else {
