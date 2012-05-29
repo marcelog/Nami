@@ -28,17 +28,24 @@ util = require('util');
 /**
  * Base action class. Every action sent to AMI must be one of these.
  * @constructor
- * @param {String} name The name of the action, this is the actual value of the 
+ * @param {String} name The name of the action, this is the actual value of the
  * "Action" key in the action message.
  * @see Message#marshall(String)
  * @augments Message
  */
 function Action(name) {
     Action.super_.call(this);
-    this.id = new Date().getTime();
+    this.id = ActionUniqueId();
     this.set('ActionID', this.id);
     this.set('Action', name);
 }
+
+var ActionUniqueId = (function() {
+	var nextId = 0;
+	return function() {
+		return nextId++;
+	}
+})();
 
 /**
  * Login Action.
