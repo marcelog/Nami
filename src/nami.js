@@ -68,13 +68,13 @@ Nami.prototype.onRawEvent = function (event) {
     this.logger.debug('Got event: ' + util.inspect(event));
     if (typeof (event.actionid) !== 'undefined') {
         this.responses[event.actionid].events.push(event);
-    }
-    if (
-        event.event.indexOf('Complete') !== -1
-            || ((typeof (event.eventlist) !== 'undefined') && event.eventlist.indexOf('Complete') !== -1)
-            || event.event.indexOf('DBGetResponse') !== -1
-    ) {
-        this.callbacks[event.actionid](this.responses[event.actionid]);
+        if (
+            event.event.indexOf('Complete') !== -1
+                || ((typeof (event.eventlist) !== 'undefined') && event.eventlist.indexOf('Complete') !== -1)
+                || event.event.indexOf('DBGetResponse') !== -1
+        ) {
+            this.callbacks[event.actionid](this.responses[event.actionid]);
+        }
     } else {
         this.emit('namiEvent', event);
         this.emit('namiEvent' + event.event, event);
@@ -206,7 +206,7 @@ Nami.prototype.open = function () {
     this.logger.debug('Opening connection');
     this.socket = new net.Socket();
     var self = this;
-    this.socket.on('connect', this.onConnect);
+    this.socket.on('connect', function() { self.onConnect(); });
     this.on('namiRawMessage', this.onRawMessage);
     this.on('namiRawResponse', this.onRawResponse);
     this.on('namiRawEvent', this.onRawEvent);
