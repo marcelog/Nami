@@ -1,4 +1,5 @@
 .project
 .settings
 .buildpath
+build
 src/node_modules
