@@ -5,6 +5,9 @@ Introduction
 
 For API and docs, check out the homepage at http://marcelog.github.com/Nami
 
+You can also download the distribution and doc from the CI server, at:
+http://ci.marcelog.name:8080/view/NodeJS/
+
 A very similar, PHP alternative, is available at http://marcelog.github.com/PAMI
 An Erlang port is available at https://github.com/marcelog/erlami
 
