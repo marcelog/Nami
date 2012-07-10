@@ -140,7 +140,15 @@ Nami.prototype.onData = function (data) {
     while ((theEOM = this.received.indexOf(this.EOM)) !== -1) {
         msg = this.received.substr(0, theEOM);
         this.emit('namiRawMessage', msg);
-        this.received = this.received.substr(theEOM + this.EOM.length);
+        var startOffset = theEOM + this.EOM.length;
+        var skippedEolChars = 0;
+        var nextChar = this.received.substr(startOffset + skippedEolChars, 1);
+        while (nextChar === "\r" || nextChar === "\n") {
+            skippedEolChars++;
+            nextChar = this.received.substr(startOffset + skippedEolChars, 1);
+        };
+        this.logger.debug('Skipped ' + skippedEolChars + ' bytes');
+        this.received = this.received.substr(startOffset + skippedEolChars);
     }
 };
 /**
