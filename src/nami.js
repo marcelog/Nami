@@ -45,7 +45,7 @@ function Nami(amiData) {
     this.amiData = amiData;
     this.EOL = "\r\n";
     this.EOM = this.EOL + this.EOL;
-    this.welcomeMessage = "Asterisk Call Manager/1.1" + this.EOL;
+    this.welcomeMessage = "Asterisk Call Manager/1.[12]" + this.EOL;
     this.received = false;
     this.responses = { };
     this.callbacks = { };
@@ -174,8 +174,8 @@ Nami.prototype.onConnect = function () {
 Nami.prototype.onWelcomeMessage = function (data) {
     var self = this, welcome;
     this.logger.debug('Got welcome message: ' + util.inspect(data));
-    welcome = data.indexOf(this.welcomeMessage);
-    if (welcome === -1) {
+    var re = new RegExp(this.welcomeMessage, "");
+    if (data.match(re) === null) {
         this.emit('namiInvalidPeer', data);
     } else {
         this.socket.on('data', function (data) {
