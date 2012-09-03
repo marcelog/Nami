@@ -157,6 +157,7 @@ ModuleUnload
 MailboxCount
 MailboxStatus
 VoicemailUsersList
+Originate
 Redirect
 UnpauseMonitor
 StopMonitor

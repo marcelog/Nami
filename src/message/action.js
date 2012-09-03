@@ -852,6 +852,27 @@ function QueueRemove() {
 }
 
 /**
+ * Originate Action
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Originate">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Originate</a>.
+ * @property {String} Channel Channel
+ * @property {String} Exten Exten
+ * @property {String} Priority Priority
+ * @property {String} Application Application
+ * @property {String} Data Data
+ * @property {String} Timeout Timeout
+ * @property {String} CallerID CallerID
+ * @property {String} Account Account
+ * @property {String} Async Async
+ * @property {String} Codecs Codecs
+ * @augments Action
+ */
+function Originate() {
+    Originate.super_.call(this, 'Originate');
+}
+
+/**
  * QueueAdd Action.
  * @constructor
  * @see Action(String)
@@ -940,6 +961,7 @@ util.inherits(Action, message.Message);
         MailboxCount,
         MailboxStatus,
         VoicemailUsersList,
+        Originate,
         Redirect,
         UnpauseMonitor,
         StopMonitor,
