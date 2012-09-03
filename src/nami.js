@@ -66,7 +66,11 @@ util.inherits(Nami, events.EventEmitter);
  */
 Nami.prototype.onRawEvent = function (event) {
     this.logger.debug('Got event: ' + util.inspect(event));
-    if (typeof (event.actionid) !== 'undefined') {
+    if (
+        typeof (event.actionid) !== 'undefined'
+        && typeof (this.responses[event.actionid]) !== 'undefined'
+        && typeof (this.callbacks[event.actionid]) !== 'undefined'
+    ) {
         this.responses[event.actionid].events.push(event);
         if (
             event.event.indexOf('Complete') !== -1
@@ -74,6 +78,8 @@ Nami.prototype.onRawEvent = function (event) {
                 || event.event.indexOf('DBGetResponse') !== -1
         ) {
             this.callbacks[event.actionid](this.responses[event.actionid]);
+            delete this.callbacks[event.actionid];
+            delete this.responses[event.actionid];
         }
     } else {
         this.emit('namiEvent', event);
@@ -100,6 +106,8 @@ Nami.prototype.onRawResponse = function (response) {
         this.responses[response.actionid] = response;            
     } else if (typeof (this.callbacks[response.actionid]) !== 'undefined') {
         this.callbacks[response.actionid](response);
+        delete this.callbacks[response.actionid];
+        delete this.responses[response.actionid];
     }
 };
 
