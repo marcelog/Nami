@@ -104,6 +104,11 @@ See src/index.js for a better example.
 
 That's about it.
 
+Multiple server support
+-----------------------
+See [this gist](https://gist.github.com/4063103) for an example of how to
+connect to multiple asterisk boxes.
+
 Supported Actions (Check the api for details)
 ---------------------------------------------
 Login
