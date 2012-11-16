@@ -38,8 +38,9 @@ var timer = require('timers');
  * @param amiData The configuration for ami.
  * @augments EventEmitter
  */
-function Nami(amiData) {
+function Nami(amiData, options) {
     Nami.super_.call(this);
+    this.options = options || {};
     this.logger = require('log4js').getLogger('Nami.Client');
     this.connected = false;
     this.amiData = amiData;
@@ -220,17 +221,63 @@ Nami.prototype.close = function () {
  */
 Nami.prototype.open = function () {
     this.logger.debug('Opening connection');
-    this.socket = new net.Socket();
     var self = this;
-    this.socket.on('connect', function() { self.onConnect(); });
+    this.initializeSocket();
     this.on('namiRawMessage', this.onRawMessage);
     this.on('namiRawResponse', this.onRawResponse);
     this.on('namiRawEvent', this.onRawEvent);
     this.socket.once('data', function (data) {
-        self.onWelcomeMessage(data); 
+        self.onWelcomeMessage(data);
     });
-    this.socket.setEncoding('ascii');
     this.received = "";
+    this.socket.connect(this.amiData.port, this.amiData.host);
+};
+
+/**
+ * Creates a new socket handles connection events.
+ * @returns undefined
+ */
+Nami.prototype.initializeSocket = function () {
+    this.logger.debug('Initializing socket');
+    var self = this;
+
+    if (this.socket && !this.socket.destroyed) {
+        this.socket.removeAllListeners();
+        this.socket.end();
+    }
+
+    this.socket = new net.Socket();
+    this.socket.setEncoding('ascii');
+
+    this.socket.on('connect', function() {
+        self.onConnect();
+        self.emit('connection:created');
+    });
+
+    this.socket.on('error', function (error) {
+        self.emit('connection:error', error);
+    });
+
+    this.socket.on('close', function (error) {
+        self.emit('connection:close', error);
+    });
+
+    this.socket.on('timeout', function () {
+        self.emit('connection:timeout');
+    });
+
+    this.socket.on('end', function () {
+        self.emit('connection:end');
+    });
+};
+
+Nami.prototype.reopen = function () {
+    this.logger.debug('Reopening connection');
+    var self = this;
+    this.initializeSocket();
+    this.socket.once('data', function (data) {
+        self.onWelcomeMessage(data);
+    });
     this.socket.connect(this.amiData.port, this.amiData.host);
 };
 
