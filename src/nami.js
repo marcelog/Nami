@@ -45,7 +45,7 @@ function Nami(amiData) {
     this.amiData = amiData;
     this.EOL = "\r\n";
     this.EOM = this.EOL + this.EOL;
-    this.welcomeMessage = "Asterisk Call Manager/1.[12]" + this.EOL;
+    this.welcomeMessage = "Asterisk Call Manager/1.[123]" + this.EOL;
     this.received = false;
     this.responses = { };
     this.callbacks = { };
