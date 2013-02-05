@@ -167,6 +167,10 @@ Nami.prototype.onConnect = function () {
     this.connected = true;
 };
 
+Nami.prototype.onClosed = function () {
+    this.connected = false;
+};
+
 /**
  * Called when the first line is received from the server. It will check that
  * the other peer is a valid AMI server. If not valid, the event "namiInvalidPeer"
@@ -212,6 +216,7 @@ Nami.prototype.close = function () {
     this.removeAllListeners();
     this.socket.removeAllListeners();
     this.socket.end();
+    this.onClosed();
 };
 
 /**
@@ -221,16 +226,83 @@ Nami.prototype.close = function () {
 Nami.prototype.open = function () {
     this.logger.debug('Opening connection');
     this.socket = new net.Socket();
-    var self = this;
-    this.socket.on('connect', function() { self.onConnect(); });
+    this.initializeSocket();
     this.on('namiRawMessage', this.onRawMessage);
     this.on('namiRawResponse', this.onRawResponse);
     this.on('namiRawEvent', this.onRawEvent);
-    this.socket.once('data', function (data) {
-        self.onWelcomeMessage(data); 
-    });
-    this.socket.setEncoding('ascii');
     this.received = "";
+    this.socket.connect(this.amiData.port, this.amiData.host);
+};
+
+/**
+ * Creates a new socket and handles connection events.
+ * @returns undefined
+ */
+Nami.prototype.initializeSocket = function () {
+    this.logger.debug('Initializing socket');
+    var self = this;
+
+    if (this.socket && !this.socket.destroyed) {
+        this.socket.removeAllListeners();
+        this.socket.end();
+    }
+
+    this.socket = new net.Socket();
+    this.socket.setEncoding('ascii');
+
+    var baseEvent = 'namiConnection';
+
+    this.socket.on('connect', function() {
+        self.logger.debug('Socket connected');
+        self.onConnect();
+        var event = { event: 'Connect' };
+        self.emit(baseEvent, event);
+        self.emit(baseEvent + event.event, event);
+    });
+ 
+    // @param {Error} error Fires right before the `close` event
+    this.socket.on('error', function (error) {
+        self.logger.debug('Socket error: ' + util.inspect(error));
+        var event = { event: 'Error', error: error };
+        self.emit(baseEvent, event);
+        self.emit(baseEvent + event.event, event);
+    });
+
+    // @param {Boolean} had_error If the connection closed from an error.
+    this.socket.on('close', function (had_error) {
+        self.logger.debug('Socket closed');
+        self.onClosed();
+        var event = { event: 'Close', had_error: had_error };
+        self.emit(baseEvent, event);
+        self.emit(baseEvent + event.event, event);
+    });
+
+    this.socket.on('timeout', function () {
+        self.logger.debug('Socket timeout');
+        var event = { event: 'Timeout' };
+        self.emit(baseEvent, event);
+        self.emit(baseEvent + event.event, event);
+    });
+
+    this.socket.on('end', function () {
+        self.logger.debug('Socket ended');
+        var event = { event: 'End' };
+        self.emit(baseEvent, event);
+        self.emit(baseEvent + event.event, event);
+    });
+
+    this.socket.once('data', function (data) {
+        self.onWelcomeMessage(data);
+    });
+};
+
+/**
+ * Reopens the socket connection to AMI.
+ * @returns undefined
+ */
+Nami.prototype.reopen = function () {
+    this.logger.debug('Reopening connection');
+    this.initializeSocket();
     this.socket.connect(this.amiData.port, this.amiData.host);
 };
 
