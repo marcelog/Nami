@@ -225,13 +225,11 @@ Nami.prototype.close = function () {
  */
 Nami.prototype.open = function () {
     this.logger.debug('Opening connection');
-    this.socket = new net.Socket();
-    this.initializeSocket();
     this.on('namiRawMessage', this.onRawMessage);
     this.on('namiRawResponse', this.onRawResponse);
     this.on('namiRawEvent', this.onRawEvent);
     this.received = "";
-    this.socket.connect(this.amiData.port, this.amiData.host);
+    this.initializeSocket();
 };
 
 /**
@@ -256,7 +254,6 @@ Nami.prototype.initializeSocket = function () {
         self.logger.debug('Socket connected');
         self.onConnect();
         var event = { event: 'Connect' };
-        self.emit(baseEvent, event);
         self.emit(baseEvent + event.event, event);
     });
  
@@ -264,7 +261,6 @@ Nami.prototype.initializeSocket = function () {
     this.socket.on('error', function (error) {
         self.logger.debug('Socket error: ' + util.inspect(error));
         var event = { event: 'Error', error: error };
-        self.emit(baseEvent, event);
         self.emit(baseEvent + event.event, event);
     });
 
@@ -273,27 +269,26 @@ Nami.prototype.initializeSocket = function () {
         self.logger.debug('Socket closed');
         self.onClosed();
         var event = { event: 'Close', had_error: had_error };
-        self.emit(baseEvent, event);
         self.emit(baseEvent + event.event, event);
     });
 
     this.socket.on('timeout', function () {
         self.logger.debug('Socket timeout');
         var event = { event: 'Timeout' };
-        self.emit(baseEvent, event);
         self.emit(baseEvent + event.event, event);
     });
 
     this.socket.on('end', function () {
         self.logger.debug('Socket ended');
         var event = { event: 'End' };
-        self.emit(baseEvent, event);
         self.emit(baseEvent + event.event, event);
     });
 
     this.socket.once('data', function (data) {
         self.onWelcomeMessage(data);
     });
+
+    this.socket.connect(this.amiData.port, this.amiData.host);
 };
 
 /**
@@ -303,7 +298,6 @@ Nami.prototype.initializeSocket = function () {
 Nami.prototype.reopen = function () {
     this.logger.debug('Reopening connection');
     this.initializeSocket();
-    this.socket.connect(this.amiData.port, this.amiData.host);
 };
 
 /**
