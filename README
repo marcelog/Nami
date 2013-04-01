@@ -109,7 +109,8 @@ nami.open();
 
 A Better example
 ----------------
-See src/index.js for a better example.
+See src/index.js for a better example (including how to reconnect when the
+current connection closes).
 
 That's about it.
 
