@@ -1,5 +1,5 @@
 CWD=$(shell pwd)
-JSDOC=/usr/nodejs/lib/node_modules/jsdoc-toolkit
+JSDOC?=/usr/nodejs/lib/node_modules/jsdoc-toolkit
 OUTPUTDIR=${CWD}/build
 DOCDIR=${OUTPUTDIR}/doc
 PKGDIR=${OUTPUTDIR}
