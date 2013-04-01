@@ -193,5 +193,7 @@ Thanks to
 * Joshua Elson for his help in trying and debugging in loaded asterisk servers
 and testing with node 0.6.5 and newer npm versions
 * Jon Hoult for his help in testing with AMI 1.2
+* Jonathan Nicholson (rooftopsparrow) for working on exposing connection events,
+making reconnections a breeze.
 
 
