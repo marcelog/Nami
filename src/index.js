@@ -35,6 +35,11 @@ process.on('SIGINT', function () {
     nami.close();
     process.exit();
 });
+nami.on('namiConnectionClose', function (data) {
+    logger.debug('Reconnecting...');
+    setTimeout(function () { nami.open(); }, 5000);
+});
+
 nami.on('namiInvalidPeer', function (data) {
 	logger.fatal("Invalid AMI Salute. Not an AMI?");
 	process.exit();
