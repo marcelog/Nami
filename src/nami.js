@@ -49,6 +49,9 @@ function Nami(amiData) {
     this.received = false;
     this.responses = { };
     this.callbacks = { };
+    this.on('namiRawMessage', this.onRawMessage);
+    this.on('namiRawResponse', this.onRawResponse);
+    this.on('namiRawEvent', this.onRawEvent);
 }
 // Nami inherits from the EventEmitter so Nami itself can throw events.
 util.inherits(Nami, events.EventEmitter);
@@ -225,9 +228,6 @@ Nami.prototype.close = function () {
  */
 Nami.prototype.open = function () {
     this.logger.debug('Opening connection');
-    this.on('namiRawMessage', this.onRawMessage);
-    this.on('namiRawResponse', this.onRawResponse);
-    this.on('namiRawEvent', this.onRawEvent);
     this.received = "";
     this.initializeSocket();
 };
