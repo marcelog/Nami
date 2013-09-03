@@ -62,8 +62,10 @@ received message as a response to an action.
 
 Installation
 ------------
-`$ npm install log4js`
-`$ npm install nami`
+```sh
+$ npm install log4js
+$ npm install nami
+```
 
  -or-
 Download it from this repo :)
@@ -71,7 +73,7 @@ Download it from this repo :)
 Configuration
 -------------
 Nami expects a configuration object, very much like this:
-```node
+```js
 var namiConfig = {
     host: "amihost",
     port: 5038,
@@ -81,10 +83,12 @@ var namiConfig = {
 ```
 Quickstart
 ----------
-`$ mkdir testnami`
-`$ npm install log4js`
-`$ npm install nami`
-```node
+```sh
+$ mkdir testnami
+$ npm install log4js
+$ npm install nami
+```
+```js
 var nami = new (require("nami").Nami)(namiConfig);
 nami.on('namiEvent', function (event) { });
 nami.on('namiEventDial', function (event) { });
@@ -115,73 +119,72 @@ connect to multiple asterisk boxes.
 
 Supported Actions (Check the api for details)
 ---------------------------------------------
-
-Login
-Logoff
-Ping
-Hangup
-CoreShowChannels
-CoreStatus
-CoreSettings
-Status
-DahdiShowChannels
-ListCommands
-AbsoluteTimeout
-SipShowPeer
-SipShowRegistry
-SipQualifyPeer
-SipPeers
-AgentLogoff
-Agents
-AttendedTransfer
-ChangeMonitor
-Command
-CreateConfig
-DahdiDialOffHook
-DahdiDndOff
-DahdiDndOn
-DahdiHangup
-DahdiRestart
-DbDel
-DbDeltree
-DbGet
-DbPut
-ExtensionState
-GetConfig
-GetConfigJson
-GetVar
-SetVar
-JabberSend
-ListCategories
-PauseMonitor
-LocalOptimizeAway
-Reload
-PlayDtmf
-Park
-ParkedCalls
-Monitor
-ModuleCheck
-ModuleLoad
-ModuleReload
-ModuleUnload
-MailboxCount
-MailboxStatus
-VoicemailUsersList
-Originate
-Redirect
-UnpauseMonitor
-StopMonitor
-ShowDialPlan
-SendText
-Queues
-QueueUnpause
-QueuePause
-QueueSummary
-QueueStatus
-QueueRule
-QueueRemove
-QueueAdd
-QueueLog
+ - Login
+ - Logoff
+ - Ping
+ - Hangup
+ - CoreShowChannels
+ - CoreStatus
+ - CoreSettings
+ - Status
+ - DahdiShowChannels
+ - ListCommands
+ - AbsoluteTimeout
+ - SipShowPeer
+ - SipShowRegistry
+ - SipQualifyPeer
+ - SipPeers
+ - AgentLogoff
+ - Agents
+ - AttendedTransfer
+ - ChangeMonitor
+ - Command
+ - CreateConfig
+ - DahdiDialOffHook
+ - DahdiDndOff
+ - DahdiDndOn
+ - DahdiHangup
+ - DahdiRestart
+ - DbDel
+ - DbDeltree
+ - DbGet
+ - DbPut
+ - ExtensionState
+ - GetConfig
+ - GetConfigJson
+ - GetVar
+ - SetVar
+ - JabberSend
+ - ListCategories
+ - PauseMonitor
+ - LocalOptimizeAway
+ - Reload
+ - PlayDtmf
+ - Park
+ - ParkedCalls
+ - Monitor
+ - ModuleCheck
+ - ModuleLoad
+ - ModuleReload
+ - ModuleUnload
+ - MailboxCount
+ - MailboxStatus
+ - VoicemailUsersList
+ - Originate
+ - Redirect
+ - UnpauseMonitor
+ - StopMonitor
+ - ShowDialPlan
+ - SendText
+ - Queues
+ - QueueUnpause
+ - QueuePause
+ - QueueSummary
+ - QueueStatus
+ - QueueRule
+ - QueueRemove
+ - QueueAdd
+ - QueueLog
 
 Thanks to
 --------
