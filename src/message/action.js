@@ -52,14 +52,18 @@ var ActionUniqueId = (function() {
  * @constructor
  * @param {String} username The username. The value of the "Username" key.
  * @param {String} secret The password. The value of the "Secret" key.
+ * @param {String} a comma delimited list of Events to subscribe to.  Example: "call,hud" will subscribe to all call and hud events.
  * @see Action(String)
  * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Login">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Login</a>.
  * @augments Action
  */
-function Login(username, secret) {
+function Login(username, secret, events) {
     Login.super_.call(this, 'Login');
     this.set('Username', username);
     this.set('Secret', secret );
+    if( events !== undefined ) {
+        this.set('Events', events);
+    }
 }
 /**
  * CoreShowChannels Action.
