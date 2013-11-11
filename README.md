@@ -105,6 +105,21 @@ nami.on('namiConnected', function (event) {
 });
 nami.open();
 ```
+
+Adding variables to actions
+---------------------------
+Use the property 'variables' in the actions:
+
+```js
+var action = new namiLib.Actions.Status();
+action.variables = {
+	'var1': 'val1'
+};
+nami.send(action, function(response) {
+	...
+});
+```
+
 A Better example
 ----------------
 See src/index.js for a better example (including how to reconnect when the

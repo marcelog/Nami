@@ -30,6 +30,7 @@
 function Message() {
     this.lines = [];
     this.EOL = "\r\n";
+    this.variables = {};
 }
 
 /**
@@ -41,11 +42,17 @@ function Message() {
 Message.prototype.marshall = function () {
     var output = "", key;
     for (key in this) {
+        if (key === 'variables') {
+            continue;
+        }
         if (this.hasOwnProperty(key)) {
             if (key !== 'lines' && key !== 'EOL' && (typeof (this[key]) !== 'function')) {
                 output = output + key + ": " + this[key] + this.EOL;
             }
         }
+    }
+    for (key in this.variables) {
+        output = output + 'Variable: ' + key + '=' + this.variables[key] + this.EOL;
     }
     output = output + this.EOL;
     return output;
@@ -75,10 +82,14 @@ Message.prototype.unmarshall = function (data) {
         } else if (parts.length === 1) {
             value = parts[0];
         }
-        this.set(
-            key.replace(/-/, '_').toLowerCase(),
-            value.replace(/^\s+/g, '').replace(/\s+$/g, '')
-        );
+        var keySafe = key.replace(/-/, '_').toLowerCase();
+        var valueSafe = value.replace(/^\s+/g, '').replace(/\s+$/g, '');
+        if (keySafe.match(/variable/) !== null) {
+            var variable = valueSafe.split("=");
+            this.variables[variable[0]] = variable[1];
+        } else {
+            this.set(keySafe, valueSafe);
+        }
     }
 };
 
