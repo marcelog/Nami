@@ -18,5 +18,5 @@ doc:
 	cd -
 
 package:
-	tar jcf ${PKGDIR}/nami.tar.bz2 AUTHORS LICENSE GNUmakefile package.json README src
+	tar jcf ${PKGDIR}/nami.tar.bz2 AUTHORS LICENSE GNUmakefile package.json README.md src
 
