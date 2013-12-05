@@ -85,6 +85,7 @@ Quickstart
 ----------
 ```sh
 $ mkdir testnami
+$ cd testnami
 $ npm install log4js
 $ npm install nami
 ```
