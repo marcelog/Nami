@@ -106,10 +106,14 @@ Message.prototype.unmarshall = function (data) {
             }
         }
 
-        this.set(
-            key.replace(/-/, '_').toLowerCase(),
-            value.replace(/^\s+/g, '').replace(/\s+$/g, '')
-        );
+        var keySafe = key.replace(/-/, '_').toLowerCase();
+        var valueSafe = value.replace(/^\s+/g, '').replace(/\s+$/g, '');
+        if (keySafe.match(/variable/) !== null) {
+          var variable = valueSafe.split("=");
+          this.variables[variable[0]] = variable[1];
+        } else {
+          this.set(keySafe, valueSafe);
+        }
     }
 };
 
