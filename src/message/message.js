@@ -68,28 +68,48 @@ Message.prototype.unmarshall = function (data) {
     var value, parts, key, line = 0;
     this.lines = data.split(this.EOL);
     for (; line < this.lines.length; line = line + 1) {
-        parts = this.lines[line].split(":");
-        key = parts.shift();
         /*
-         * This is so, because if this message is a response, specifically a response to
-         * something like "ListCommands", the value of the keys, can contain the semicolon
-         * ":", which happens to be token to be used to split keys and values. AMI does not
-         * specify anything like an escape character, so we cant distinguish wether we're
-         * dealing with a multi semicolon line or a standard key/value line.
+         * string operations may be expensive at this point
+         * and also this kind of string operation is really 
+         * quick and dirty just to resolve my specific issue.
+         *
+         * Using the Action
+         * -- namiLib.Actions.Command(); --
+         * returns the command output with the string
+         * --END COMMAND-- at the end.
+         * The used delimiter ":" can course different
+         * key/value output based on the result returned from the command.
+         *
+         * I think its easier to get the data from the output
+         * when the string is in one peace instead of being
+         * teared apart.
+         * For this reason i simply added the new key "CommandOutput"
+         * and passthrough the whole string as value
          */
-        if (parts.length > 1) {
-            value = parts.join(':');
-        } else if (parts.length === 1) {
-            value = parts[0];
-        }
-        var keySafe = key.replace(/-/, '_').toLowerCase();
-        var valueSafe = value.replace(/^\s+/g, '').replace(/\s+$/g, '');
-        if (keySafe.match(/variable/) !== null) {
-            var variable = valueSafe.split("=");
-            this.variables[variable[0]] = variable[1];
+        if(this.lines[line].indexOf("--END COMMAND--") != -1){
+          key = "CommandOutput";
+          value = this.lines[line].replace("--END COMMAND--", "");
         } else {
-            this.set(keySafe, valueSafe);
+            parts = this.lines[line].split(":");
+            key = parts.shift();
+            /*
+             * This is so, because if this message is a response, specifically a response to
+             * something like "ListCommands", the value of the keys, can contain the semicolon
+             * ":", which happens to be token to be used to split keys and values. AMI does not
+             * specify anything like an escape character, so we cant distinguish wether we're
+             * dealing with a multi semicolon line or a standard key/value line.
+             */
+            if (parts.length > 1) {
+                value = parts.join(':');
+            } else if (parts.length === 1) {
+                value = parts[0];
+            }
         }
+
+        this.set(
+            key.replace(/-/, '_').toLowerCase(),
+            value.replace(/^\s+/g, '').replace(/\s+$/g, '')
+        );
     }
 };
 
