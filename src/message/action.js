@@ -905,6 +905,130 @@ function QueueLog() {
 	QueueLog.super_.call(this, 'QueueLog');
 }
 
+/** 
+ * MeetmeList Action.
+ * @constructor
+ * @see Action(String)
+ * @augments Action
+ */
+ function MeetmeList(conference) {
+   MeetmeList.super_.call(this, 'MeetmeList');
+   if(conference != null)
+     this.set('Conference', conference);
+ }
+ 
+ /**
+  * MeetmeMute Action.
+  * @constructor
+  * @see Action(String)
+  * @augments Action
+  */
+ function MeetmeMute(meetme, usernum) {
+   MeetmeMute.super_.call(this, 'MeetmeMute');
+   this.set('Meetme', meetme);
+   this.set('Usernum', usernum);
+ }
+  
+/**
+ * MeetmeUnmute Action.
+ * @constructor
+ * @see Action(String)
+ * @augments Action
+ */
+function MeetmeUnmute(meetme, usernum) {
+  MeetmeUnmute.super_.call(this, 'MeetmeUnmute');
+  this.set('Meetme', meetme);
+  this.set('Usernum', usernum);
+}
+
+/**
+ * ConfbridgeListRooms Action.
+ * @constructor
+ * @see Action(String)
+ * @augments Action
+ */
+function ConfbridgeListRooms() {
+  ConfbridgeListRooms.super_.call(this, 'ConfbridgeListRooms');
+}
+
+/**
+ * ConfbridgeList Action.
+ * @constructor
+ * @see Action(String)
+ * @param {String} conference room. The value of the "conference" key.
+ * @augments Action
+ */
+function ConfbridgeList(conference) {
+  ConfbridgeList.super_.call(this, 'ConfbridgeList');
+  this.set('Conference', conference);
+}
+
+/**
+ * ConfbridgeKick Action.
+ * @constructor
+ * @see Action(String)
+ * @param {String} conference room. The value of the "conference" key.
+ * @param {String} Channel. The value of the "Channel" key. 
+ * @augments Action
+ */
+function ConfbridgeKick(conference, channel) {
+  ConfbridgeKick.super_.call(this, 'ConfbridgeKick');
+  this.set('Conference', conference);
+  this.set('Channel', channel);
+}
+
+/**
+ * ConfbridgeLock Action.
+ * @constructor
+ * @see Action(String)
+ * @param {String} conference room. The value of the "conference" key.
+ * @augments Action
+ */
+function ConfbridgeLock(conference) {
+  ConfbridgeLock.super_.call(this, 'ConfbridgeLock');
+  this.set('Conference', conference);
+}
+
+/**
+ * ConfbridgeUnlock Action.
+ * @constructor
+ * @see Action(String)
+ * @param {String} conference room. The value of the "conference" key.
+ * @augments Action
+ */
+function ConfbridgeUnlock(conference) {
+  ConfbridgeUnlock.super_.call(this, 'ConfbridgeUnlock');
+  this.set('Conference', conference);
+}
+
+/**
+ * ConfbridgeMute Action.
+ * @constructor
+ * @see Action(String)
+ * @param {String} conference room. The value of the "conference" key.
+ * @param {String} Channel. The value of the "Channel" key. 
+ * @augments Action
+ */
+function ConfbridgeMute(conference, channel) {
+  ConfbridgeMute.super_.call(this, 'ConfbridgeMute');
+  this.set('Conference', conference);
+  this.set('Channel', channel);
+}
+
+/**
+ * ConfbridgeUnmute Action.
+ * @constructor
+ * @see Action(String)
+ * @param {String} conference room. The value of the "conference" key.
+ * @param {String} Channel. The value of the "Channel" key. 
+ * @augments Action
+ */
+function ConfbridgeUnmute(conference, channel) {
+  ConfbridgeUnmute.super_.call(this, 'ConfbridgeUnmute');
+  this.set('Conference', conference);
+  this.set('Channel', channel);
+}
+
 
 // Inheritance for this module
 util.inherits(Action, message.Message);
@@ -975,7 +1099,17 @@ util.inherits(Action, message.Message);
         QueueRemove,
         QueueRule,
         QueueAdd,
-        QueueLog
+        QueueLog,
+        MeetmeList,
+        MeetmeMute,
+        MeetmeUnmute,
+        ConfbridgeListRooms,
+        ConfbridgeList,
+        ConfbridgeKick,
+        ConfbridgeLock,
+        ConfbridgeUnlock,
+        ConfbridgeMute,
+        ConfbridgeUnmute
     ];
     for (i in actions) {
         util.inherits(actions[i], Action);
