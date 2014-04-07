@@ -913,8 +913,9 @@ function QueueLog() {
  */
  function MeetmeList(conference) {
    MeetmeList.super_.call(this, 'MeetmeList');
-   if(conference != null)
+   if(conference != null) {
      this.set('Conference', conference);
+   }
  }
  
  /**
