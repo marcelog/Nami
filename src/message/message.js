@@ -30,7 +30,6 @@
 function Message() {
     this.lines = [];
     this.EOL = "\r\n";
-    this.variables = {};
 }
 
 /**
@@ -42,17 +41,11 @@ function Message() {
 Message.prototype.marshall = function () {
     var output = "", key;
     for (key in this) {
-        if (key === 'variables') {
-            continue;
-        }
         if (this.hasOwnProperty(key)) {
             if (key !== 'lines' && key !== 'EOL' && (typeof (this[key]) !== 'function')) {
                 output = output + key + ": " + this[key] + this.EOL;
             }
         }
-    }
-    for (key in this.variables) {
-        output = output + 'Variable: ' + key + '=' + this.variables[key] + this.EOL;
     }
     output = output + this.EOL;
     return output;
@@ -68,24 +61,6 @@ Message.prototype.unmarshall = function (data) {
     var value, parts, key, line = 0;
     this.lines = data.split(this.EOL);
     for (; line < this.lines.length; line = line + 1) {
-        /*
-         * string operations may be expensive at this point
-         * and also this kind of string operation is really 
-         * quick and dirty just to resolve my specific issue.
-         *
-         * Using the Action
-         * -- namiLib.Actions.Command(); --
-         * returns the command output with the string
-         * --END COMMAND-- at the end.
-         * The used delimiter ":" can course different
-         * key/value output based on the result returned from the command.
-         *
-         * I think its easier to get the data from the output
-         * when the string is in one peace instead of being
-         * teared apart.
-         * For this reason i simply added the new key "CommandOutput"
-         * and passthrough the whole string as value
-         */
         if(this.lines[line].indexOf("--END COMMAND--") != -1){
           key = "CommandOutput";
           value = this.lines[line].replace("--END COMMAND--", "");
@@ -106,14 +81,10 @@ Message.prototype.unmarshall = function (data) {
             }
         }
 
-        var keySafe = key.replace(/-/, '_').toLowerCase();
-        var valueSafe = value.replace(/^\s+/g, '').replace(/\s+$/g, '');
-        if (keySafe.match(/variable/) !== null) {
-          var variable = valueSafe.split("=");
-          this.variables[variable[0]] = variable[1];
-        } else {
-          this.set(keySafe, valueSafe);
-        }
+        this.set(
+            key.replace(/-/, '_').toLowerCase(),
+            value.replace(/^\s+/g, '').replace(/\s+$/g, '')
+        );
     }
 };
 
