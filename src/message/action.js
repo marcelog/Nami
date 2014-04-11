@@ -1070,6 +1070,7 @@ util.inherits(Action, message.Message);
         GetConfig,
         GetConfigJson,
         GetVar,
+        SetVar,
         JabberSend,
         ListCategories,
         PauseMonitor,
