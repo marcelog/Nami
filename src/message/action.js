@@ -723,6 +723,20 @@ function Redirect() {
 }
 
 /**
+ * Bridge Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Bridge">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Bridge</a>.
+ * @augments Action
+ * @property {String} Channel1 Channel to Bridge to Channel2
+ * @property {String} Channel2 Channel to Bridge to Channel1
+ * @property {String} Tone Play courtesy tone to Channel 2 [yes/no]
+ */
+function Bridge() {
+	Bridge.super_.call(this, 'Bridge');
+}
+
+/**
  * ShowDialPlan Action.
  * @constructor
  * @see Action(String)
@@ -1089,6 +1103,7 @@ util.inherits(Action, message.Message);
         VoicemailUsersList,
         Originate,
         Redirect,
+        Bridge,
         UnpauseMonitor,
         StopMonitor,
         ShowDialPlan,
