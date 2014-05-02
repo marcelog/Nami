@@ -188,6 +188,7 @@ Supported Actions (Check the api for details)
  - VoicemailUsersList
  - Originate
  - Redirect
+ - Bridge
  - UnpauseMonitor
  - StopMonitor
  - ShowDialPlan
