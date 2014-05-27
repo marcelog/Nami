@@ -30,7 +30,7 @@ var namiConfig = {
     secret: process.argv[5]
 };
 
-var nami = new namiLib.Nami(namiConfig);
+var nami = new namiLib.Nami(namiConfig, {logger: require("log4js").getLogger('Nami.Core')});
 process.on('SIGINT', function () {
     nami.close();
     process.exit();
