@@ -36,13 +36,11 @@ var timer = require('timers');
  * Nami client.
  * @constructor
  * @param {object} amiData The configuration for ami.
- * @param {object} options Optional object which may contain library settings
  * @augments EventEmitter
  */
-function Nami(amiData, options) {
+function Nami(amiData) {
     Nami.super_.call(this);
-    options = options || {};
-    this.logger = options.logger || console;
+    this.logger = amiData.logger || console;
     this.connected = false;
     this.amiData = amiData;
     this.EOL = "\r\n";

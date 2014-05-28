@@ -127,18 +127,19 @@ That's about it.
 
 Using logger other than console
 ------------------------------
-Nami constructor takes an optional parameter, which may contain 'logger'
-attribute. If it exists, it will be used instead of console:
+Nami config may contain an optional attribute 'logger'.
+If it exists, it will be used instead of console:
 
 ```js
-var nami = new (require("nami").Nami)(namiConfig, {logger: require('log4js').getLogger('Nami.Core')});
+namiConfig.logger = require('log4js').getLogger('Nami.Core');
+var nami = new (require("nami").Nami)(namiConfig);
 ```
 
 Viable options:
 https://github.com/nomiddlename/log4js-node
 https://github.com/trentm/node-bunyan
 
-Anything that can be looks like:
+Logger may be anything that can be looks like:
 ```
 logger = {
     error: function(message) {},
