@@ -202,6 +202,7 @@ Supported Actions (Check the api for details)
  - QueueRemove
  - QueueAdd
  - QueueLog
+ - AGI
 
 Thanks to
 --------

@@ -1044,6 +1044,22 @@ function ConfbridgeUnmute(conference, channel) {
   this.set('Channel', channel);
 }
 
+/**
+ * AGI Action.
+ * @constructor
+ * @see Action(String)
+ * @see https://wiki.asterisk.org/wiki/display/AST/ManagerAction_AGI
+ * @param {String} Channel that is currently in Async AGI.
+ * @param {String} Application to execute. 
+ * @param {String} This will be sent back in CommandID header of AsyncAGI exec event notification.
+ * @augments Action
+ */
+function AGI(channel, command, commandId) {
+  AGI.super_.call(this, 'AGI');
+  this.set('Conference', conference);
+  this.set('Channel', channel);
+  this.set('ChannelID', channelId);
+}
 
 // Inheritance for this module
 util.inherits(Action, message.Message);
@@ -1126,7 +1142,8 @@ util.inherits(Action, message.Message);
         ConfbridgeLock,
         ConfbridgeUnlock,
         ConfbridgeMute,
-        ConfbridgeUnmute
+        ConfbridgeUnmute,
+        AGI 
     ];
     for (i in actions) {
         util.inherits(actions[i], Action);
