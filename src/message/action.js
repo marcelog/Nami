@@ -1056,9 +1056,9 @@ function ConfbridgeUnmute(conference, channel) {
  */
 function AGI(channel, command, commandId) {
   AGI.super_.call(this, 'AGI');
-  this.set('Conference', conference);
   this.set('Channel', channel);
-  this.set('ChannelID', channelId);
+  this.set('Command', command);
+  this.set('CommandID', commandId);
 }
 
 // Inheritance for this module
