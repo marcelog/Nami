@@ -243,7 +243,7 @@ Nami.prototype.initializeSocket = function () {
 
     if (this.socket && !this.socket.destroyed) {
         this.socket.removeAllListeners();
-        this.socket.end();
+        this.socket.destroy();
     }
 
     this.socket = new net.Socket();
