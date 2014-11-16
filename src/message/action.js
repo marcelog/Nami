@@ -1061,6 +1061,23 @@ function AGI(channel, command, commandId) {
   this.set('CommandID', commandId);
 }
 
+/**
+ * BlindTransfer Action.
+ * @constructor
+ * @see Action(String)
+ * @see https://wiki.asterisk.org/wiki/display/AST/Asterisk+12+ManagerAction_BlindTransfer
+ * @param {String} Source channel that wants to transfer the target channel.
+ * @param {String} Context to transfer the target channel to.
+ * @param {String} Extension inside the context to transfer the target channel to.
+ * @augments Action
+ */
+function BlindTransfer(channel, context, extension) {
+  BlindTransfer.super_.call(this, 'BlindTransfer');
+  this.set('Channel', channel);
+  this.set('Context', context);
+  this.set('Exten', extension);
+}
+
 // Inheritance for this module
 util.inherits(Action, message.Message);
 (function() {
@@ -1143,7 +1160,8 @@ util.inherits(Action, message.Message);
         ConfbridgeUnlock,
         ConfbridgeMute,
         ConfbridgeUnmute,
-        AGI 
+        AGI,
+        BlindTransfer
     ];
     for (i in actions) {
         util.inherits(actions[i], Action);
