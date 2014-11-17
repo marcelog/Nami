@@ -783,9 +783,18 @@ function Queues() {
  * @property {String} Reason Optional, reason description
  * @augments Action
  */
-function QueueUnpause() {
-	QueueUnpause.super_.call(this, 'QueueUnpause');
-    this.paused = 'false';
+function QueueUnpause(interface, queue) {
+  	QueueUnpause.super_.call(this, 'QueuePause');
+  this.set('paused', 'false');
+  this.set('interface', interface);
+    
+  if (undefined !== queue) {
+    this.set('queue', queue);
+  }
+  
+  if (undefined !== reason) {
+    this.set('reason', reason);
+  }
 }
 
 /**
@@ -798,9 +807,18 @@ function QueueUnpause() {
  * @property {String} Reason Optional, reason description
  * @augments Action
  */
-function QueuePause() {
+function QueuePause(interface, queue, reason) {
 	QueuePause.super_.call(this, 'QueuePause');
-    this.paused = 'true';
+  this.set('paused', 'true');
+  this.set('interface', interface);
+    
+  if (undefined !== queue) {
+    this.set('queue', queue);
+  }
+  
+  if (undefined !== reason) {
+    this.set('reason', reason);
+  }
 }
 
 /**
