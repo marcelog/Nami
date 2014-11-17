@@ -783,7 +783,7 @@ function Queues() {
  * @property {String} Reason Optional, reason description
  * @augments Action
  */
-function QueueUnpause(interface, queue) {
+function QueueUnpause(interface, queue, reason) {
   	QueueUnpause.super_.call(this, 'QueuePause');
   this.set('paused', 'false');
   this.set('interface', interface);
