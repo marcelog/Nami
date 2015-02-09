@@ -917,10 +917,10 @@ function Originate() {
  * @property {String} StateInterface Optional, State interface
  * @augments Action
  */
-function QueueAdd(interface, queue, memberName, penalty, stateInterface) {
+function QueueAdd(queue, interface, memberName, penalty, stateInterface) {
 	QueueAdd.super_.call(this, 'QueueAdd');
-	this.set('interface', interface);
     	this.set('queue', queue);
+    	this.set('interface', interface);
     	
 	if (undefined !== memberName) {
 	    this.set('membername', memberName);
