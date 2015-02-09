@@ -879,8 +879,10 @@ function QueueReset() {
  * @property {String} Interface Interface
  * @augments Action
  */
-function QueueRemove() {
+function QueueRemove(queue, interface) {
 	QueueRemove.super_.call(this, 'QueueRemove');
+	this.set('queue', queue);
+    	this.set('interface', interface);
 }
 
 /**
