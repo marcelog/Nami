@@ -203,6 +203,7 @@ Supported Actions (Check the api for details)
  - QueueAdd
  - QueueLog
  - AGI
+ - BlindTransfer
 
 Thanks to
 --------

@@ -84,7 +84,10 @@ Message.prototype.unmarshall = function (data) {
         }
         var keySafe = key.replace(/-/, '_').toLowerCase();
         var valueSafe = value.replace(/^\s+/g, '').replace(/\s+$/g, '');
-        if (keySafe.match(/variable/) !== null) {
+        /*
+         * SetVar contains Variable: header, but value should not include '=' in this case
+         */
+        if (keySafe.match(/variable/) !== null && valueSafe.match(/=/) !== null) {
             var variable = valueSafe.split("=");
             this.variables[variable[0]] = variable[1];
         } else {

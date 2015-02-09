@@ -783,9 +783,18 @@ function Queues() {
  * @property {String} Reason Optional, reason description
  * @augments Action
  */
-function QueueUnpause() {
-	QueueUnpause.super_.call(this, 'QueueUnpause');
-    this.paused = 'false';
+function QueueUnpause(interface, queue, reason) {
+  	QueueUnpause.super_.call(this, 'QueuePause');
+  this.set('paused', 'false');
+  this.set('interface', interface);
+    
+  if (undefined !== queue) {
+    this.set('queue', queue);
+  }
+  
+  if (undefined !== reason) {
+    this.set('reason', reason);
+  }
 }
 
 /**
@@ -798,9 +807,18 @@ function QueueUnpause() {
  * @property {String} Reason Optional, reason description
  * @augments Action
  */
-function QueuePause() {
+function QueuePause(interface, queue, reason) {
 	QueuePause.super_.call(this, 'QueuePause');
-    this.paused = 'true';
+  this.set('paused', 'true');
+  this.set('interface', interface);
+    
+  if (undefined !== queue) {
+    this.set('queue', queue);
+  }
+  
+  if (undefined !== reason) {
+    this.set('reason', reason);
+  }
 }
 
 /**
@@ -1061,6 +1079,23 @@ function AGI(channel, command, commandId) {
   this.set('CommandID', commandId);
 }
 
+/**
+ * BlindTransfer Action.
+ * @constructor
+ * @see Action(String)
+ * @see https://wiki.asterisk.org/wiki/display/AST/Asterisk+12+ManagerAction_BlindTransfer
+ * @param {String} Source channel that wants to transfer the target channel.
+ * @param {String} Context to transfer the target channel to.
+ * @param {String} Extension inside the context to transfer the target channel to.
+ * @augments Action
+ */
+function BlindTransfer(channel, context, extension) {
+  BlindTransfer.super_.call(this, 'BlindTransfer');
+  this.set('Channel', channel);
+  this.set('Context', context);
+  this.set('Exten', extension);
+}
+
 // Inheritance for this module
 util.inherits(Action, message.Message);
 (function() {
@@ -1143,7 +1178,8 @@ util.inherits(Action, message.Message);
         ConfbridgeUnlock,
         ConfbridgeMute,
         ConfbridgeUnmute,
-        AGI 
+        AGI,
+        BlindTransfer
     ];
     for (i in actions) {
         util.inherits(actions[i], Action);
