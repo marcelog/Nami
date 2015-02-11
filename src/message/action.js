@@ -879,10 +879,10 @@ function QueueReset() {
  * @property {String} Interface Interface
  * @augments Action
  */
-function QueueRemove(queue, asteriskInterface) {
+function QueueRemove(asteriskInterface, queue) {
 	QueueRemove.super_.call(this, 'QueueRemove');
+	this.set('interface', asteriskInterface);
 	this.set('queue', queue);
-    	this.set('interface', asteriskInterface);
 }
 
 /**
@@ -919,10 +919,10 @@ function Originate() {
  * @property {String} StateInterface Optional, State interface
  * @augments Action
  */
-function QueueAdd(queue, asteriskInterface) {
+function QueueAdd(asteriskInterface, queue) {
 	QueueAdd.super_.call(this, 'QueueAdd');
+	this.set('interface', asteriskInterface);
     	this.set('queue', queue);
-    	this.set('interface', asteriskInterface);
 }
 
 /**
