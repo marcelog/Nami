@@ -783,10 +783,10 @@ function Queues() {
  * @property {String} Reason Optional, reason description
  * @augments Action
  */
-function QueueUnpause(interface, queue, reason) {
+function QueueUnpause(asteriskInterface, queue, reason) {
   	QueueUnpause.super_.call(this, 'QueuePause');
   this.set('paused', 'false');
-  this.set('interface', interface);
+  this.set('interface', asteriskInterface);
     
   if (undefined !== queue) {
     this.set('queue', queue);
@@ -807,10 +807,10 @@ function QueueUnpause(interface, queue, reason) {
  * @property {String} Reason Optional, reason description
  * @augments Action
  */
-function QueuePause(interface, queue, reason) {
+function QueuePause(asteriskInterface, queue, reason) {
 	QueuePause.super_.call(this, 'QueuePause');
   this.set('paused', 'true');
-  this.set('interface', interface);
+  this.set('interface', asteriskInterface);
     
   if (undefined !== queue) {
     this.set('queue', queue);
@@ -879,8 +879,10 @@ function QueueReset() {
  * @property {String} Interface Interface
  * @augments Action
  */
-function QueueRemove() {
+function QueueRemove(asteriskInterface, queue) {
 	QueueRemove.super_.call(this, 'QueueRemove');
+	this.set('interface', asteriskInterface);
+	this.set('queue', queue);
 }
 
 /**
@@ -917,8 +919,10 @@ function Originate() {
  * @property {String} StateInterface Optional, State interface
  * @augments Action
  */
-function QueueAdd() {
+function QueueAdd(asteriskInterface, queue) {
 	QueueAdd.super_.call(this, 'QueueAdd');
+	this.set('interface', asteriskInterface);
+    	this.set('queue', queue);
 }
 
 /**
