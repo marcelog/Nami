@@ -830,8 +830,10 @@ function QueuePause(asteriskInterface, queue, reason) {
  * @augments Action
  */
 function QueueSummary(queue) {
-	QueueSummary.super_.call(this, 'QueueSummary');
-	this.set('Queue', queue);
+  QueueSummary.super_.call(this, 'QueueSummary');
+  if (undefined != queue) {
+    this.set('Queue', queue);
+  }
 }
 
 /**
