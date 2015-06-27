@@ -204,6 +204,8 @@ Supported Actions (Check the api for details)
  - QueueLog
  - AGI
  - BlindTransfer
+ - Filter
+ - Events
 
 Thanks to
 --------

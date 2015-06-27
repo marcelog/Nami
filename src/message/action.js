@@ -829,8 +829,9 @@ function QueuePause(asteriskInterface, queue, reason) {
  * @property {String} Queue Optional, Queue
  * @augments Action
  */
-function QueueSummary() {
+function QueueSummary(queue) {
 	QueueSummary.super_.call(this, 'QueueSummary');
+	this.set('Queue', queue);
 }
 
 /**
@@ -919,10 +920,19 @@ function Originate() {
  * @property {String} StateInterface Optional, State interface
  * @augments Action
  */
-function QueueAdd(asteriskInterface, queue) {
+function QueueAdd(asteriskInterface, queue, paused, memberName, penalty) {
 	QueueAdd.super_.call(this, 'QueueAdd');
 	this.set('interface', asteriskInterface);
-    	this.set('queue', queue);
+	this.set('queue', queue);
+	if (undefined !== paused) {
+		this.set('paused', paused);
+	}
+	if (undefined !== memberName) {
+		this.set('membername', memberName);
+	}
+	if (undefined !== penalty) {
+		this.set('penalty', penalty);
+	}
 }
 
 /**
@@ -1100,6 +1110,32 @@ function BlindTransfer(channel, context, extension) {
   this.set('Exten', extension);
 }
 
+/**
+ * Filter Action.
+ * @constructor
+ * @param {String} operation. The value of the "Operation" key.
+ * @param {String} filter. The value of the "Filter" key.
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/Asterisk+11+ManagerAction_Filter">https://wiki.asterisk.org/wiki/display/AST/Asterisk+11+ManagerAction_Filter</a>.
+ * @augments Action
+ */
+function Filter(operation, filter) {
+	Filter.super_.call(this, 'Filter');
+	this.set('Operation', operation);
+	this.set('Filter', filter);
+}
+
+/**
+ *
+ * @param mask
+ * @constructor
+ * @see See https://wiki.asterisk.org/wiki/display/AST/Asterisk+11+ManagerAction_Events
+ */
+function Events(mask) {
+	Events.super_.call(this, 'Events');
+	this.set('Eventmask', mask);
+}
+
 // Inheritance for this module
 util.inherits(Action, message.Message);
 (function() {
@@ -1183,7 +1219,9 @@ util.inherits(Action, message.Message);
         ConfbridgeMute,
         ConfbridgeUnmute,
         AGI,
-        BlindTransfer
+        BlindTransfer,
+        Filter,
+        Events
     ];
     for (i in actions) {
         util.inherits(actions[i], Action);
