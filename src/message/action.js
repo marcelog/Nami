@@ -857,8 +857,14 @@ function QueueRule() {
  * @property {String} Member Optional, Member
  * @augments Action
  */
-function QueueStatus() {
+function QueueStatus(queue, member) {
 	QueueStatus.super_.call(this, 'QueueStatus');
+	if (undefined != queue) {
+		this.set('Queue', queue);
+	}
+	if (undefined != member) {
+		this.set('Member', member);
+	}
 }
 
 /**
