@@ -41,6 +41,9 @@ var timer = require('timers');
 function Nami(amiData) {
     Nami.super_.call(this);
     this.logger = require('log4js').getLogger('Nami.Client');
+    if (amiData.loglevel){
+        this.logger.setLevel(amiData.loglevel);
+    }
     this.connected = false;
     this.amiData = amiData;
     this.EOL = "\r\n";
