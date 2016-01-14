@@ -1,3 +1,6 @@
+[![Click here to lend your support to: Nami and make a donation at pledgie.com !](https://pledgie.com/campaigns/30946.png?skin_name=chrome)](https://pledgie.com/campaigns/30946)
+
+
 Introduction
 ------------
 
@@ -19,7 +22,7 @@ events).
 
 This is supported by the Nami class (er.. function) which inherits from
 EventEmitter, so your application is able to subscribe to the interesting nami
-events. 
+events.
 
 Requirements
 ------------
@@ -28,15 +31,15 @@ Requirements
 
 Events used in Nami
 -------------------
- 
+
  * `namiConnected`: Emitted when nami could successfully connect and logged in to
 an AMI server.
- * `namiConnection`: Emitted for all connection related events. Listen to this 
+ * `namiConnection`: Emitted for all connection related events. Listen to this
 generic event for the status of the socket connection.
- * `namiConnection(EventName)`: Emitted for the status of the connection. States 
+ * `namiConnection(EventName)`: Emitted for the status of the connection. States
 include: `Connect`, `End`, `Error`, `Timeout`, and `Close`. The `Error` event
-will emit right before the `Close` event and includes the error that was thrown. 
-The `Close` event includes a boolean value (`had_error`) if an error was thrown. 
+will emit right before the `Close` event and includes the error that was thrown.
+The `Close` event includes a boolean value (`had_error`) if an error was thrown.
  * namiEvent: Emitted for all events. Listen to this generic event if you want
 to catch any events.
  * `namiEvent(EventName)`: These events are thrown based on the event name
@@ -55,7 +58,7 @@ AMI (delimited by double crlf), this is emitted to invoke the decode routine.
 After namiRawMessage, the decodification routine runs to properly identify this
 message as a response, an event that belongs to a response, or an async event
 from server.
- * `namiRawEvent`: Emitted when the decodification routine 
+ * `namiRawEvent`: Emitted when the decodification routine
 classified the received message as an async event from server.
  * `namiRawResponse`: Emitted when the decodification routine classified the
 received message as a response to an action.
