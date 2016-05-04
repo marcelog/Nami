@@ -45,7 +45,7 @@ function Nami(amiData) {
     this.amiData = amiData;
     this.EOL = "\r\n";
     this.EOM = this.EOL + this.EOL;
-    this.welcomeMessage = "Asterisk Call Manager/.*" + this.EOL;
+    this.welcomeMessage = "Asterisk Call Manager/[0-9,.]*" + this.EOL;
     this.received = false;
     this.responses = { };
     this.callbacks = { };
@@ -73,6 +73,7 @@ Nami.prototype.onRawEvent = function (event) {
         typeof (event.actionid) !== 'undefined'
         && typeof (this.responses[event.actionid]) !== 'undefined'
         && typeof (this.callbacks[event.actionid]) !== 'undefined'
+        && typeof (this.responses[event.actionid].events) !== 'undefined'
     ) {
         this.responses[event.actionid].events.push(event);
         if (
@@ -242,7 +243,7 @@ Nami.prototype.initializeSocket = function () {
 
     if (this.socket && !this.socket.destroyed) {
         this.socket.removeAllListeners();
-        this.socket.end();
+        this.socket.destroy();
     }
 
     this.socket = new net.Socket();
