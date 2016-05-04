@@ -101,7 +101,7 @@ process.on('SIGINT', function () {
 });
 nami.on('namiConnected', function (event) {
     nami.send(new namiLib.Actions.CoreShowChannelsAction(), function(response){
-        logger.debug(' ---- Response: ' + util.inspect(response));
+        console.log(' ---- Response: ' + util.inspect(response));
     });
 });
 nami.open();
@@ -151,6 +151,20 @@ logger = {
     debug: function(message) {},
 }
 ```
+
+Controlling the loglevel
+------------------------
+If you are using your own logger (i.e: overriding the `logger` property of
+the Nami client), you should check the documentation for it and apply the needed
+changes or configuration accordingly.
+
+If you are using the default Nami logger, you can set the property `logLevel`
+of the Nami client to one of the following values:
+
+* 0 to log only error messages.
+* 1 to log error and warning messages.
+* 2 to log error, warning, and info messages.
+* 3 to log everything: error, warning, info, and debug messages.
 
 Multiple server support
 -----------------------

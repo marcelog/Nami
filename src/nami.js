@@ -39,8 +39,21 @@ var timer = require('timers');
  * @augments EventEmitter
  */
 function Nami(amiData) {
+    var self = this;
     Nami.super_.call(this);
-    this.logger = amiData.logger || defaultLoggger();
+    this.logLevel = 3; // debug level by default.
+
+    var genericLog = function(minLevel, fun, msg) {
+        if(self.logLevel >= minLevel) {
+            fun(msg);
+        }
+    };
+    this.logger = amiData.logger || {
+        error: function(msg) { genericLog(0, console.error, msg)},
+        warn: function(msg) { genericLog(1, console.warn, msg)},
+        info: function(msg) { genericLog(2, console.info, msg)},
+        debug: function(msg) { genericLog(3, console.log, msg)}
+    };
     this.connected = false;
     this.amiData = amiData;
     this.EOL = "\r\n";
@@ -57,24 +70,12 @@ function Nami(amiData) {
 util.inherits(Nami, events.EventEmitter);
 
 /**
- * Constructs default logger for this library
- */
-function defaultLoggger() {
-    return {
-        error: console.error.bind(console),
-        warn : console.warn.bind(console),
-        info : console.info.bind(console),
-        debug: console.log.bind(console)
-    };
-}
-
-/**
  * Called when a message arrives and is decoded as an event (namiRawEvent event).
  * This will actually instantiate an Event. If the event has an ActionID,
  * the corresponding response is looked up and will have this event appended.
  * Otherwise, the event "namiEvent" is fired. Also, the event "namiEvent<EventName>"
  * is fired (i.e: on event Dial, namiEventDial will be fired).
- * 
+ *
  * @see Nami#onRawMessage(String)
  * @param {Event} response An Event message.
  * @returns void
@@ -118,7 +119,7 @@ Nami.prototype.onRawResponse = function (response) {
         (typeof (response.message) !== 'undefined')
             && (response.message.indexOf('follow') !== -1)
     ) {
-        this.responses[response.actionid] = response;            
+        this.responses[response.actionid] = response;
     } else if (typeof (this.callbacks[response.actionid]) !== 'undefined') {
         this.callbacks[response.actionid](response);
         delete this.callbacks[response.actionid];
@@ -268,7 +269,7 @@ Nami.prototype.initializeSocket = function () {
         var event = { event: 'Connect' };
         self.emit(baseEvent + event.event, event);
     });
- 
+
     // @param {Error} error Fires right before the `close` event
     this.socket.on('error', function (error) {
         self.logger.debug('Socket error: ' + util.inspect(error));
