@@ -27,7 +27,8 @@ var namiConfig = {
     host: process.argv[2],
     port: process.argv[3],
     username: process.argv[4],
-    secret: process.argv[5]
+    secret: process.argv[5],
+    logger: require("log4js").getLogger('Nami.Core')
 };
 
 var nami = new namiLib.Nami(namiConfig);

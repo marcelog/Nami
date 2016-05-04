@@ -35,12 +35,12 @@ var timer = require('timers');
 /**
  * Nami client.
  * @constructor
- * @param amiData The configuration for ami.
+ * @param {object} amiData The configuration for ami.
  * @augments EventEmitter
  */
 function Nami(amiData) {
     Nami.super_.call(this);
-    this.logger = require('log4js').getLogger('Nami.Client');
+    this.logger = amiData.logger || defaultLoggger();
     this.connected = false;
     this.amiData = amiData;
     this.EOL = "\r\n";
@@ -55,6 +55,18 @@ function Nami(amiData) {
 }
 // Nami inherits from the EventEmitter so Nami itself can throw events.
 util.inherits(Nami, events.EventEmitter);
+
+/**
+ * Constructs default logger for this library
+ */
+function defaultLoggger() {
+    return {
+        error: console.error.bind(console),
+        warn : console.warn.bind(console),
+        info : console.info.bind(console),
+        debug: console.log.bind(console)
+    };
+}
 
 /**
  * Called when a message arrives and is decoded as an event (namiRawEvent event).

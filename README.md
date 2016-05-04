@@ -27,7 +27,6 @@ events.
 Requirements
 ------------
  * Nodejs (Tested with 0.6.5)
- * log4js (For logging, tested with 0.3.9)
 
 Events used in Nami
 -------------------
@@ -66,7 +65,6 @@ received message as a response to an action.
 Installation
 ------------
 ```sh
-$ npm install log4js
 $ npm install nami
 ```
 
@@ -89,7 +87,6 @@ Quickstart
 ```sh
 $ mkdir testnami
 $ cd testnami
-$ npm install log4js
 $ npm install nami
 ```
 ```js
@@ -130,6 +127,30 @@ See src/index.js for a better example (including how to reconnect when the
 current connection closes).
 
 That's about it.
+
+Using logger other than console
+------------------------------
+Nami config may contain an optional attribute 'logger'.
+If it exists, it will be used instead of console:
+
+```js
+namiConfig.logger = require('log4js').getLogger('Nami.Core');
+var nami = new (require("nami").Nami)(namiConfig);
+```
+
+Viable options:
+https://github.com/nomiddlename/log4js-node
+https://github.com/trentm/node-bunyan
+
+Logger may be anything that can be looks like:
+```
+logger = {
+    error: function(message) {},
+    warn : function(message) {},
+    info : function(message) {},
+    debug: function(message) {},
+}
+```
 
 Multiple server support
 -----------------------
