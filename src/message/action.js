@@ -787,11 +787,11 @@ function QueueUnpause(asteriskInterface, queue, reason) {
   	QueueUnpause.super_.call(this, 'QueuePause');
   this.set('paused', 'false');
   this.set('interface', asteriskInterface);
-    
+
   if (undefined !== queue) {
     this.set('queue', queue);
   }
-  
+
   if (undefined !== reason) {
     this.set('reason', reason);
   }
@@ -811,11 +811,11 @@ function QueuePause(asteriskInterface, queue, reason) {
 	QueuePause.super_.call(this, 'QueuePause');
   this.set('paused', 'true');
   this.set('interface', asteriskInterface);
-    
+
   if (undefined !== queue) {
     this.set('queue', queue);
   }
-  
+
   if (undefined !== reason) {
     this.set('reason', reason);
   }
@@ -959,7 +959,7 @@ function QueueLog() {
 	QueueLog.super_.call(this, 'QueueLog');
 }
 
-/** 
+/**
  * MeetmeList Action.
  * @constructor
  * @see Action(String)
@@ -971,7 +971,7 @@ function QueueLog() {
      this.set('Conference', conference);
    }
  }
- 
+
  /**
   * MeetmeMute Action.
   * @constructor
@@ -983,7 +983,7 @@ function QueueLog() {
    this.set('Meetme', meetme);
    this.set('Usernum', usernum);
  }
-  
+
 /**
  * MeetmeUnmute Action.
  * @constructor
@@ -1023,7 +1023,7 @@ function ConfbridgeList(conference) {
  * @constructor
  * @see Action(String)
  * @param {String} conference room. The value of the "conference" key.
- * @param {String} Channel. The value of the "Channel" key. 
+ * @param {String} Channel. The value of the "Channel" key.
  * @augments Action
  */
 function ConfbridgeKick(conference, channel) {
@@ -1061,7 +1061,7 @@ function ConfbridgeUnlock(conference) {
  * @constructor
  * @see Action(String)
  * @param {String} conference room. The value of the "conference" key.
- * @param {String} Channel. The value of the "Channel" key. 
+ * @param {String} Channel. The value of the "Channel" key.
  * @augments Action
  */
 function ConfbridgeMute(conference, channel) {
@@ -1075,7 +1075,7 @@ function ConfbridgeMute(conference, channel) {
  * @constructor
  * @see Action(String)
  * @param {String} conference room. The value of the "conference" key.
- * @param {String} Channel. The value of the "Channel" key. 
+ * @param {String} Channel. The value of the "Channel" key.
  * @augments Action
  */
 function ConfbridgeUnmute(conference, channel) {
@@ -1090,7 +1090,7 @@ function ConfbridgeUnmute(conference, channel) {
  * @see Action(String)
  * @see https://wiki.asterisk.org/wiki/display/AST/ManagerAction_AGI
  * @param {String} Channel that is currently in Async AGI.
- * @param {String} Application to execute. 
+ * @param {String} Application to execute.
  * @param {String} This will be sent back in CommandID header of AsyncAGI exec event notification.
  * @augments Action
  */
@@ -1131,6 +1131,19 @@ function Filter(operation, filter) {
 	Filter.super_.call(this, 'Filter');
 	this.set('Operation', operation);
 	this.set('Filter', filter);
+}
+
+/**
+ * UserEvent Action.
+ * @constructor
+ * @param {String} UserEvent. The name of the event.
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/Asterisk+11+ManagerAction_UserEvent">https://wiki.asterisk.org/wiki/display/AST/Asterisk+11+ManagerAction_UserEvent</a>.
+ * @augments Action
+ */
+function UserEvent(event) {
+	UserEvent.super_.call(this, 'UserEvent');
+	this.set('UserEvent', event);
 }
 
 /**
@@ -1229,7 +1242,8 @@ util.inherits(Action, message.Message);
         AGI,
         BlindTransfer,
         Filter,
-        Events
+        Events,
+        UserEvent
     ];
     for (i in actions) {
         util.inherits(actions[i], Action);
