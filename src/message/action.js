@@ -1147,6 +1147,50 @@ function UserEvent(event) {
 }
 
 /**
+ * PJSIPNotify Action.
+ * @constructor
+ * @param {String} PJSIPNotify. The name of the event.
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/Asterisk+13+ManagerAction_PJSIPNotify">https://wiki.asterisk.org/wiki/display/AST/Asterisk+13+ManagerAction_PJSIPNotify</a>.
+ * @augments Action
+ * @augments Endpoint - The endpoint to which to send the NOTIFY.
+ * @augments URI - Abritrary URI to which to send the NOTIFY.
+ * @augments Variable - Appends variables as headers/content to the NOTIFY. If the variable is named Content, then the value will compose the body of the message if another variable sets Content-Type. name=value 
+ */
+function PJSIPNotify(event) {
+	UserEvent.super_.call(this, 'PJSIPNotify');
+	this.set('PJSIPNotify', event);
+}
+
+/**
+ * PJSIPShowEndpoint Action.
+ * @constructor
+ * @param {String} PJSIPShowEndpoint. The name of the event.
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/Asterisk+13+ManagerAction_PJSIPShowEndpoint">https://wiki.asterisk.org/wiki/display/AST/Asterisk+13+ManagerAction_PJSIPShowEndpoint</a>.
+ * @augments Action
+ * @ActionID - ActionID for this transaction. Will be returned.
+ * @Endpoint - The endpoint to list.
+ */
+function PJSIPShowEndpoint(event) {
+	UserEvent.super_.call(this, 'PJSIPShowEndpoint');
+	this.set('PJSIPShowEndpoint', event);
+}
+
+/**
+ * UserEvent PJSIPShowEndpoints.
+ * @constructor
+ * @param {String} PJSIPShowEndpoints. The name of the event.
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/Asterisk+13+ManagerAction_PJSIPShowEndpoints">https://wiki.asterisk.org/wiki/display/AST/Asterisk+13+ManagerAction_PJSIPShowEndpoints</a>.
+ * @augments Action
+ */
+function PJSIPShowEndpoints(event) {
+	UserEvent.super_.call(this, 'PJSIPShowEndpoints');
+	this.set('PJSIPShowEndpoints', event);
+}
+
+/**
  *
  * @param mask
  * @constructor
@@ -1243,7 +1287,18 @@ util.inherits(Action, message.Message);
         BlindTransfer,
         Filter,
         Events,
-        UserEvent
+        UserEvent,
+        PJSIPNotify,
+	PJSIPQualify,
+	PJSIPRegister,
+	PJSIPShowEndpoint,
+	PJSIPShowEndpoints,
+	PJSIPShowRegistrationsInbound,
+	PJSIPShowRegistrationsOutbound,
+	PJSIPShowResourceLists,
+	PJSIPShowSubscriptionsInbound,
+	PJSIPShowSubscriptionsOutbound,
+	PJSIPUnregister
     ];
     for (i in actions) {
         util.inherits(actions[i], Action);
