@@ -1289,16 +1289,8 @@ util.inherits(Action, message.Message);
         Events,
         UserEvent,
         PJSIPNotify,
-	PJSIPQualify,
-	PJSIPRegister,
 	PJSIPShowEndpoint,
-	PJSIPShowEndpoints,
-	PJSIPShowRegistrationsInbound,
-	PJSIPShowRegistrationsOutbound,
-	PJSIPShowResourceLists,
-	PJSIPShowSubscriptionsInbound,
-	PJSIPShowSubscriptionsOutbound,
-	PJSIPUnregister
+	PJSIPShowEndpoints
     ];
     for (i in actions) {
         util.inherits(actions[i], Action);
