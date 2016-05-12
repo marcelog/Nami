@@ -36,7 +36,7 @@ util = require('util');
 function Action(name) {
     Action.super_.call(this);
     this.id = ActionUniqueId();
-    this.set('ActionID', this.id);
+    this.set('ActionID', name + "_" + this.id);
     this.set('Action', name);
 }
 

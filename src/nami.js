@@ -27,10 +27,20 @@
 var net = require('net');
 var events = require('events');
 var action = require(__dirname + '/message/action.js');
+var message = require(__dirname + '/message/message.js');
 var namiResponse = require(__dirname + '/message/response.js');
 var util = require('util');
 var namiEvents = require(__dirname + '/message/event.js');
 var timer = require('timers');
+var Q = require('q');
+
+var ActionUniqueId = (function() {
+  var nextId = 0;
+    return function() {
+    return nextId++;
+  };
+})();
+
 
 /**
  * Nami client.
@@ -328,6 +338,50 @@ Nami.prototype.send = function (action, callback) {
     this.responses[action.ActionID] = "";
     this.socket.write(action.marshall());
 };
+
+
+/**
+ * Sends an action to AMI.
+ *
+ * @param {Action} object format action.
+ * @param {function} callback The optional callback to be invoked when the
+ * responses arrives.
+ *
+ * @returns void
+ */
+Nami.prototype.sendNew = function(action,callback){
+    var Action = new message.Message();   
+    for (key in action){
+      Action.set(key,action[key]);
+    }
+    Action.ActionID = Action.ActionID || ActionUniqueId();
+    
+    this.logger.debug('Sending: ' + util.inspect(action));
+    this.callbacks[Action.ActionID] = callback;
+    this.responses[Action.ActionID] = "";
+    this.socket.write(Action.marshall());
+};
+
+/**
+ * Sends an action to AMI that return a Promise.
+ *
+ * @param {Action} object format action.
+ *
+ * @returns Promise
+ */
+Nami.prototype.sendP = function(action){
+  var defer = Q.defer();
+  this.sendNew(action,function(data){  
+    if(data.response === 'Success'){
+      defer.resolve(data);
+    } else {
+      defer.reject(err);
+    }      
+  });
+  return defer.promise;  
+};
+
+
 
 exports.Nami = Nami;
 exports.Actions = action;
