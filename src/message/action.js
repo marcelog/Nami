@@ -1223,6 +1223,7 @@ util.inherits(Action, message.Message);
         Queues,
         QueueUnpause,
         QueuePause,
+        QueueReset,
         QueueSummary,
         QueueStatus,
         QueueRemove,
