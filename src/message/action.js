@@ -596,10 +596,27 @@ function Park() {
  * @constructor
  * @see Action(String)
  * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_ParkedCalls">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_ParkedCalls</a>.
+ * @property {String} ParkingLot Optional parking lot to view
  * @augments Action
  */
-function ParkedCalls() {
+function ParkedCalls(lot) {
 	ParkedCalls.super_.call(this, 'ParkedCalls');
+
+    if (undefined !== lot) {
+        this.set('ParkingLot', lot);
+    }
+
+}
+
+/**
+ * Parkinglots Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Parkinglots">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Parkinglots</a>.
+ * @augments Action
+ */
+function Parkinglots() {
+	Parkinglots.super_.call(this, 'Parkinglots');
 }
 
 /**
@@ -1205,6 +1222,7 @@ util.inherits(Action, message.Message);
         PlayDtmf,
         Park,
         ParkedCalls,
+        Parkinglots,
         Monitor,
         ModuleCheck,
         ModuleLoad,
