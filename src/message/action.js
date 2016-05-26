@@ -595,7 +595,7 @@ function Park() {
  * ParkedCalls Action.
  * @constructor
  * @see Action(String)
- * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_ParkedCalls">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_ParkedCalls</a>.
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/Asterisk+13+ManagerAction_ParkedCalls">https://wiki.asterisk.org/wiki/display/AST/Asterisk+13+ManagerAction_ParkedCalls</a>.
  * @property {String} ParkingLot Optional parking lot to view
  * @augments Action
  */
@@ -612,7 +612,7 @@ function ParkedCalls(lot) {
  * Parkinglots Action.
  * @constructor
  * @see Action(String)
- * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Parkinglots">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Parkinglots</a>.
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/Asterisk+13+ManagerAction_Parkinglots">https://wiki.asterisk.org/wiki/display/AST/Asterisk+13+ManagerAction_Parkinglots</a>.
  * @augments Action
  */
 function Parkinglots() {
