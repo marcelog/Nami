@@ -791,6 +791,37 @@ function Queues() {
 }
 
 /**
+ * QueueReload Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_QueueReload">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_QueueReload</a>.
+ * @property {String} Queue Optional, Queue
+ * @property {String} Members Optional, yes/no
+ * @property {String} Rules Optional, yes/no
+ * @property {String} Parameters Optional, yes/no
+ * @augments Action
+ */
+function QueueReload(queue, members, rules, parameters) {
+  QueueReload.super_.call(this, 'QueueReload');
+
+  if (undefined !== queue) {
+    this.set('queue', queue);
+  }
+
+  if (undefined !== members) {
+    this.set('members', members);
+  }
+
+  if (undefined !== rules) {
+    this.set('rules', rules);
+  }
+
+  if (undefined !== parameters) {
+    this.set('parameters', parameters);
+  }
+}
+
+/**
  * QueueUnpause Action.
  * @constructor
  * @see Action(String)
@@ -1248,6 +1279,7 @@ util.inherits(Action, message.Message);
         QueueRule,
         QueueAdd,
         QueueLog,
+        QueueReload,
         MeetmeList,
         MeetmeMute,
         MeetmeUnmute,
