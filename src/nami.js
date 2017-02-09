@@ -202,6 +202,7 @@ Nami.prototype.onClosed = function () {
 Nami.prototype.onWelcomeMessage = function (data) {
     var self = this, welcome;
     this.logger.debug('Got welcome message: ' + util.inspect(data));
+    this.emit('welcome', { msg: data });
     var re = new RegExp(this.welcomeMessage, "");
     if (data.match(re) === null) {
         this.emit('namiInvalidPeer', data);

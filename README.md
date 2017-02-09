@@ -31,6 +31,7 @@ Requirements
 Events used in Nami
 -------------------
 
+ * `welcome`: Emitted when nami could reach the AMI server.
  * `namiConnected`: Emitted when nami could successfully connect and logged in to
 an AMI server.
  * `namiConnection`: Emitted for all connection related events. Listen to this
