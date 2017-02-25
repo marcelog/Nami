@@ -240,17 +240,17 @@ Nami.prototype.close = function () {
  * Opens the connection to AMI.
  * @returns void
  */
-Nami.prototype.open = function () {
+Nami.prototype.open = function (opts = {}) {
     this.logger.debug('Opening connection');
     this.received = "";
-    this.initializeSocket();
+    this.initializeSocket(opts);
 };
 
 /**
  * Creates a new socket and handles connection events.
  * @returns undefined
  */
-Nami.prototype.initializeSocket = function () {
+Nami.prototype.initializeSocket = function (opts = {}) {
     this.logger.debug('Initializing socket');
     var self = this;
 
@@ -261,6 +261,10 @@ Nami.prototype.initializeSocket = function () {
 
     this.socket = new net.Socket();
     this.socket.setEncoding('ascii');
+    if (opts.timeout) {
+        this.socket.setTimeout(opts.timeout);
+    }
+
 
     var baseEvent = 'namiConnection';
 
@@ -334,4 +338,3 @@ exports.Nami = Nami;
 exports.Actions = action;
 exports.Event = namiEvents;
 exports.Response = namiResponse;
-
