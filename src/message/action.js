@@ -44,7 +44,7 @@ var ActionUniqueId = (function() {
 	var nextId = 0;
 	return function() {
 		return nextId++;
-	}
+	};
 })();
 
 /**
@@ -460,6 +460,20 @@ function GetConfigJson() {
  */
 function GetVar() {
 	GetVar.super_.call(this, 'GetVar');
+}
+
+/**
+ * PJSIPNotify Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/Asterisk+14+ManagerAction_PJSIPNotify">https://wiki.asterisk.org/wiki/display/AST/Asterisk+14+ManagerAction_PJSIPNotify</a>.
+ * @property {String} The endpoint to which to send the NOTIFY 
+ * @property {String} Abritrary URI to which to send the NOTIFY 
+ * @property {String} Appends variables as headers/content to the NOTIFY 
+ * @augments Action
+ */
+function PJSIPNotify() {
+	PJSIPNotify.super_.call(this, 'PJSIPNotify');
 }
 
 /**
@@ -879,7 +893,7 @@ function QueuePause(asteriskInterface, queue, reason) {
  */
 function QueueSummary(queue) {
   QueueSummary.super_.call(this, 'QueueSummary');
-  if (undefined != queue) {
+  if (undefined !== queue) {
     this.set('Queue', queue);
   }
 }
@@ -907,10 +921,10 @@ function QueueRule() {
  */
 function QueueStatus(queue, member) {
 	QueueStatus.super_.call(this, 'QueueStatus');
-	if (undefined != queue) {
+	if (undefined !== queue) {
 		this.set('Queue', queue);
 	}
-	if (undefined != member) {
+	if (undefined !== member) {
 		this.set('Member', member);
 	}
 }
@@ -1015,7 +1029,7 @@ function QueueLog() {
  */
  function MeetmeList(conference) {
    MeetmeList.super_.call(this, 'MeetmeList');
-   if(conference != null) {
+   if(conference !== null) {
      this.set('Conference', conference);
    }
  }
@@ -1246,6 +1260,7 @@ util.inherits(Action, message.Message);
         GetVar,
         SetVar,
         JabberSend,
+        PJSIPNotify,
         ListCategories,
         PauseMonitor,
         LocalOptimizeAway,
