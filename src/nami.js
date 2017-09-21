@@ -141,6 +141,7 @@ Nami.prototype.onRawMessage = function (buffer) {
     if (buffer.match(/^Event: /) !== null) {
         event = new namiEvents.Event(buffer);
         this.emit('namiRawEvent', event);
+        this.emit('namiRawEventUnmarshalled', buffer); // This includes the raw event unmarshalled with \r\n etc still intact
     } else if (buffer.match(/^Response: /) !== null) {
         response = new namiResponse.Response(buffer);
         this.emit('namiRawResponse', response);
@@ -196,7 +197,7 @@ Nami.prototype.onClosed = function () {
  * On successfull connection, "namiConnected" is emitted.
  * @param {String} data The data read from server.
  * @see Nami#onData(String)
- * @see Login(String, String)
+ * @see Login(String, String, String)
  * @returns void
  */
 Nami.prototype.onWelcomeMessage = function (data) {
@@ -210,7 +211,7 @@ Nami.prototype.onWelcomeMessage = function (data) {
             self.onData(data);
         });
         this.send(
-            new action.Login(this.amiData.username, this.amiData.secret),
+            new action.Login(this.amiData.username, this.amiData.secret, this.amiData.events),
             function (response) {
                 if (response.response !== 'Success') {
                     self.emit('namiLoginIncorrect');
