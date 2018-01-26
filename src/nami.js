@@ -211,7 +211,7 @@ Nami.prototype.onWelcomeMessage = function (data) {
         });
         var login = new action.Login(this.amiData.username, this.amiData.secret)
         if (Array.isArray(this.amiData.events)) {
-            login.set('Events', events.join(','))
+            login.set('Events', this.amiData.events.join(','))
         }
         this.send(
             login,
