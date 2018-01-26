@@ -209,8 +209,12 @@ Nami.prototype.onWelcomeMessage = function (data) {
         this.socket.on('data', function (data) {
             self.onData(data);
         });
+        var login = new action.Login(this.amiData.username, this.amiData.secret)
+        if (Array.isArray(this.amiData.events)) {
+            login.set('Events', this.amiData.events.join(','))
+        }
         this.send(
-            new action.Login(this.amiData.username, this.amiData.secret),
+            login,
             function (response) {
                 if (response.response !== 'Success') {
                     self.emit('namiLoginIncorrect');
