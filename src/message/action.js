@@ -634,11 +634,26 @@ function Parkinglots() {
 }
 
 /**
+ * MixMonitor Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/Asterisk+18+ManagerAction_MixMonitor">https://wiki.asterisk.org/wiki/display/AST/Asterisk+18+ManagerAction_MixMonitor</a>.
+ * @property {String} Channel Channel name to start MixMonitor
+ * @property {String} Filename Path where to save the audio
+ * @property {String} Options Options for execution of MixMonitor
+ * @property {String} Command Command to execute on recording completion
+ * @augments Action
+ */
+ function MixMonitor() {
+	MixMonitor.super_.call(this, 'MixMonitor');
+}
+
+/**
  * Monitor Action.
  * @constructor
  * @see Action(String)
  * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Monitor">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Monitor</a>.
- * @property {String} Channel Channel name to park
+ * @property {String} Channel Channel name to start Monitor
  * @property {String} Filename Path where to save the audio
  * @augments Action
  */
@@ -1269,6 +1284,7 @@ util.inherits(Action, message.Message);
         Park,
         ParkedCalls,
         Parkinglots,
+        MixMonitor,
         Monitor,
         ModuleCheck,
         ModuleLoad,
