@@ -527,6 +527,20 @@ function UnpauseMonitor() {
 }
 
 /**
+ * StopMixMonitor Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/Asterisk+18+ManagerAction_StopMixMonitor">https://wiki.asterisk.org/wiki/display/AST/Asterisk+18+ManagerAction_StopMixMonitor</a>.
+ * @property {String} Channel Channel name to stop MixMonitor
+ * @property {String} ActionId ActionID for this transaction
+ * @property {String} MixMonitorID  If a valid ID is provided, then this command will stop only that specific MixMonitor
+ * @augments Action
+ */
+ function StopMixMonitor() {
+	MixMonitor.super_.call(this, 'StopMixMonitor');
+}
+
+/**
  * StopMonitor Action.
  * @constructor
  * @see Action(String)
@@ -537,7 +551,6 @@ function UnpauseMonitor() {
 function StopMonitor() {
 	StopMonitor.super_.call(this, 'StopMonitor');
 }
-
 
 /**
  * LocalOptimizeAway Action.
@@ -1297,6 +1310,7 @@ util.inherits(Action, message.Message);
         Redirect,
         Bridge,
         UnpauseMonitor,
+        StopMixMonitor,
         StopMonitor,
         ShowDialPlan,
         SendText,
