@@ -463,6 +463,29 @@ function GetVar() {
 }
 
 /**
+ * PJSIPShowEndpoint Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://docs.asterisk.org/Asterisk_20_Documentation/API_Documentation/AMI_Actions/PJSIPShowEndpoint/">https://docs.asterisk.org/Asterisk_20_Documentation/API_Documentation/AMI_Actions/PJSIPShowEndpoint/</a>.
+ * @property {String} Endpoint Endpoint to Show
+ * @augments Action
+ */
+function PJSIPNotify() {
+	PJSIPShowEndpoint.super_.call(this, 'PJSIPShowEndpoint');
+}
+
+/**
+ * PJSIPShowEndpoints Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://docs.asterisk.org/Asterisk_20_Documentation/API_Documentation/AMI_Actions/PJSIPShowEndpoints/">https://docs.asterisk.org/Asterisk_20_Documentation/API_Documentation/AMI_Actions/PJSIPShowEndpoints/</a>.
+ * @augments Action
+ */
+function PJSIPNotify() {
+	PJSIPShowEndpoints.super_.call(this, 'PJSIPShowEndpoints');
+}
+
+/**
  * PJSIPNotify Action.
  * @constructor
  * @see Action(String)
@@ -532,7 +555,6 @@ function UnpauseMonitor() {
  * @see Action(String)
  * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/Asterisk+18+ManagerAction_StopMixMonitor">https://wiki.asterisk.org/wiki/display/AST/Asterisk+18+ManagerAction_StopMixMonitor</a>.
  * @property {String} Channel Channel name to stop MixMonitor
- * @property {String} ActionId ActionID for this transaction
  * @property {String} MixMonitorID  If a valid ID is provided, then this command will stop only that specific MixMonitor
  * @augments Action
  */
