@@ -470,7 +470,7 @@ function GetVar() {
  * @property {String} Endpoint Endpoint to Show
  * @augments Action
  */
-function PJSIPNotify() {
+function PJSIPShowEndpoint() {
 	PJSIPShowEndpoint.super_.call(this, 'PJSIPShowEndpoint');
 }
 
@@ -481,7 +481,7 @@ function PJSIPNotify() {
  * @see See <a href="https://docs.asterisk.org/Asterisk_20_Documentation/API_Documentation/AMI_Actions/PJSIPShowEndpoints/">https://docs.asterisk.org/Asterisk_20_Documentation/API_Documentation/AMI_Actions/PJSIPShowEndpoints/</a>.
  * @augments Action
  */
-function PJSIPNotify() {
+function PJSIPShowEndpoints() {
 	PJSIPShowEndpoints.super_.call(this, 'PJSIPShowEndpoints');
 }
 
