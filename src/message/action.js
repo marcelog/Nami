@@ -1311,6 +1311,8 @@ util.inherits(Action, message.Message);
         SetVar,
         JabberSend,
         PJSIPNotify,
+        PJSIPShowEndpoint,
+        PJSIPShowEndpoints,
         ListCategories,
         PauseMonitor,
         LocalOptimizeAway,
