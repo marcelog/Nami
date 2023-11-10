@@ -4,12 +4,12 @@
 Introduction
 ------------
 
-For API and docs, check out the homepage at http://marcelog.github.com/Nami
+For API and docs, check out the homepage at http://marcelog.github.io/Nami
 
 You can also download the distribution and doc from the CI server, at:
 http://ci.marcelog.name:8080/view/NodeJS/
 
-A very similar, PHP alternative, is available at http://marcelog.github.com/PAMI
+A very similar, PHP alternative, is available at http://marcelog.github.io/PAMI
 An Erlang port is available at https://github.com/marcelog/erlami
 
 Nami by itself is just a library that allows your nodejs code to communicate to

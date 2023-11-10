@@ -463,6 +463,29 @@ function GetVar() {
 }
 
 /**
+ * PJSIPShowEndpoint Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://docs.asterisk.org/Asterisk_20_Documentation/API_Documentation/AMI_Actions/PJSIPShowEndpoint/">https://docs.asterisk.org/Asterisk_20_Documentation/API_Documentation/AMI_Actions/PJSIPShowEndpoint/</a>.
+ * @property {String} Endpoint Endpoint to Show
+ * @augments Action
+ */
+function PJSIPShowEndpoint() {
+	PJSIPShowEndpoint.super_.call(this, 'PJSIPShowEndpoint');
+}
+
+/**
+ * PJSIPShowEndpoints Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://docs.asterisk.org/Asterisk_20_Documentation/API_Documentation/AMI_Actions/PJSIPShowEndpoints/">https://docs.asterisk.org/Asterisk_20_Documentation/API_Documentation/AMI_Actions/PJSIPShowEndpoints/</a>.
+ * @augments Action
+ */
+function PJSIPShowEndpoints() {
+	PJSIPShowEndpoints.super_.call(this, 'PJSIPShowEndpoints');
+}
+
+/**
  * PJSIPNotify Action.
  * @constructor
  * @see Action(String)
@@ -527,6 +550,19 @@ function UnpauseMonitor() {
 }
 
 /**
+ * StopMixMonitor Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/Asterisk+18+ManagerAction_StopMixMonitor">https://wiki.asterisk.org/wiki/display/AST/Asterisk+18+ManagerAction_StopMixMonitor</a>.
+ * @property {String} Channel Channel name to stop MixMonitor
+ * @property {String} MixMonitorID  If a valid ID is provided, then this command will stop only that specific MixMonitor
+ * @augments Action
+ */
+ function StopMixMonitor() {
+	MixMonitor.super_.call(this, 'StopMixMonitor');
+}
+
+/**
  * StopMonitor Action.
  * @constructor
  * @see Action(String)
@@ -537,7 +573,6 @@ function UnpauseMonitor() {
 function StopMonitor() {
 	StopMonitor.super_.call(this, 'StopMonitor');
 }
-
 
 /**
  * LocalOptimizeAway Action.
@@ -634,11 +669,26 @@ function Parkinglots() {
 }
 
 /**
+ * MixMonitor Action.
+ * @constructor
+ * @see Action(String)
+ * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/Asterisk+18+ManagerAction_MixMonitor">https://wiki.asterisk.org/wiki/display/AST/Asterisk+18+ManagerAction_MixMonitor</a>.
+ * @property {String} Channel Channel name to start MixMonitor
+ * @property {String} Filename Path where to save the audio
+ * @property {String} Options Options for execution of MixMonitor
+ * @property {String} Command Command to execute on recording completion
+ * @augments Action
+ */
+ function MixMonitor() {
+	MixMonitor.super_.call(this, 'MixMonitor');
+}
+
+/**
  * Monitor Action.
  * @constructor
  * @see Action(String)
  * @see See <a href="https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Monitor">https://wiki.asterisk.org/wiki/display/AST/ManagerAction_Monitor</a>.
- * @property {String} Channel Channel name to park
+ * @property {String} Channel Channel name to start Monitor
  * @property {String} Filename Path where to save the audio
  * @augments Action
  */
@@ -1261,6 +1311,8 @@ util.inherits(Action, message.Message);
         SetVar,
         JabberSend,
         PJSIPNotify,
+        PJSIPShowEndpoint,
+        PJSIPShowEndpoints,
         ListCategories,
         PauseMonitor,
         LocalOptimizeAway,
@@ -1269,6 +1321,7 @@ util.inherits(Action, message.Message);
         Park,
         ParkedCalls,
         Parkinglots,
+        MixMonitor,
         Monitor,
         ModuleCheck,
         ModuleLoad,
@@ -1281,6 +1334,7 @@ util.inherits(Action, message.Message);
         Redirect,
         Bridge,
         UnpauseMonitor,
+        StopMixMonitor,
         StopMonitor,
         ShowDialPlan,
         SendText,
